@@ -1,3 +1,5 @@
+using ThAmCo.Catering.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Regsiter the database context with the framework
+builder.Services.AddDbContext<CateringDbContext>();
 
 var app = builder.Build();
 
