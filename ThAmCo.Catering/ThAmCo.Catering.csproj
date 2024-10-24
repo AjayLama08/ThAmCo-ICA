@@ -21,6 +21,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\ThAmCo.Events\ThAmCo.Events.csproj" />
+		<ProjectReference Include="..\ThAmCo.Venues\ThAmCo.Venues.csproj" />
 	</ItemGroup>
 	
 
