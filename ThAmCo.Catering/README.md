@@ -19,9 +19,9 @@ ThAmCo.Catering is a .NET 8 web application designed to manage catering services
 ## Getting Started
 1. Clone the Repository.
 > Open visual studio.
-> Click on the clone repository.
-> Enter the URL (which is https://github.com/AjayLama08/ThAmCo-ICA/tree/master/ThAmCo.Catering in this case) and the directory where you want to save the project.
-> Click on the clone button.
+>> Click on the "Clone a repository" button.
+>> Enter the repository URL (which is https://github.com/AjayLama08/ThAmCo-ICA/tree/master/ThAmCo.Catering in this case).
+>> Click on the "Clone" button.
 
  
 ### Setup the Database
