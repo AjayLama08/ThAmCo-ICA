@@ -16,11 +16,14 @@ ThAmCo.Catering is a .NET 8 web application designed to manage catering services
 - [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
 
 
-## Getting Started
+##Getting Started
 ### Clone the Repository
-git clone https://github.com/AjayLama08/ThAmCo-ICA/tree/master/ThAmCo.Catering
+1. Open visual studio.
+2. Click on the clone repository.
+3. Enter the URL (which is https://github.com/AjayLama08/ThAmCo-ICA/tree/master/ThAmCo.Catering in this case) and the directory where you want to save the project.
+4. Click on the clone button.
 
-
+ 
 ### Setup the Database
 1. Open the integrated terminal in Visual Studio (Tools > NuGet Package Manager > Package Manager Console).
 2. Run the following command to add and apply migrations:
@@ -58,3 +61,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 For any questions or suggestions, please contact [q2043246@live.tees.ac.uk](mailto: q2043246@live.tees.ac.uk).
+
+
