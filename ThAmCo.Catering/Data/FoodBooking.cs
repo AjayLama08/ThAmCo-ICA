@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using ThAmCo.Events.Data;
+
 
 namespace ThAmCo.Catering.Data
 {
@@ -17,8 +17,7 @@ namespace ThAmCo.Catering.Data
         //Navigation property with Menu class
         public Menu Menu { get; set; }
 
-        //Navigation property with Event class
-        public Event? Event { get; set; }
+       
 
     }
 }
