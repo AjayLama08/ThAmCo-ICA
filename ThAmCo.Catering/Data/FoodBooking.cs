@@ -9,7 +9,11 @@ namespace ThAmCo.Catering.Data
         public int NumberOfGuests { get; set; }
         public int MenuId { get; set; }
 
+        //Navigation property with Menu class
         public Menu Menu { get; set; }
+
+        
+
 
     }
 }
