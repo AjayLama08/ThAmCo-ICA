@@ -18,6 +18,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
   </ItemGroup>
-	<ProjectReference Include="..\ThAmCo.Events\ThAmCo.Events.csproj" />
+
+	<ItemGroup>
+		<ProjectReference Include="..\ThAmCo.Events\ThAmCo.Events.csproj" />
+	</ItemGroup>
+	
 
 </Project>

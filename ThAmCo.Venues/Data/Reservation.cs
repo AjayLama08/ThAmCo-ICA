@@ -26,5 +26,7 @@ namespace ThAmCo.Venues.Data
 
         [Required]
         public string StaffId { get; set; }
+
+       
     }
 }

@@ -12,9 +12,9 @@ namespace ThAmCo.Events.Data
 
 
         //Navigation property with Catering.Data.FoodBooking
-        public FoodBooking FoodBooking { get; set; }
+        public FoodBooking? FoodBooking { get; set; }
         //Navigation property with Venues.Data.Reservation
-        public Reservation Reservation { get; set; }
+        public Reservation? Reservation { get; set; }
         //Navigation property with Venues.Data.EventType
         public EventType EventType { get; set; }
     }
