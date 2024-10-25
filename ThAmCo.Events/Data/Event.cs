@@ -11,7 +11,7 @@ namespace ThAmCo.Events.Data
         [Required]
         public string Title { get; set; }
 
-        [Required]
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
         //Navigation property to Staffing class
