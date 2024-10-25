@@ -4,12 +4,16 @@ namespace ThAmCo.Catering.Data
 {
     public class CateringDbContext : DbContext
     {
+        //DbSets which represent the tables in the database
         public DbSet<FoodBooking> FoodBookings { get; set; }
         public DbSet<FoodItem> FoodItems { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<MenuFoodItem> MenuFoodItems { get; set; }
+
+        //Path to the database file
         public string DbPath { get; set; } = string.Empty;
 
+        //Constructor to set the path to the database file
         public CateringDbContext()
         {
             var folder = Environment.SpecialFolder.MyDocuments;
@@ -17,24 +21,27 @@ namespace ThAmCo.Catering.Data
             DbPath = Path.Join(path, "catering.db");
         }
 
+        //Method to configure the database connection
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlite($"Data source = {DbPath}");
         }
 
+        //Method to configure the database model
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            //Compound key
+            //Compoound key
             builder.Entity<MenuFoodItem>().HasKey(mfi => new { mfi.MenuId, mfi.FoodItemId });
 
+            //Foreign key constraints
             builder.Entity<MenuFoodItem>()
-                .HasOne(fi => fi.FoodItem)
-                .WithMany(mfi => mfi.MenuFoodItems)
-                .HasForeignKey(fi => fi.FoodItemId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(fi => fi.FoodItem) 
+                .WithMany(mfi => mfi.MenuFoodItems) //One to many relationship
+                .HasForeignKey(fi => fi.FoodItemId) //Foreign key
+                .OnDelete(DeleteBehavior.Restrict); //Restrict deletion of FoodItem if it is referenced in MenuFoodItem
 
             builder.Entity<MenuFoodItem>()
                 .HasOne(m => m.Menu)
@@ -42,6 +49,7 @@ namespace ThAmCo.Catering.Data
                 .HasForeignKey(m => m.MenuId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            //Seed data to Menu to populate the database
             builder.Entity<Menu>().HasData(
                 new Menu { MenuId = 1, MenuName = "Vegetarian" },
                 new Menu { MenuId = 2, MenuName = "Non-Vegetarian" },
@@ -59,6 +67,7 @@ namespace ThAmCo.Catering.Data
                 new Menu { MenuId = 14, MenuName = "Organic" },
                 new Menu { MenuId = 15, MenuName = "Mediterranean" }
 );
+            //Seed data to FoodBooking to populate the database
             builder.Entity<FoodBooking>().HasData(
                 new FoodBooking { FoodBookingId = 1, ClientReferenceId = 101, NumberOfGuests = 10, MenuId = 1 },
                 new FoodBooking { FoodBookingId = 2, ClientReferenceId = 102, NumberOfGuests = 20, MenuId = 2 },
@@ -76,6 +85,7 @@ namespace ThAmCo.Catering.Data
                 new FoodBooking { FoodBookingId = 14, ClientReferenceId = 114, NumberOfGuests = 50, MenuId = 14 },
                 new FoodBooking { FoodBookingId = 15, ClientReferenceId = 115, NumberOfGuests = 60, MenuId = 15 }
 );
+            //Seed data to FoodItem to populate the database
             builder.Entity<FoodItem>().HasData(
                 new FoodItem { FoodItemId = 1, Description = "Spicy Chicken Curry with Coconut Milk", UnitPrice = 10.50f },
                 new FoodItem { FoodItemId = 2, Description = "Steamed Jasmine Rice", UnitPrice = 5.00f },
@@ -93,6 +103,7 @@ namespace ThAmCo.Catering.Data
                 new FoodItem { FoodItemId = 14, Description = "Penne Alfredo with Grilled Chicken", UnitPrice = 13.60f },
                 new FoodItem { FoodItemId = 15, Description = "Fresh Fruit Platter with Seasonal Berries", UnitPrice = 7.20f }
 );
+            //Seed data to MenuFoodItem to populate the database
             builder.Entity<MenuFoodItem>().HasData(
                 new MenuFoodItem { MenuId = 1, FoodItemId = 1 }, // Vegetarian Menu with Spicy Chicken Curry
                 new MenuFoodItem { MenuId = 1, FoodItemId = 2 }, // Vegetarian Menu with Steamed Jasmine Rice

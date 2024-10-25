@@ -11,6 +11,8 @@ namespace ThAmCo.Catering.Data
         [Required]
         public float UnitPrice { get; set; }
 
+
+        //Navigation property with MenuFoodItem class
         public List<MenuFoodItem> MenuFoodItems { get; set; }
     }
 }

@@ -9,6 +9,8 @@ namespace ThAmCo.Catering.Data
 
         public Menu Menu { get; set; }
 
+
+        //Navigation property with FoodItem class
         public FoodItem FoodItem { get; set; }
     }
 }

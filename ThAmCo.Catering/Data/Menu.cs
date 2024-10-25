@@ -9,8 +9,11 @@ namespace ThAmCo.Catering.Data
         [Required]
         public string MenuName { get; set; }
 
+
+        //Navigation property with FoodBooking class
         public List<FoodBooking> FoodBookings { get; set; }
 
+        //Navigation property with MenuFoodItem class
         public List<MenuFoodItem> MenuFoodItems { get; set; }
 
     }
