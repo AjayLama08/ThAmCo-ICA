@@ -72,15 +72,24 @@ namespace ThAmCo.Catering.Controllers
             return NoContent();
         }
 
+
+
         // POST: api/Menus
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Menu>> PostMenu(Menu menu)
+        public async Task<ActionResult<Menu>> PostMenu(ThAmCo.Catering.DTO.MenuDTO menu)
         {
-            _context.Menus.Add(menu);
+            Menu thisMenu = new Menu
+            {
+                MenuName = menu.MenuName,
+                 FoodBookings= null,
+                MenuFoodItems = null, 
+            };
+
+            _context.Menus.Add(thisMenu);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMenu", new { id = menu.MenuId }, menu);
+            return CreatedAtAction("GetMenu", new { id = thisMenu.MenuId }, thisMenu);
         }
 
         // DELETE: api/Menus/5
