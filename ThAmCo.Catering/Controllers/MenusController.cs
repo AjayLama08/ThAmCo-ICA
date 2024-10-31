@@ -44,14 +44,20 @@ namespace ThAmCo.Catering.Controllers
         // PUT: api/Menus/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMenu(int id, Menu menu)
+        public async Task<IActionResult> PutMenu(int id, ThAmCo.Catering.DTO.MenuDTO menu)
         {
-            if (id != menu.MenuId)
+            var thisMenu = await _context.Menus.FindAsync(id);
+
+            if (thisMenu == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(menu).State = EntityState.Modified;
+            // Update the properties of the entity directly
+            thisMenu.MenuName = menu.MenuName;
+
+            // Mark the entity as modified
+            _context.Entry(thisMenu).State = EntityState.Modified;
 
             try
             {
