@@ -44,14 +44,22 @@ namespace ThAmCo.Catering.Controllers
         // PUT: api/FoodItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFoodItem(int id, FoodItem foodItem)
+        public async Task<IActionResult> PutFoodItem(int id, ThAmCo.Catering.DTO.FoodItemDTO foodItem)
         {
-            if (id != foodItem.FoodItemId)
+            var thisFoodItem = await _context.FoodItems.FindAsync(id);
+
+            if (thisFoodItem == null)
             {
                 return BadRequest();
             }
 
-            _context.Entry(foodItem).State = EntityState.Modified;
+            // Update the properties of the entity directly
+            thisFoodItem.Description = foodItem.Description;
+            thisFoodItem.UnitPrice = foodItem.UnitPrice;
+
+            // Mark the entity as modified
+            _context.Entry(thisFoodItem).State = EntityState.Modified;
+
 
             try
             {
