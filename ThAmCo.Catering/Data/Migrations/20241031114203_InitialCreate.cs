@@ -75,13 +75,13 @@ namespace ThAmCo.Catering.Data.Migrations
                         column: x => x.FoodItemId,
                         principalTable: "FoodItems",
                         principalColumn: "FoodItemId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MenuFoodItems_Menus_MenuId",
                         column: x => x.MenuId,
                         principalTable: "Menus",
                         principalColumn: "MenuId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(

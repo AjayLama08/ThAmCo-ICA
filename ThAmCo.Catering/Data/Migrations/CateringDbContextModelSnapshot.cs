@@ -455,13 +455,13 @@ namespace ThAmCo.Catering.Data.Migrations
                     b.HasOne("ThAmCo.Catering.Data.FoodItem", "FoodItem")
                         .WithMany("MenuFoodItems")
                         .HasForeignKey("FoodItemId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ThAmCo.Catering.Data.Menu", "Menu")
                         .WithMany("MenuFoodItems")
                         .HasForeignKey("MenuId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("FoodItem");

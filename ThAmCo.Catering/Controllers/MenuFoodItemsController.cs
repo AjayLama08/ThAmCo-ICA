@@ -98,10 +98,12 @@ namespace ThAmCo.Catering.Controllers
         }
 
         // DELETE: api/MenuFoodItems/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMenuFoodItem(int id)
+        [HttpDelete("{foodItemId}/{menuId}")]
+        public async Task<IActionResult> DeleteMenuFoodItem(int foodItemId, int menuId)
         {
-            var menuFoodItem = await _context.MenuFoodItems.FindAsync(id);
+            var menuFoodItem = await _context.MenuFoodItems
+                .FirstOrDefaultAsync(mfi => mfi.FoodItemId == foodItemId && mfi.MenuId == menuId);
+
             if (menuFoodItem == null)
             {
                 return NotFound();
@@ -113,9 +115,9 @@ namespace ThAmCo.Catering.Controllers
             return NoContent();
         }
 
-        private bool MenuFoodItemExists(int id)
+        private bool MenuFoodItemExists(int foodItemId, int menuId)
         {
-            return _context.MenuFoodItems.Any(e => e.MenuId == id);
+            return _context.MenuFoodItems.Any(e => e.FoodItemId == foodItemId && e.MenuId == menuId);
         }
     }
 }

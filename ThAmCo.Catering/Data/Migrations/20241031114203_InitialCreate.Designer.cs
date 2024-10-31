@@ -10,7 +10,7 @@ using ThAmCo.Catering.Data;
 namespace ThAmCo.Catering.Data.Migrations
 {
     [DbContext(typeof(CateringDbContext))]
-    [Migration("20241022131534_InitialCreate")]
+    [Migration("20241031114203_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -458,13 +458,13 @@ namespace ThAmCo.Catering.Data.Migrations
                     b.HasOne("ThAmCo.Catering.Data.FoodItem", "FoodItem")
                         .WithMany("MenuFoodItems")
                         .HasForeignKey("FoodItemId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ThAmCo.Catering.Data.Menu", "Menu")
                         .WithMany("MenuFoodItems")
                         .HasForeignKey("MenuId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("FoodItem");
