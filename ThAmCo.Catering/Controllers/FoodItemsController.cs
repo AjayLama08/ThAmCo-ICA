@@ -75,12 +75,18 @@ namespace ThAmCo.Catering.Controllers
         // POST: api/FoodItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<FoodItem>> PostFoodItem(FoodItem foodItem)
+        public async Task<ActionResult<FoodItem>> PostFoodItem(ThAmCo.Catering.DTO.FoodItemDTO foodItem)
         {
-            _context.FoodItems.Add(foodItem);
+            FoodItem thisFoodItem = new FoodItem
+            {
+                Description = foodItem.Description,
+                UnitPrice = foodItem.UnitPrice
+            };
+
+            _context.FoodItems.Add(thisFoodItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFoodItem", new { id = foodItem.FoodItemId }, foodItem);
+            return CreatedAtAction("GetFoodItem", new { id = thisFoodItem.FoodItemId }, thisFoodItem);
         }
 
         // DELETE: api/FoodItems/5

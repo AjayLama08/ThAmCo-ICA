@@ -75,9 +75,15 @@ namespace ThAmCo.Catering.Controllers
         // POST: api/MenuFoodItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<MenuFoodItem>> PostMenuFoodItem(MenuFoodItem menuFoodItem)
+        public async Task<ActionResult<MenuFoodItem>> PostMenuFoodItem(ThAmCo.Catering.DTO.MenuFoodItemDTO menuFoodItem)
         {
-            _context.MenuFoodItems.Add(menuFoodItem);
+            MenuFoodItem thisMenuFoodItem = new MenuFoodItem
+            {
+                MenuId = menuFoodItem.MenuId,
+                FoodItemId = menuFoodItem.FoodItemId
+            };
+
+            _context.MenuFoodItems.Add(thisMenuFoodItem);
             try
             {
                 await _context.SaveChangesAsync();
@@ -94,7 +100,7 @@ namespace ThAmCo.Catering.Controllers
                 }
             }
 
-            return CreatedAtAction("GetMenuFoodItem", new { id = menuFoodItem.MenuId }, menuFoodItem);
+            return CreatedAtAction("GetMenuFoodItem", new { id = thisMenuFoodItem.MenuId }, thisMenuFoodItem);
         }
 
         private bool MenuFoodItemExists(int menuId)
