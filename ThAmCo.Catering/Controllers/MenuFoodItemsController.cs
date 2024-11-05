@@ -130,17 +130,18 @@ namespace ThAmCo.Catering.Controllers
         }
 
         /// <summary>
-        /// Delete a food item from a menu (Think about replacing the parameters with a DTO)
+        /// Delete a food item from a menu (Think about replacing the parameters with a DTO
         /// </summary>
+        /// <param name="menuFoodItemDTO"></param>
         /// <param name="foodItemId"></param>
         /// <param name="menuId"></param>
         /// <returns></returns>
         // DELETE: api/MenuFoodItems/5
         [HttpDelete("{foodItemId}/{menuId}")]
-        public async Task<IActionResult> DeleteMenuFoodItem(int foodItemId, int menuId)
+        public async Task<IActionResult> DeleteMenuFoodItem(ThAmCo.Catering.DTO.MenuFoodItemDTO menuFoodItemDTO)
         {
             var menuFoodItem = await _context.MenuFoodItems
-                .FirstOrDefaultAsync(mfi => mfi.FoodItemId == foodItemId && mfi.MenuId == menuId);
+                .FirstOrDefaultAsync(mfi => mfi.FoodItemId == menuFoodItemDTO.FoodItemId && mfi.MenuId == menuFoodItemDTO.MenuId);
 
             if (menuFoodItem == null)
             {
