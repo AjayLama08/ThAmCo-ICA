@@ -20,6 +20,10 @@ namespace ThAmCo.Catering.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Get all menu food items
+        /// </summary>
+        /// <returns></returns>
         // GET: api/MenuFoodItems
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MenuFoodItem>>> GetMenuFoodItems()
@@ -27,6 +31,11 @@ namespace ThAmCo.Catering.Controllers
             return await _context.MenuFoodItems.ToListAsync();
         }
 
+        /// <summary>
+        /// Get a menu food item by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/MenuFoodItems/5
         [HttpGet("{id}")]
         public async Task<ActionResult<MenuFoodItem>> GetMenuFoodItem(int id)
@@ -41,6 +50,13 @@ namespace ThAmCo.Catering.Controllers
             return menuFoodItem;
         }
 
+        /// <summary>
+        /// Edit a menu food item
+        /// </summary>
+        /// <param name="foodItemId"></param>
+        /// <param name="menuId"></param>
+        /// <param name="menuFoodItem"></param>
+        /// <returns></returns>
         // PUT: api/MenuFoodItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{foodItemId}/{menuId}")]
@@ -72,6 +88,11 @@ namespace ThAmCo.Catering.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Add a menu food item
+        /// </summary>
+        /// <param name="menuFoodItem"></param>
+        /// <returns></returns>
         // POST: api/MenuFoodItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -108,6 +129,12 @@ namespace ThAmCo.Catering.Controllers
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Delete a food item from a menu (Think about replacing the parameters with a DTO)
+        /// </summary>
+        /// <param name="foodItemId"></param>
+        /// <param name="menuId"></param>
+        /// <returns></returns>
         // DELETE: api/MenuFoodItems/5
         [HttpDelete("{foodItemId}/{menuId}")]
         public async Task<IActionResult> DeleteMenuFoodItem(int foodItemId, int menuId)

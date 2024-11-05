@@ -20,6 +20,10 @@ namespace ThAmCo.Catering.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Get all food items
+        /// </summary>
+        /// <returns></returns>
         // GET: api/FoodItems
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FoodItem>>> GetFoodItems()
@@ -27,6 +31,11 @@ namespace ThAmCo.Catering.Controllers
             return await _context.FoodItems.ToListAsync();
         }
 
+        /// <summary>
+        /// Get a food item by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/FoodItems/5
         [HttpGet("{id}")]
         public async Task<ActionResult<FoodItem>> GetFoodItem(int id)
@@ -41,6 +50,12 @@ namespace ThAmCo.Catering.Controllers
             return foodItem;
         }
 
+        /// <summary>
+        ///  Edit a food item
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="foodItem"></param>
+        /// <returns></returns>
         // PUT: api/FoodItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -80,6 +95,11 @@ namespace ThAmCo.Catering.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Add a food item
+        /// </summary>
+        /// <param name="foodItem"></param>
+        /// <returns></returns>
         // POST: api/FoodItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -97,6 +117,11 @@ namespace ThAmCo.Catering.Controllers
             return CreatedAtAction("GetFoodItem", new { id = thisFoodItem.FoodItemId }, thisFoodItem);
         }
 
+        /// <summary>
+        /// Delete a food item
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // DELETE: api/FoodItems/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFoodItem(int id)

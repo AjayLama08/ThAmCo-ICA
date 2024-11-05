@@ -20,6 +20,10 @@ namespace ThAmCo.Catering.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Get all menus
+        /// </summary>
+        /// <returns></returns>
         // GET: api/Menus
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Menu>>> GetMenus()
@@ -27,6 +31,11 @@ namespace ThAmCo.Catering.Controllers
             return await _context.Menus.ToListAsync();
         }
 
+        /// <summary>
+        /// Get a menu by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/Menus/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Menu>> GetMenu(int id)
@@ -41,6 +50,12 @@ namespace ThAmCo.Catering.Controllers
             return menu;
         }
 
+        /// <summary>
+        /// Edit a menu
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="menu"></param>
+        /// <returns></returns>
         // PUT: api/Menus/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -79,7 +94,11 @@ namespace ThAmCo.Catering.Controllers
         }
 
 
-
+        /// <summary>
+        /// Add a menu
+        /// </summary>
+        /// <param name="menu"></param>
+        /// <returns></returns>
         // POST: api/Menus
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -98,6 +117,11 @@ namespace ThAmCo.Catering.Controllers
             return CreatedAtAction("GetMenu", new { id = thisMenu.MenuId }, thisMenu);
         }
 
+        /// <summary>
+        /// Delete a menu
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // DELETE: api/Menus/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMenu(int id)
