@@ -41,7 +41,7 @@ namespace ThAmCo.Catering.Data
                 .HasOne(fi => fi.FoodItem) 
                 .WithMany(mfi => mfi.MenuFoodItems) //One to many relationship
                 .HasForeignKey(fi => fi.FoodItemId) //Foreign key
-                .OnDelete(DeleteBehavior.Cascade); //Restrict deletion of FoodItem if it is referenced in MenuFoodItem
+                .OnDelete(DeleteBehavior.Cascade); 
 
             builder.Entity<MenuFoodItem>()
                 .HasOne(m => m.Menu)
