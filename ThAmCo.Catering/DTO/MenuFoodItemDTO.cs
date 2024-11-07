@@ -2,7 +2,7 @@
 {
     public class MenuFoodItemDTO
     {
-        public int MenuId { get; set; }
-        public int FoodItemId { get; set; }
+        public required int MenuId { get; set; }
+        public required int FoodItemId { get; set; }
     }
 }
