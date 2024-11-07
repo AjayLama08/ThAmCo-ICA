@@ -14,6 +14,8 @@ namespace ThAmCo.Catering.Data
         [Required]
         public int MenuId { get; set; }
 
+        public int? EventId { get; set; }
+
         //Navigation property with Menu class
         public Menu Menu { get; set; }
 

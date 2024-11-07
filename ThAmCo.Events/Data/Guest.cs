@@ -19,6 +19,8 @@ namespace ThAmCo.Events.Data
         [Required]
         public string PhoneNumber { get; set; }
 
+        public required int GuestBookingId { get; set; }
+
         //Navigation property to GuestBooking class
         public List<GuestBooking> GuestBookings { get; set; }
     }
