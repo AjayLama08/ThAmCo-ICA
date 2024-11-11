@@ -7,7 +7,7 @@ namespace ThAmCo.Catering.Data
         [Required]
         public int MenuId { get; set; }
         [Required]
-        public string MenuName { get; set; }
+        public string MenuName { get; set; } = string.Empty;
 
 
         //Navigation property with FoodBooking class

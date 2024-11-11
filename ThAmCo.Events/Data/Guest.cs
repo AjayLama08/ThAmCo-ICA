@@ -8,16 +8,13 @@ namespace ThAmCo.Events.Data
         public int GuestId { get; set; }
 
         [Required]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         [Required]
-        public string Lastname { get; set; }
+        public string Lastname { get; set; } = string.Empty;
 
         [Required]
-        public string Email { get; set; }
-
-        [Required]
-        public string PhoneNumber { get; set; }
+        public int PhoneNumber { get; set; }
 
         //Navigation property to GuestBooking class
         public List<GuestBooking> GuestBookings { get; set; }

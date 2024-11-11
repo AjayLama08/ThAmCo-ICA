@@ -8,16 +8,13 @@ namespace ThAmCo.Events.Data
         public int StaffId { get; set; }
 
         [Required]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         [Required]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         [Required]
-        public string Email { get; set; }
-
-        [Required]
-        public string PhoneNumber { get; set; }
+        public int PhoneNumber { get; set; }
 
         //Navigation property to Staffing class
         public List<Staffing> Staffings { get; set; }

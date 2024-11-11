@@ -5,9 +5,6 @@ namespace ThAmCo.Events.Data
     public class GuestBooking
     {
         [Required]
-        public int GuestBookingId { get; set; }
-
-        [Required]
         public int EventId { get; set; }
 
         [Required]
