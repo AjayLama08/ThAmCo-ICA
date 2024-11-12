@@ -50,6 +50,8 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 1,
                             DateAndTime = new DateTime(2022, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "WED",
+                            FoodBookingId = 101,
+                            ReservationReference = "RES2022063001",
                             Title = "John and Jane's Wedding"
                         },
                         new
@@ -57,6 +59,7 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 2,
                             DateAndTime = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "CON",
+                            FoodBookingId = 102,
                             Title = "Tech Innovations 2022"
                         },
                         new
@@ -64,6 +67,7 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 3,
                             DateAndTime = new DateTime(2022, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "PTY",
+                            ReservationReference = "RES2022081203",
                             Title = "Alice's Birthday Party"
                         },
                         new
@@ -71,6 +75,7 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 4,
                             DateAndTime = new DateTime(2023, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "WED",
+                            FoodBookingId = 104,
                             Title = "Mike and Emma's Wedding"
                         },
                         new
@@ -78,6 +83,7 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 5,
                             DateAndTime = new DateTime(2023, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "CON",
+                            ReservationReference = "RES2023100805",
                             Title = "Digital Marketing Summit"
                         },
                         new
@@ -85,7 +91,8 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 6,
                             DateAndTime = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "PTY",
-                            Title = "Bob's Surprise Birthday Party"
+                            FoodBookingId = 106,
+                            Title = "Bob's Surprise Party"
                         },
                         new
                         {
@@ -99,21 +106,24 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 8,
                             DateAndTime = new DateTime(2024, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "CON",
-                            Title = "AI and Future Technologies"
+                            FoodBookingId = 108,
+                            ReservationReference = "RES2024030508",
+                            Title = "AI and Future Tech"
                         },
                         new
                         {
                             EventId = 9,
                             DateAndTime = new DateTime(2024, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "PTY",
-                            Title = "Frank's 50th Birthday Party"
+                            Title = "Frank's 50th Birthday"
                         },
                         new
                         {
                             EventId = 10,
                             DateAndTime = new DateTime(2024, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "CON",
-                            Title = "Business Leadership Forum"
+                            FoodBookingId = 110,
+                            Title = "Leadership Forum"
                         });
                 });
 
