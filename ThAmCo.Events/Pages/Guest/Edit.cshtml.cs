@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ThAmCo.Events.Data;
 
-namespace ThAmCo.Events.Pages.Staffs
+namespace ThAmCo.Events.Pages.Guest
 {
     public class EditModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace ThAmCo.Events.Pages.Staffs
         }
 
         [BindProperty]
-        public Staff Staff { get; set; } = default!;
+        public Guest Guest { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,12 +29,12 @@ namespace ThAmCo.Events.Pages.Staffs
                 return NotFound();
             }
 
-            var staff =  await _context.Staffs.FirstOrDefaultAsync(m => m.StaffId == id);
-            if (staff == null)
+            var guest =  await _context.Guests.FirstOrDefaultAsync(m => m.GuestId == id);
+            if (guest == null)
             {
                 return NotFound();
             }
-            Staff = staff;
+            Guest = guest;
             return Page();
         }
 
@@ -47,7 +47,7 @@ namespace ThAmCo.Events.Pages.Staffs
                 return Page();
             }
 
-            _context.Attach(Staff).State = EntityState.Modified;
+            _context.Attach(Guest).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +55,7 @@ namespace ThAmCo.Events.Pages.Staffs
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StaffExists(Staff.StaffId))
+                if (!GuestExists(Guest.GuestId))
                 {
                     return NotFound();
                 }
@@ -68,9 +68,9 @@ namespace ThAmCo.Events.Pages.Staffs
             return RedirectToPage("./Index");
         }
 
-        private bool StaffExists(int id)
+        private bool GuestExists(int id)
         {
-            return _context.Staffs.Any(e => e.StaffId == id);
+            return _context.Guests.Any(e => e.GuestId == id);
         }
     }
 }

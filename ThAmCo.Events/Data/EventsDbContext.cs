@@ -44,26 +44,22 @@ namespace ThAmCo.Events.Data
             builder.Entity<GuestBooking>()
                 .HasOne(g => g.Guest)
                 .WithMany(gb => gb.GuestBookings)
-                .HasForeignKey(g => g.GuestId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(g => g.GuestId);
 
             builder.Entity<GuestBooking>()
                 .HasOne(e => e.Event)
                 .WithMany(gb => gb.GuestBookings)
-                .HasForeignKey(e => e.EventId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(e => e.EventId);
 
             builder.Entity<Staffing>()
                 .HasOne(s => s.Staff)
                 .WithMany(s => s.Staffings)
-                .HasForeignKey(s => s.EventId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(s => s.EventId);
 
             builder.Entity<Staffing>()
                 .HasOne(e => e.Event)
                 .WithMany(s => s.Staffings)
-                .HasForeignKey(e => e.EventId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(e => e.EventId);
 
             builder.Entity<Guest>().HasData(
              new Guest { GuestId = 1, FirstName = "John", Lastname = "Doe", Email = "john.doe@example.com" },

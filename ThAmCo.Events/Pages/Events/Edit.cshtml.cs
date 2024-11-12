@@ -29,12 +29,12 @@ namespace ThAmCo.Events.Pages.Events
                 return NotFound();
             }
 
-            var event =  await _context.Events.FirstOrDefaultAsync(m => m.EventId == id);
-            if (event == null)
+            var eventToEdit =  await _context.Events.FirstOrDefaultAsync(m => m.EventId == id);
+            if (eventToEdit == null)
             {
                 return NotFound();
             }
-            Event = event;
+            Event = eventToEdit;
             return Page();
         }
 

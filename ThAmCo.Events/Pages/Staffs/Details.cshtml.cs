@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ThAmCo.Events.Data;
 
-namespace ThAmCo.Events.Pages.StaffList
+namespace ThAmCo.Events.Pages.Staffs
 {
     public class DetailsModel : PageModel
     {
