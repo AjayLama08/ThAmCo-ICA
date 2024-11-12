@@ -24,7 +24,7 @@ namespace ThAmCo.Events.Pages.Guest
         }
 
         [BindProperty]
-        public Guest Guest { get; set; } = default!;
+        public ThAmCo.Events.Data.Guest Guest { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()

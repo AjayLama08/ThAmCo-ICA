@@ -19,7 +19,7 @@ namespace ThAmCo.Events.Pages.Guest
         }
 
         [BindProperty]
-        public Guest Guest { get; set; } = default!;
+        public ThAmCo.Events.Data.Guest Guest { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

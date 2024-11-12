@@ -18,7 +18,7 @@ namespace ThAmCo.Events.Pages.Guest
             _context = context;
         }
 
-        public IList<Guest> Guest { get;set; } = default!;
+        public IList<ThAmCo.Events.Data.Guest> Guest { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
