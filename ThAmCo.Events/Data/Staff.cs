@@ -4,7 +4,18 @@ namespace ThAmCo.Events.Data
 {
     public class Staff
     {
-        [Required]
+
+        public Staff()
+        {
+        }
+
+        public Staff(int staffId, string firstName, string lastName)
+        {
+            StaffId = staffId;
+            FirstName = firstName;
+            LastName = lastName;
+        }
+       
         public int StaffId { get; set; }
 
         [Required]
@@ -13,10 +24,7 @@ namespace ThAmCo.Events.Data
         [Required]
         public string LastName { get; set; } = string.Empty;
 
-        [Required]
-        public int PhoneNumber { get; set; }
-
         //Navigation property to Staffing class
-        public List<Staffing> Staffings { get; set; }
+        public List<Staffing>? Staffings { get; set; }
     }
 }

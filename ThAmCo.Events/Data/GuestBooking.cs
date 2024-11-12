@@ -11,9 +11,9 @@ namespace ThAmCo.Events.Data
         public int GuestId { get; set; }
 
         //Navigation property with Event class
-        public Event Event { get; set; }
+        public Event? Event { get; set; }
 
         //Navigation property with Guest class
-        public Guest Guest { get; set; }
+        public Guest? Guest { get; set; }
     }
 }

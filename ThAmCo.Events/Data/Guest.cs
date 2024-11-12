@@ -14,7 +14,7 @@ namespace ThAmCo.Events.Data
         public string Lastname { get; set; } = string.Empty;
 
         [Required]
-        public int PhoneNumber { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         //Navigation property to GuestBooking class
         public List<GuestBooking> GuestBookings { get; set; }

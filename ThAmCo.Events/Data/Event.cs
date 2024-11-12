@@ -6,7 +6,18 @@ namespace ThAmCo.Events.Data
 {
     public class Event
     {
-        [Required]
+        public Event()
+        {
+        }
+
+        public Event(int eventId, string eventTypeId, string title, DateTime date)
+        {
+            EventId = eventId;
+            EventTypeId = eventTypeId;
+            Title = title;
+            DateAndTime = date;
+        }
+       
         public int EventId { get; set; }
         [Required]
         public string EventTypeId { get; set; } = string.Empty;
@@ -15,17 +26,17 @@ namespace ThAmCo.Events.Data
         public string Title { get; set; } = string.Empty;
 
         [DataType(DataType.Date)]
-        public DateTime Date { get; set; }
+        public DateTime DateAndTime { get; set; }
 
         public int? FoodBookingId { get; set; }
 
-        public bool HasReservation { get; set; }
+        public string? ReservationReference { get; set; }
 
         //Navigation property to Staffing class
-        public List<Staffing> Staffings { get; set; }
+        public List<Staffing>? Staffings { get; set; }
 
         //Navigation property to GuestBooking class
-        public List<GuestBooking> GuestBookings { get; set; }
+        public List<GuestBooking>? GuestBookings { get; set; }
 
 
 
