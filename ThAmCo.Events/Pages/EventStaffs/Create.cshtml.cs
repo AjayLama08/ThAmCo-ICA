@@ -20,8 +20,8 @@ namespace ThAmCo.Events.Pages.EventStaffs
 
         public IActionResult OnGet()
         {
-        ViewData["EventId"] = new SelectList(_context.Events, "EventId", "Title");
-        ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "FirstName");
+            ViewData["EventId"] = new SelectList(_context.Events, "EventId", "Title");
+            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "FirstName");
             return Page();
         }
 

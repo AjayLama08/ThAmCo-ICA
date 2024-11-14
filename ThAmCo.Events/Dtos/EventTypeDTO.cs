@@ -1,8 +1,10 @@
-﻿namespace ThAmCo.Events.Dtos
+﻿using System.Text.Json.Serialization;
+
+public class EventTypeDTO
 {
-    public class EventTypeDTO
-    {
-        public required string EventTypeId { get; set; }
-        public required string EventName { get; set; } 
-    }
+    [JsonPropertyName("id")]
+    public string EventTypeId { get; set; }
+
+    [JsonPropertyName("title")]
+    public string Title { get; set; }
 }

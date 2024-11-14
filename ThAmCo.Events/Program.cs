@@ -1,6 +1,10 @@
 using ThAmCo.Events.Data;
+using ThAmCo.Events.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Register the HTTP Client and the EventTypeService for dependency injection
+builder.Services.AddHttpClient<EventTypeService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();

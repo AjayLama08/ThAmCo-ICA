@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json;
-using ThAmCo.Events.Dtos;
+using ThAmCo.Events;
 
 namespace ThAmCo.Events.Services
 {
     public class EventTypeService
     {
-        const string ServiceBaseUrl = "http://localhost:7011/api/api";
+        const string ServiceBaseUrl = "https://localhost:7088/api";
 
-        const string EventTypeEndPoint = "/EventTypes";
+        const string EventTypeEndPoint = "/eventtypes";
 
         private readonly HttpClient _httpClient;
 
@@ -39,18 +39,18 @@ namespace ThAmCo.Events.Services
             return items;
         }
 
-        public async Task<List<SelectListItem>> GetEventTypeSelectionListAsync()
+        public async Task<List<SelectListItem>> GetEventTypeSelectListAsync()
         {
-            var eventTypes = await GetEventItemsAsync();
+            var eventType = await GetEventItemsAsync();
 
             var selectList = new List<SelectListItem>();
 
-            if (eventTypes != null)
+            if (eventType != null)
             {
-                selectList = eventTypes.Select(e => new SelectListItem
+                selectList = eventType.Select(e => new SelectListItem
                 {
                     Value = e.EventTypeId,
-                    Text = e.EventName
+                    Text = e.Title
                 }).ToList();
             }
             return selectList;

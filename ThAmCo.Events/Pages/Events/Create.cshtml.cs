@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ThAmCo.Events.Data;
+using ThAmCo.Events.Services;
 
 namespace ThAmCo.Events.Pages.Events
 {
@@ -13,13 +14,21 @@ namespace ThAmCo.Events.Pages.Events
     {
         private readonly ThAmCo.Events.Data.EventsDbContext _context;
 
-        public CreateModel(ThAmCo.Events.Data.EventsDbContext context)
+        private readonly EventTypeService _eventTypeService;
+
+        // Empty SelectListItem List for category drop down
+        public List<SelectListItem> EventTypeItems { get; set; } = [];
+
+        public CreateModel(ThAmCo.Events.Data.EventsDbContext context, EventTypeService eventTypeService)
         {
             _context = context;
+            _eventTypeService = eventTypeService;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            //Popualte event type drop down using service class
+            EventTypeItems = await _eventTypeService.GetEventTypeSelectListAsync();
             return Page();
         }
 
@@ -31,6 +40,8 @@ namespace ThAmCo.Events.Pages.Events
         {
             if (!ModelState.IsValid)
             {
+                //Popualte event type drop down using service class to redisplay input form
+                EventTypeItems = await _eventTypeService.GetEventTypeSelectListAsync();
                 return Page();
             }
 
