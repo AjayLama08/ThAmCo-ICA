@@ -3,9 +3,10 @@ namespace ThAmCo.Catering.DTO
 {
     public class FoodItemDTO
     {
-      public required string Description { get; set; }
+        public int FoodItemId { get; set; }
+        public string Description { get; set; } = string.Empty;
 
-      public required float UnitPrice { get; set; }
+        public  float UnitPrice { get; set; }
 
 
     }

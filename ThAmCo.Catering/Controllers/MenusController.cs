@@ -51,6 +51,40 @@ namespace ThAmCo.Catering.Controllers
         }
 
         /// <summary>
+        /// Get a list and details of food items in a menu
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        //GET: api/Menus/5/FoodItems
+        [HttpGet("{id}/FoodItems")]
+        public async Task<ActionResult<ThAmCo.Catering.DTO.FoodItemsInMenuDTO>> GetFoodItemsInMenu(int id)
+        {
+            var menu = await _context.Menus
+                .Include(m => m.MenuFoodItems)
+                .ThenInclude(mfi => mfi.FoodItem)
+                .FirstOrDefaultAsync(m => m.MenuId == id);
+
+            if (menu == null)
+            {
+                return NotFound();
+            }
+
+            var foodItemsInMenu = new ThAmCo.Catering.DTO.FoodItemsInMenuDTO
+            {
+                MenuId = menu.MenuId,
+                MenuName = menu.MenuName,
+                FoodItems = menu.MenuFoodItems.Select(mfi => new ThAmCo.Catering.DTO.FoodItemDTO
+                {
+                    FoodItemId = mfi.FoodItem.FoodItemId,
+                    Description = mfi.FoodItem.Description,
+                    UnitPrice = mfi.FoodItem.UnitPrice
+                }).ToList()
+            };
+
+            return foodItemsInMenu;
+        }
+
+        /// <summary>
         /// Edit a menu
         /// </summary>
         /// <param name="id"></param>
