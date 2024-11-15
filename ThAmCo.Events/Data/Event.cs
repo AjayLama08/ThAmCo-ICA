@@ -19,16 +19,15 @@ namespace ThAmCo.Events.Data
         }
        
         public int EventId { get; set; }
-
+        [Required]
+        public string EventTypeId { get; set; } = string.Empty;
         [Required]
         public string Title { get; set; } = string.Empty;
 
         [DataType(DataType.Date)]
         public DateTime DateAndTime { get; set; }
 
-        [Required]
-        public string EventTypeId { get; set; } = string.Empty;
-
+        
         public int? FoodBookingId { get; set; }
 
         public string? ReservationReference { get; set; }

@@ -3,8 +3,8 @@
 public class EventTypeDTO
 {
     [JsonPropertyName("id")]
-    public string EventTypeId { get; set; }
+    public string EventTypeId { get; set; } = string.Empty;
 
     [JsonPropertyName("title")]
-    public string Title { get; set; }
+    public string Title { get; set; } = string.Empty;
 }

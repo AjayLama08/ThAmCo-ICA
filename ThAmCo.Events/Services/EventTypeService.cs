@@ -50,7 +50,7 @@ namespace ThAmCo.Events.Services
                 selectList = eventType.Select(e => new SelectListItem
                 {
                     Value = e.EventTypeId,
-                    Text = e.Title
+                    Text = e.EventTypeId
                 }).ToList();
             }
             return selectList;

@@ -22,13 +22,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Event[0].DateAndTime)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event[0].FoodBookingId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event[0].ReservationReference)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -42,12 +35,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateAndTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FoodBookingId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReservationReference)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.EventId">Edit</a> |
