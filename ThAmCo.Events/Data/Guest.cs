@@ -4,6 +4,19 @@ namespace ThAmCo.Events.Data
 {
     public class Guest
     {
+
+        public Guest()
+        {
+        }
+
+        public Guest(int guestId, string firstName, string lastName, string email)
+        {
+            GuestId = guestId;
+            FirstName = firstName;
+            Lastname = lastName;
+            Email = email;
+        }
+
         [Required]
         public int GuestId { get; set; }
 
@@ -17,6 +30,6 @@ namespace ThAmCo.Events.Data
         public string Email { get; set; } = string.Empty;
 
         //Navigation property to GuestBooking class
-        public List<GuestBooking> GuestBookings { get; set; }
+        public List<GuestBooking>? GuestBookings { get; set; }
     }
 }

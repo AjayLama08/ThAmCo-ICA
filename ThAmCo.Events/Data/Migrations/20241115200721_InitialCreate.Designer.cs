@@ -11,7 +11,7 @@ using ThAmCo.Events.Data;
 namespace ThAmCo.Events.Data.Migrations
 {
     [DbContext(typeof(EventsDbContext))]
-    [Migration("20241114235554_InitialCreate")]
+    [Migration("20241115200721_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

@@ -21,7 +21,7 @@ namespace ThAmCo.Catering.Controllers
         }
 
         /// <summary>
-        /// Get all menu food items
+        /// Get all food items in a menu
         /// </summary>
         /// <returns></returns>
         // GET: api/MenuFoodItems
@@ -32,7 +32,39 @@ namespace ThAmCo.Catering.Controllers
         }
 
         /// <summary>
-        /// Get a menu food item by id
+        /// Get food item details in a menu
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}/Details")]
+        public async Task<ActionResult<ThAmCo.Catering.DTO.FoodItemsInMenuDTO>> GetFoodItemsInMenu(int id)
+        {
+            var menu = await _context.Menus
+                .Include(m => m.MenuFoodItems)
+                .ThenInclude(mfi => mfi.FoodItem)
+                .FirstOrDefaultAsync(m => m.MenuId == id);
+
+            if (menu == null)
+            {
+                return NotFound();
+            }
+
+            var foodItemsInMenu = new ThAmCo.Catering.DTO.FoodItemsInMenuDTO
+            {
+                MenuId = menu.MenuId,
+                MenuName = menu.MenuName,
+                FoodItems = menu.MenuFoodItems.Select(mfi => new ThAmCo.Catering.DTO.FoodItemDTO
+                {
+                    FoodItemId = mfi.FoodItem.FoodItemId,
+                    Description = mfi.FoodItem.Description,
+                    UnitPrice = mfi.FoodItem.UnitPrice
+                }).ToList()
+            };
+
+            return foodItemsInMenu;
+        }
+        /// <summary>
+        /// Get food items in a menu
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -51,7 +83,7 @@ namespace ThAmCo.Catering.Controllers
         }
 
         /// <summary>
-        /// Edit a menu food item
+        /// Edit a food item in a menu
         /// </summary>
         /// <param name="foodItemId"></param>
         /// <param name="menuId"></param>
@@ -89,7 +121,7 @@ namespace ThAmCo.Catering.Controllers
         }
 
         /// <summary>
-        /// Add a menu food item
+        /// Add a food item to a menu
         /// </summary>
         /// <param name="menuFoodItem"></param>
         /// <returns></returns>
@@ -130,14 +162,12 @@ namespace ThAmCo.Catering.Controllers
         }
 
         /// <summary>
-        /// Delete a food item from a menu (Think about replacing the parameters with a DTO
+        /// Delete a food item from a menu 
         /// </summary>
         /// <param name="menuFoodItemDTO"></param>
-        /// <param name="foodItemId"></param>
-        /// <param name="menuId"></param>
         /// <returns></returns>
         // DELETE: api/MenuFoodItems/5
-        [HttpDelete("{foodItemId}/{menuId}")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteMenuFoodItem(ThAmCo.Catering.DTO.MenuFoodItemDTO menuFoodItemDTO)
         {
             var menuFoodItem = await _context.MenuFoodItems
