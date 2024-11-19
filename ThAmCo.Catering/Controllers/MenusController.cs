@@ -49,6 +49,38 @@ namespace ThAmCo.Catering.Controllers
 
             return menu;
         }
+        /// <summary>
+        /// Get food item details in a menu
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}/Details")]
+        public async Task<ActionResult<ThAmCo.Catering.DTO.FoodItemsInMenuDTO>> GetFoodItemsInMenu(int id)
+        {
+            var menu = await _context.Menus
+                .Include(m => m.MenuFoodItems)
+                .ThenInclude(mfi => mfi.FoodItem)
+                .FirstOrDefaultAsync(m => m.MenuId == id);
+
+            if (menu == null)
+            {
+                return NotFound();
+            }
+
+            var foodItemsInMenu = new ThAmCo.Catering.DTO.FoodItemsInMenuDTO
+            {
+                MenuId = menu.MenuId,
+                MenuName = menu.MenuName,
+                FoodItems = menu.MenuFoodItems.Select(mfi => new ThAmCo.Catering.DTO.FoodItemDTO
+                {
+                    FoodItemId = mfi.FoodItem.FoodItemId,
+                    Description = mfi.FoodItem.Description,
+                    UnitPrice = mfi.FoodItem.UnitPrice
+                }).ToList()
+            };
+
+            return foodItemsInMenu;
+        }
 
         /// <summary>
         /// Edit a menu
