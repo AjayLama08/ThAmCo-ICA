@@ -53,3 +53,52 @@
     <a asp-page="./Edit" asp-route-id="@Model.Event.EventId">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>
+
+<br />
+<br />
+
+<h5>Booked Guests for this event</h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Guests[0].GuestId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guests[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guests[0].Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guests[0].Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Guests)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GuestId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.GuestId">Edit</a> |
+                    <a asp-page="/Guests/Details" asp-route-id="@item.GuestId">Details</a> |
+                    <a asp-page="/Guests/Delete" asp-route-id="@item.GuestId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -16,9 +16,13 @@ namespace ThAmCo.Events.Pages.Events
         public DetailsModel(ThAmCo.Events.Data.EventsDbContext context)
         {
             _context = context;
+            Guests = new List<ThAmCo.Events.Data.Guest>();
+            GuestBookings = new List<GuestBooking>();
         }
 
         public Event Event { get; set; } = default!;
+        public List<ThAmCo.Events.Data.Guest> Guests { get; set; }
+        public List<GuestBooking> GuestBookings { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,8 +39,18 @@ namespace ThAmCo.Events.Pages.Events
             else
             {
                 Event = eventForDetails;
+                var eventGuests = await _context.Guests
+                    .Include(gb => gb.GuestBookings)
+                    .ThenInclude(e => e.Event)
+                    .Where(gb => gb.GuestBookings.Any(e => e.EventId == id))
+                    .ToListAsync();
+
+                if (eventGuests != null)
+                {
+                    Guests = eventGuests;
+                }
+                return Page();
             }
-            return Page();
         }
     }
 }

@@ -25,6 +25,6 @@ namespace ThAmCo.Events.Data
         public string LastName { get; set; } = string.Empty;
 
         //Navigation property to Staffing class
-        public List<Staffing>? Staffings { get; set; }
+        public List<Staffing> Staffings { get; set; }
     }
 }

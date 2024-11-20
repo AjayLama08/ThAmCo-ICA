@@ -30,6 +30,6 @@ namespace ThAmCo.Events.Data
         public string Email { get; set; } = string.Empty;
 
         //Navigation property to GuestBooking class
-        public List<GuestBooking>? GuestBookings { get; set; }
+        public List<GuestBooking> GuestBookings { get; set; }
     }
 }

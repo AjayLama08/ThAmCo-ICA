@@ -33,7 +33,7 @@ namespace ThAmCo.Events.Data
         public string? ReservationReference { get; set; }
 
         //Navigation property to Staffing class
-        public List<Staffing>? Staffings { get; set; }
+        public List<Staffing> Staffings { get; set; }
 
         //Navigation property to GuestBooking class
         public List<GuestBooking> GuestBookings { get; set; }

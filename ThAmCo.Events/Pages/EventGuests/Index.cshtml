@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.GuestBooking[0].Event)
+                @Html.DisplayNameFor(model => model.GuestBooking[0].EventId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.GuestBooking[0].Guest)
@@ -26,8 +26,9 @@
 @foreach (var item in Model.GuestBooking) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Event.EventTypeId)
+                @Html.DisplayFor(modelItem => item.Event.EventId)
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Guest.Email)
             </td>
