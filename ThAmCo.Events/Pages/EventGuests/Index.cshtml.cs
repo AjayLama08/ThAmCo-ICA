@@ -18,13 +18,21 @@ namespace ThAmCo.Events.Pages.EventGuests
             _context = context;
         }
 
-        public IList<GuestBooking> GuestBooking { get;set; } = default!;
+        public IList<GuestBooking> GuestBooking { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? id)
         {
-            GuestBooking = await _context.GuestBookings
+            var eventsContext = _context.GuestBookings.AsQueryable();
+
+            if (id != null)
+            {
+                eventsContext = eventsContext.Where(e => e.EventId == id);
+            }
+            eventsContext = eventsContext
                 .Include(g => g.Event)
-                .Include(g => g.Guest).ToListAsync();
+                .Include(g => g.Guest);
+
+            GuestBooking = await eventsContext.ToListAsync();
         }
     }
 }

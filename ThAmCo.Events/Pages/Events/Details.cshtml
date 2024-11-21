@@ -90,6 +90,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
+                <td>
+                    <a asp-page="/EventGuests/Remove" asp-route-EventId="@Model.Event.EventId" asp-route-GuestId="@item.GuestId">Remove</a>
+                </td>
             </tr>
         }
     </tbody>

@@ -33,9 +33,7 @@
                 @Html.DisplayFor(modelItem => item.Guest.Email)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+               <a asp-page ="./Remove" asp-route-EventId="@item.EventId" asp-route-GuestId="@item.GuestId">Remove</a>
             </td>
         </tr>
 }
