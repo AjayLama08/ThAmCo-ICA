@@ -67,21 +67,5 @@ namespace ThAmCo.Events.Pages.Events
 
             return RedirectToPage(new { id = eventId });
         }
-
-        public async Task<IActionResult> OnPostUnregisterAttendanceAsync(int eventId, int guestId)
-        {
-            var guestBooking = await _context.GuestBookings
-                .FirstOrDefaultAsync(gb => gb.EventId == eventId && gb.GuestId == guestId);
-
-            if (guestBooking == null)
-            {
-                return NotFound();
-            }
-
-            guestBooking.HasAttended = false;
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage(new { id = eventId });
-        }
     }
 }
