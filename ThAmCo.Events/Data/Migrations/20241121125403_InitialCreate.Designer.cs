@@ -11,7 +11,7 @@ using ThAmCo.Events.Data;
 namespace ThAmCo.Events.Data.Migrations
 {
     [DbContext(typeof(EventsDbContext))]
-    [Migration("20241115200721_InitialCreate")]
+    [Migration("20241121125403_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -144,7 +144,7 @@ namespace ThAmCo.Events.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Lastname")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -158,70 +158,70 @@ namespace ThAmCo.Events.Data.Migrations
                             GuestId = 1,
                             Email = "john.doe@example.com",
                             FirstName = "John",
-                            Lastname = "Doe"
+                            LastName = "Doe"
                         },
                         new
                         {
                             GuestId = 2,
                             Email = "jane.smith@example.com",
                             FirstName = "Jane",
-                            Lastname = "Smith"
+                            LastName = "Smith"
                         },
                         new
                         {
                             GuestId = 3,
                             Email = "alice.johnson@example.com",
                             FirstName = "Alice",
-                            Lastname = "Johnson"
+                            LastName = "Johnson"
                         },
                         new
                         {
                             GuestId = 4,
                             Email = "bob.brown@example.com",
                             FirstName = "Bob",
-                            Lastname = "Brown"
+                            LastName = "Brown"
                         },
                         new
                         {
                             GuestId = 5,
                             Email = "charlie.davis@example.com",
                             FirstName = "Charlie",
-                            Lastname = "Davis"
+                            LastName = "Davis"
                         },
                         new
                         {
                             GuestId = 6,
                             Email = "david.martinez@example.com",
                             FirstName = "David",
-                            Lastname = "Martinez"
+                            LastName = "Martinez"
                         },
                         new
                         {
                             GuestId = 7,
                             Email = "eve.miller@example.com",
                             FirstName = "Eve",
-                            Lastname = "Miller"
+                            LastName = "Miller"
                         },
                         new
                         {
                             GuestId = 8,
                             Email = "frank.wilson@example.com",
                             FirstName = "Frank",
-                            Lastname = "Wilson"
+                            LastName = "Wilson"
                         },
                         new
                         {
                             GuestId = 9,
                             Email = "grace.taylor@example.com",
                             FirstName = "Grace",
-                            Lastname = "Taylor"
+                            LastName = "Taylor"
                         },
                         new
                         {
                             GuestId = 10,
                             Email = "hank.anderson@example.com",
                             FirstName = "Hank",
-                            Lastname = "Anderson"
+                            LastName = "Anderson"
                         });
                 });
 
@@ -231,6 +231,9 @@ namespace ThAmCo.Events.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("EventId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("HasAttended")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("GuestId", "EventId");
@@ -243,82 +246,98 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             GuestId = 1,
-                            EventId = 1
+                            EventId = 1,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 1,
-                            EventId = 2
+                            EventId = 2,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 2,
-                            EventId = 1
+                            EventId = 1,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 2,
-                            EventId = 3
+                            EventId = 3,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 3,
-                            EventId = 3
+                            EventId = 3,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 4,
-                            EventId = 2
+                            EventId = 2,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 4,
-                            EventId = 5
+                            EventId = 5,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 5,
-                            EventId = 4
+                            EventId = 4,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 5,
-                            EventId = 6
+                            EventId = 6,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 6,
-                            EventId = 5
+                            EventId = 5,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 7,
-                            EventId = 6
+                            EventId = 6,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 7,
-                            EventId = 9
+                            EventId = 9,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 8,
-                            EventId = 7
+                            EventId = 7,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 9,
-                            EventId = 7
+                            EventId = 7,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 9,
-                            EventId = 8
+                            EventId = 8,
+                            HasAttended = false
                         },
                         new
                         {
                             GuestId = 10,
-                            EventId = 10
+                            EventId = 10,
+                            HasAttended = false
                         });
                 });
 

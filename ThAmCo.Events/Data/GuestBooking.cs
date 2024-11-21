@@ -10,6 +10,8 @@ namespace ThAmCo.Events.Data
         [Required]
         public int GuestId { get; set; }
 
+        public bool HasAttended { get; set; }
+
         //Navigation property with Event class
         public Event? Event { get; set; }
 

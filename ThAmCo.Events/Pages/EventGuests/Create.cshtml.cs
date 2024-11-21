@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata;
 using ThAmCo.Events.Data;
 
 namespace ThAmCo.Events.Pages.EventGuests
@@ -20,15 +21,15 @@ namespace ThAmCo.Events.Pages.EventGuests
 
         public IActionResult OnGet()
         {
-        ViewData["EventId"] = new SelectList(_context.Events, "EventId", "EventTypeId");
-        ViewData["GuestId"] = new SelectList(_context.Guests, "GuestId", "Email");
+            ViewData["EventId"] = new SelectList(_context.Events, "EventId", "Title");
+            ViewData["GuestId"] = new SelectList(_context.Guests.Select(g => new { g.GuestId, FullName = g.FirstName + " " + g.LastName }), "GuestId", "FullName");
             return Page();
         }
 
         [BindProperty]
         public GuestBooking GuestBooking { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+        
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

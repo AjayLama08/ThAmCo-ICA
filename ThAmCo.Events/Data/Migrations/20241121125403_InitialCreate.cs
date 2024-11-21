@@ -37,7 +37,7 @@ namespace ThAmCo.Events.Data.Migrations
                     GuestId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(type: "TEXT", nullable: false),
-                    Lastname = table.Column<string>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -64,7 +64,8 @@ namespace ThAmCo.Events.Data.Migrations
                 columns: table => new
                 {
                     EventId = table.Column<int>(type: "INTEGER", nullable: false),
-                    GuestId = table.Column<int>(type: "INTEGER", nullable: false)
+                    GuestId = table.Column<int>(type: "INTEGER", nullable: false),
+                    HasAttended = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -126,7 +127,7 @@ namespace ThAmCo.Events.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Guests",
-                columns: new[] { "GuestId", "Email", "FirstName", "Lastname" },
+                columns: new[] { "GuestId", "Email", "FirstName", "LastName" },
                 values: new object[,]
                 {
                     { 1, "john.doe@example.com", "John", "Doe" },
@@ -160,25 +161,25 @@ namespace ThAmCo.Events.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "GuestBookings",
-                columns: new[] { "EventId", "GuestId" },
+                columns: new[] { "EventId", "GuestId", "HasAttended" },
                 values: new object[,]
                 {
-                    { 1, 1 },
-                    { 2, 1 },
-                    { 1, 2 },
-                    { 3, 2 },
-                    { 3, 3 },
-                    { 2, 4 },
-                    { 5, 4 },
-                    { 4, 5 },
-                    { 6, 5 },
-                    { 5, 6 },
-                    { 6, 7 },
-                    { 9, 7 },
-                    { 7, 8 },
-                    { 7, 9 },
-                    { 8, 9 },
-                    { 10, 10 }
+                    { 1, 1, false },
+                    { 2, 1, false },
+                    { 1, 2, false },
+                    { 3, 2, false },
+                    { 3, 3, false },
+                    { 2, 4, false },
+                    { 5, 4, false },
+                    { 4, 5, false },
+                    { 6, 5, false },
+                    { 5, 6, false },
+                    { 6, 7, false },
+                    { 9, 7, false },
+                    { 7, 8, false },
+                    { 7, 9, false },
+                    { 8, 9, false },
+                    { 10, 10, false }
                 });
 
             migrationBuilder.InsertData(

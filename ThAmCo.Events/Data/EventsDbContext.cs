@@ -62,16 +62,16 @@ namespace ThAmCo.Events.Data
                 .HasForeignKey(e => e.EventId);
 
             builder.Entity<Guest>().HasData(
-             new Guest { GuestId = 1, FirstName = "John", Lastname = "Doe", Email = "john.doe@example.com" },
-             new Guest { GuestId = 2, FirstName = "Jane", Lastname = "Smith", Email = "jane.smith@example.com" },
-             new Guest { GuestId = 3, FirstName = "Alice", Lastname = "Johnson", Email = "alice.johnson@example.com" },
-             new Guest { GuestId = 4, FirstName = "Bob", Lastname = "Brown", Email = "bob.brown@example.com" },
-             new Guest { GuestId = 5, FirstName = "Charlie", Lastname = "Davis", Email = "charlie.davis@example.com" },
-             new Guest { GuestId = 6, FirstName = "David", Lastname = "Martinez", Email = "david.martinez@example.com" },
-             new Guest { GuestId = 7, FirstName = "Eve", Lastname = "Miller", Email = "eve.miller@example.com" },
-             new Guest { GuestId = 8, FirstName = "Frank", Lastname = "Wilson", Email = "frank.wilson@example.com" },
-             new Guest { GuestId = 9, FirstName = "Grace", Lastname = "Taylor", Email = "grace.taylor@example.com" },
-             new Guest { GuestId = 10, FirstName = "Hank", Lastname = "Anderson", Email = "hank.anderson@example.com"
+             new Guest { GuestId = 1, FirstName = "John", LastName = "Doe", Email = "john.doe@example.com" },
+             new Guest { GuestId = 2, FirstName = "Jane", LastName = "Smith", Email = "jane.smith@example.com" },
+             new Guest { GuestId = 3, FirstName = "Alice", LastName = "Johnson", Email = "alice.johnson@example.com" },
+             new Guest { GuestId = 4, FirstName = "Bob", LastName = "Brown", Email = "bob.brown@example.com" },
+             new Guest { GuestId = 5, FirstName = "Charlie", LastName = "Davis", Email = "charlie.davis@example.com" },
+             new Guest { GuestId = 6, FirstName = "David", LastName = "Martinez", Email = "david.martinez@example.com" },
+             new Guest { GuestId = 7, FirstName = "Eve", LastName = "Miller", Email = "eve.miller@example.com" },
+             new Guest { GuestId = 8, FirstName = "Frank", LastName = "Wilson", Email = "frank.wilson@example.com" },
+             new Guest { GuestId = 9, FirstName = "Grace", LastName = "Taylor", Email = "grace.taylor@example.com" },
+             new Guest { GuestId = 10, FirstName = "Hank", LastName = "Anderson", Email = "hank.anderson@example.com"
              });
 
             builder.Entity<Event>().HasData(
