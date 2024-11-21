@@ -47,7 +47,8 @@ namespace ThAmCo.Catering.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ClientReferenceId = table.Column<int>(type: "INTEGER", nullable: false),
                     NumberOfGuests = table.Column<int>(type: "INTEGER", nullable: false),
-                    MenuId = table.Column<int>(type: "INTEGER", nullable: false)
+                    MenuId = table.Column<int>(type: "INTEGER", nullable: false),
+                    EventId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -130,24 +131,24 @@ namespace ThAmCo.Catering.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "FoodBookings",
-                columns: new[] { "FoodBookingId", "ClientReferenceId", "MenuId", "NumberOfGuests" },
+                columns: new[] { "FoodBookingId", "ClientReferenceId", "EventId", "MenuId", "NumberOfGuests" },
                 values: new object[,]
                 {
-                    { 1, 101, 1, 10 },
-                    { 2, 102, 2, 20 },
-                    { 3, 103, 3, 30 },
-                    { 4, 104, 4, 15 },
-                    { 5, 105, 5, 25 },
-                    { 6, 106, 6, 35 },
-                    { 7, 107, 7, 40 },
-                    { 8, 108, 8, 12 },
-                    { 9, 109, 9, 18 },
-                    { 10, 110, 10, 22 },
-                    { 11, 111, 11, 28 },
-                    { 12, 112, 12, 32 },
-                    { 13, 113, 13, 45 },
-                    { 14, 114, 14, 50 },
-                    { 15, 115, 15, 60 }
+                    { 1, 101, null, 1, 10 },
+                    { 2, 102, null, 2, 20 },
+                    { 3, 103, null, 3, 30 },
+                    { 4, 104, null, 4, 15 },
+                    { 5, 105, null, 5, 25 },
+                    { 6, 106, null, 6, 35 },
+                    { 7, 107, null, 7, 40 },
+                    { 8, 108, null, 8, 12 },
+                    { 9, 109, null, 9, 18 },
+                    { 10, 110, null, 10, 22 },
+                    { 11, 111, null, 11, 28 },
+                    { 12, 112, null, 12, 32 },
+                    { 13, 113, null, 13, 45 },
+                    { 14, 114, null, 14, 50 },
+                    { 15, 115, null, 15, 60 }
                 });
 
             migrationBuilder.InsertData(

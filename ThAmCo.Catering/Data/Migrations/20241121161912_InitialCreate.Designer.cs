@@ -10,14 +10,14 @@ using ThAmCo.Catering.Data;
 namespace ThAmCo.Catering.Data.Migrations
 {
     [DbContext(typeof(CateringDbContext))]
-    [Migration("20241031114203_InitialCreate")]
+    [Migration("20241121161912_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
             modelBuilder.Entity("ThAmCo.Catering.Data.FoodBooking", b =>
                 {
@@ -26,6 +26,9 @@ namespace ThAmCo.Catering.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ClientReferenceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("EventId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("MenuId")

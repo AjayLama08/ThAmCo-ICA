@@ -54,44 +54,40 @@
 </div>
 <br />
 <br />
-<h3>Booked Guests for this event</h3>
 
+<h3>Guests</h3>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Guests[0].GuestId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Guests[0].FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Guests[0].LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Guests[0].Email)
-            </th>
-            <th></th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Attendance</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Guests)
+        @foreach (var guest in Model.Guests)
         {
             <tr>
+                <td>@guest.FirstName</td>
+                <td>@guest.LastName</td>
+                <td>@guest.Email</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.GuestId)
+                    @if (guest.GuestBookings.Any(gb => gb.EventId == Model.Event.EventId && gb.HasAttended))
+                    {
+                        <span>Attended</span>
+                    }
+                    else
+                    {
+                        <form method="post" asp-page-handler="RegisterAttendance">
+                            <input type="hidden" name="eventId" value="@Model.Event.EventId" />
+                            <input type="hidden" name="guestId" value="@guest.GuestId" />
+                            <button type="submit">Register Attendance</button>
+                        </form>
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    <a asp-page="/EventGuests/Remove" asp-route-EventId="@Model.Event.EventId" asp-route-GuestId="@item.GuestId">Remove</a>
+                    <a asp-page="/EventGuests/Remove" asp-route-EventId="@Model.Event.EventId" asp-route-GuestId="@guest.GuestId">Remove</a>
                 </td>
             </tr>
         }
@@ -106,4 +102,4 @@
 </tbody>
 <br />
 <br />
-<h3> Total Guest: @Model.Guests.Count</h3>
+<h3>Total Guests: @Model.Guests.Count</h3>
