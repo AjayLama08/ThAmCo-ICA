@@ -31,7 +31,10 @@ namespace ThAmCo.Events.Pages.Guest
                 return NotFound();
             }
 
-            var guest = await _context.Guests.FirstOrDefaultAsync(m => m.GuestId == id);
+            var guest = await _context.Guests
+                .Include(g => g.GuestBookings)
+                .ThenInclude(gb => gb.Event)
+                .FirstOrDefaultAsync(m => m.GuestId == id);
 
             if (guest == null)
             {
@@ -40,20 +43,11 @@ namespace ThAmCo.Events.Pages.Guest
             else
             {
                 Guest = guest;
-
-                var eventNames = await _context.Events
-                    .Include(e => e.GuestBookings)
-                    .ThenInclude(g => g.Guest)
-                    .Where(e => e.GuestBookings.Any(gb => gb.GuestId == id))
-                    .ToListAsync();
-
-                if (eventNames != null)
-                {
-                    Events = eventNames;
-                }
+                GuestBookings = guest.GuestBookings;
+                Events = guest.GuestBookings.Select(gb => gb.Event).ToList();
                 return Page();
             }
         }
+
     }
 }
-

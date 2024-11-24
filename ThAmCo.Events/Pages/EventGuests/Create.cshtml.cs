@@ -40,7 +40,7 @@ namespace ThAmCo.Events.Pages.EventGuests
             _context.GuestBookings.Add(GuestBooking);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Event/Details");
         }
     }
 }

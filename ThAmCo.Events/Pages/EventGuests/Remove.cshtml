@@ -36,6 +36,6 @@
         <input type="hidden" asp-for="GuestBooking.EventId" />
         <input type="hidden" asp-for="GuestBooking.GuestId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <a asp-page="/Events/Details" asp-route-id="@Model.GuestBooking.EventId">Back to List</a>
     </form>
 </div>

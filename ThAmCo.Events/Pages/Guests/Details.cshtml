@@ -45,37 +45,25 @@
 <br />
 <br />
 
-<h3>Booked Events for this guest</h3> 
-
+<h3>Associated Events</h3>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Events[0].EventId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Events[0].EventTypeId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Events[0].Title)
-            </th>
-            <th></th>
+            <th>Event Title</th>
+            <th>Date</th>
+            <th>HasAttended</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Events)
+        @foreach (var booking in Model.GuestBookings)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EventId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EventTypeId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
+                <td>@booking.Event.Title</td>
+                <td>@booking.Event.DateAndTime.ToShortDateString()</td>
+                <td>@booking.HasAttended</td>
             </tr>
         }
     </tbody>
 </table>
+
+
