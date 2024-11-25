@@ -48,10 +48,9 @@ namespace ThAmCo.Events.Pages.Events
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 //Popualte event type drop down using service class to redisplay input form
                 EventTypeItems = await _eventTypeService.GetEventTypeSelectListAsync();

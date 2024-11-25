@@ -29,7 +29,7 @@ namespace ThAmCo.Events.Pages.Guest
         
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 return Page();
             }
