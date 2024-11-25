@@ -41,26 +41,31 @@ namespace ThAmCo.Events.Data
             builder.Entity<Staffing>()
                 .HasKey(s => new { s.StaffId, s.EventId });
 
+            //Navigation properties
             builder.Entity<GuestBooking>()
-                .HasOne(g => g.Guest)
+                .HasOne(g => g.Guest) 
                 .WithMany(gb => gb.GuestBookings)
                 .HasForeignKey(g => g.GuestId);
 
+            //Navigation properties
             builder.Entity<GuestBooking>()
                 .HasOne(e => e.Event)
                 .WithMany(gb => gb.GuestBookings)
                 .HasForeignKey(e => e.EventId);
 
+            //Navigation properties
             builder.Entity<Staffing>()
                 .HasOne(s => s.Staff)
                 .WithMany(s => s.Staffings)
                 .HasForeignKey(s => s.EventId);
 
+            //Navigation properties
             builder.Entity<Staffing>()
                 .HasOne(e => e.Event)
                 .WithMany(s => s.Staffings)
                 .HasForeignKey(e => e.EventId);
 
+            //Seed data to populate Guest Table
             builder.Entity<Guest>().HasData(
              new Guest { GuestId = 1, FirstName = "John", LastName = "Doe", Email = "john.doe@example.com" },
              new Guest { GuestId = 2, FirstName = "Jane", LastName = "Smith", Email = "jane.smith@example.com" },
@@ -74,6 +79,7 @@ namespace ThAmCo.Events.Data
              new Guest { GuestId = 10, FirstName = "Hank", LastName = "Anderson", Email = "hank.anderson@example.com"
              });
 
+            //Seed data to populate Event Table
             builder.Entity<Event>().HasData(
              new Event { EventId = 1, EventTypeId = "WED", Title = "John and Jane's Wedding", DateAndTime = new DateTime(2022, 6, 30), FoodBookingId = 101, ReservationReference = "RES2022063001" },
              new Event { EventId = 2, EventTypeId = "CON", Title = "Tech Innovations 2022", DateAndTime = new DateTime(2022, 7, 15), FoodBookingId = 102, ReservationReference = null },
@@ -87,7 +93,7 @@ namespace ThAmCo.Events.Data
              new Event { EventId = 10, EventTypeId = "MET", Title = "Leadership Forum", DateAndTime = new DateTime(2024, 7, 22), FoodBookingId = 110, ReservationReference = null }
 );
 
-
+            //Seed data to populate GuestBooking Table
             builder.Entity<GuestBooking>().HasData(
              // Guest 1 (John Doe)
              new GuestBooking { GuestId = 1, EventId = 1 },  // John at John & Jane's Wedding
@@ -126,6 +132,7 @@ namespace ThAmCo.Events.Data
              new GuestBooking { GuestId = 10, EventId = 10 } // Hank at Business Leadership Forum
             );
 
+            //Seed data to populate Staff Table
             builder.Entity<Staff>().HasData(
             new Staff { StaffId = 1, FirstName = "Sarah", LastName = "Jones" },
             new Staff { StaffId = 2, FirstName = "Jacob", LastName = "Smith" },
@@ -139,6 +146,7 @@ namespace ThAmCo.Events.Data
             new Staff { StaffId = 10, FirstName = "James", LastName = "Anderson" }
             );
 
+            //Seed data to populate Staffing Table
             builder.Entity<Staffing>().HasData(
             new Staffing { StaffId = 1, EventId = 1 },  // Sarah at John and Jane's Wedding
             new Staffing { StaffId = 2, EventId = 1 },  // Jacob at John and Jane's Wedding

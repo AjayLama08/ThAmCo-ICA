@@ -16,7 +16,7 @@ namespace ThAmCo.Events.Pages.Events
 
         private readonly EventTypeService _eventTypeService;
 
-        // Empty SelectListItem List for category drop down
+        // Empty SelectListItem List for event type drop down
         public List<SelectListItem> EventTypeItems { get; set; } = [];
 
         public CreateModel(ThAmCo.Events.Data.EventsDbContext context, EventTypeService eventTypeService)
