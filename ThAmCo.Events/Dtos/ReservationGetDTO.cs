@@ -6,7 +6,6 @@ namespace ThAmCo.Events.Dtos
     {
         public string Reference { get; set; } = string.Empty;
 
-        [DataType(DataType.Date)]
         public DateTime EventDate { get; set; }
 
         public string VenueCode { get; set; } = string.Empty;

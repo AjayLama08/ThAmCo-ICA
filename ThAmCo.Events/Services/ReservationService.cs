@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.Json;
 using ThAmCo.Events.Dtos;
 
 namespace ThAmCo.Events.Services
@@ -21,42 +22,23 @@ namespace ThAmCo.Events.Services
             PropertyNameCaseInsensitive = true
         };
 
-        public async Task<List<ReservationGetDTO>> GetReservationsGetAsync()
+        public async Task<List<ReservationGetDTO>> GetVenueAvailabilityListAsync(DateTime date, string eventTypeId)
         {
-            var response = await _httpClient.GetAsync(ServiceBaseUrl + ReservationEndPoint);
+            var url = ServiceBaseUrl + ReservationEndPoint + "?date=" + date.ToString("yyyy-MM-dd") + "&eventTypeId=" + eventTypeId;
+
+            var response = await _httpClient.GetAsync(url);
 
             response.EnsureSuccessStatusCode();
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
-            var reservations = JsonSerializer.Deserialize<List<ReservationGetDTO>>(jsonResponse, options);
+            var items = JsonSerializer.Deserialize<List<ReservationGetDTO>>(jsonResponse, options);
 
-            if (reservations == null)
+            if (items == null)
             {
-                throw new ArgumentNullException(nameof(response), "The Reservation response is null");
+                throw new ArgumentNullException(nameof(response), "The Venue Availability list response is null");
             }
-            return reservations;
-        }
-
-        public async Task<List<ReservationPostDTO>> PostReservationPostAsync()
-        {
-            var reservations = await GetReservationsGetAsync();
-
-            var postDTO = new List<ReservationPostDTO>();
-
-            if (reservations != null)
-            {
-                foreach (var reservation in reservations)
-                {
-                    postDTO.Add(new ReservationPostDTO
-                    {
-                        EventDate = reservation.EventDate,
-                        VenueCode = reservation.VenueCode,
-                        StaffName = reservation.StaffName
-                    });
-                }
-            }
-            return postDTO;
+            return items;
         }
     }
 }
