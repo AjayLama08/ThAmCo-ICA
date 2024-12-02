@@ -60,7 +60,7 @@ namespace ThAmCo.Events.Pages.Events
             EventId = eventToReserve.EventId;
 
             DateTime beginDate = eventToReserve.DateAndTime;
-            DateTime endDate = eventToReserve.DateAndTime.AddDays(1); // Assuming endDate is one day after beginDate
+            DateTime endDate = eventToReserve.DateAndTime;
             string eventType = eventToReserve.EventTypeId;
 
             var availableVenues = await _availabilityService.GetAvailabilityListAsync(beginDate, endDate, eventType);
