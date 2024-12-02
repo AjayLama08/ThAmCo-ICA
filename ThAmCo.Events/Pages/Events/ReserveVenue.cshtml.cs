@@ -1,47 +1,104 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ThAmCo.Events.Services;
+using ThAmCo.Events.ViewModels;
 
-namespace ThAmCo.Events.Pages
+namespace ThAmCo.Events.Pages.Events
 {
     public class ReserveVenueModel : PageModel
     {
-        private readonly VenueService _venueService;
+        private readonly ThAmCo.Events.Data.EventsDbContext _context;
+        private readonly AvailabilityService _availabilityService;
 
-        public ReserveVenueModel(VenueService venueService)
+        public List<SelectListItem> AvailableVenues { get; set; }
+
+        [BindProperty]
+        public ReserveVenueVM ReserveVenue { get; set; }
+
+        public ReserveVenueModel(ThAmCo.Events.Data.EventsDbContext context, AvailabilityService availabilityService)
         {
-            _venueService = venueService;
+            _context = context;
+            _availabilityService = availabilityService;
+            AvailableVenues = new List<SelectListItem>();
         }
 
-        [BindProperty]
-        public string EventId { get; set; }
+        public EventVM Event { get; set; }
 
         [BindProperty]
-        public string VenueId { get; set; }
+        public int EventId { get; set; }
 
-        public List<VenueDTO> AvailableVenues { get; set; }
+        [BindProperty]
+        public string VenueCode { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string eventId)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            EventId = eventId;
-            AvailableVenues = await _venueService.GetAvailableVenuesAsync(eventId);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var eventToReserve = await _context.Events.Select(e => new EventVM
+            {
+                EventId = e.EventId,
+                Title = e.Title,
+                DateAndTime = e.DateAndTime,
+                EventTypeId = e.EventTypeId,
+                FoodBookingId = e.FoodBookingId,
+                ReservationReference = e.ReservationReference
+            }).FirstOrDefaultAsync(m => m.EventId == id);
+
+            if (eventToReserve == null)
+            {
+                return NotFound();
+            }
+
+            Event = eventToReserve;
+            ReserveVenue = new ReserveVenueVM();
+            ReserveVenue.EventId = eventToReserve.EventId;
+            EventId = eventToReserve.EventId;
+
+            DateTime beginDate = eventToReserve.DateAndTime;
+            DateTime endDate = eventToReserve.DateAndTime.AddDays(1); // Assuming endDate is one day after beginDate
+            string eventType = eventToReserve.EventTypeId;
+
+            var availableVenues = await _availabilityService.GetAvailabilityListAsync(beginDate, endDate, eventType);
+            if (availableVenues != null)
+            {
+                AvailableVenues = availableVenues.Select(v => new SelectListItem
+                {
+                    Text = v.VenueCode,
+                    Value = v.VenueCode
+                }).ToList();
+            }
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var success = await _venueService.ReserveVenueAsync(EventId, VenueId);
-            if (success)
+            if (!ModelState.IsValid)
             {
-                // Redirect to the event details page or show a success message
-                return RedirectToPage("Details", new { id = EventId });
-            }
-            else
-            {
-                // Show an error message
-                ModelState.AddModelError("", "Failed to reserve the venue.");
                 return Page();
             }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EventExists(Event.EventId))
+                {
+                    return NotFound();
+                }
+            }
+            return RedirectToPage("./Index");
+        }
+
+        private bool EventExists(int eventId)
+        {
+            return _context.Events.Any(e => e.EventId == eventId);
         }
     }
 }

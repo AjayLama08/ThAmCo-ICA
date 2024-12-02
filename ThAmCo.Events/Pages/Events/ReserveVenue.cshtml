@@ -1,34 +1,77 @@
-﻿@page
-@model ThAmCo.Events.Pages.ReserveVenueModel
-@{
-    ViewData["Title"] = "Reserve Venue";
+﻿@page  
+@model ThAmCo.Events.Pages.Events.ReserveVenueModel  
+
+@{  
+  ViewData["Title"] = "ReserveVenue";  
+}  
+
+<h1>ReserveVenue</h1>  
+
+<h4>Event</h4>  
+<hr />  
+        @* Display Workshop Details (label/name and data columns)*@  
+        <dl class="row">  
+        <dt class="col-sm-2">  
+            @Html.DisplayNameFor(model => model.Event.Title)  
+        </dt>  
+        <dd class="col-sm-10">  
+            @Html.DisplayFor(model => model.Event.Title)  
+        </dd>  
+        <dt class="col-sm-2">  
+            @Html.DisplayNameFor(model => model.Event.DateAndTime)  
+        </dt>  
+        <dd class="col-sm-10">  
+            @Html.DisplayFor(model => model.Event.DateAndTime)  
+        </dd>  
+        <dt class="col-sm-2">  
+            @Html.DisplayNameFor(model => model.Event.ReservationReference)  
+        </dt>  
+        <dd class="col-sm-10">  
+            @if (string.IsNullOrEmpty(Model.Event.ReservationReference))  
+         {  
+            <text>None</text>  
+        }  
+             else  
+        {  
+             @Html.DisplayFor(model => model.Event.ReservationReference)  
+        }  
+        </dd>  
+        <dt class="col-sm-2">  
+            @Html.DisplayNameFor(model => model.Event.EventTypeId)  
+        </dt>  
+        <dd class="col-sm-10">  
+            @Html.DisplayFor(model => model.Event.EventTypeId)  
+        </dd>  
+        </dl>  
+<div class="row">  
+  <div class="col-md-4">  
+      <form method="post">  
+          <div asp-validation-summary="ModelOnly" class="text-danger"></div>  
+          <input type="hidden" asp-for="EventId" />  
+          <div class="form-group">  
+          <label asp-for="VenueCode" class="control-label"></label>  
+          <select asp-for="VenueCode" asp-items="Model.AvailableVenues"  
+          class="form-control">  
+         <option value="">-- Select --</option>  
+         </select>  
+         <span asp-validation-for="VenueCode" class="text-danger"></span>  
+         </div>  
+          <div class="form-group">  
+              <label asp-for="Event.ReservationReference" class="control-label"></label>  
+              <input asp-for="Event.ReservationReference" class="form-control" />  
+              <span asp-validation-for="Event.ReservationReference" class="text-danger"></span>  
+          </div>  
+          <div class="form-group">  
+              <input type="submit" value="Save" class="btn btn-primary" />  
+          </div>  
+      </form>  
+  </div>  
+</div>  
+
+<div>  
+  <a asp-page="./Index">Back to List</a>  
+</div>  
+
+@section Scripts {  
+  @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}  
 }
-
-<h2>Available Venues</h2>
-
-<form method="post">
-    <input type="hidden" asp-for="EventId" />
-    <table>
-        <thead>
-            <tr>
-                <th>Venue Name</th>
-                <th>Location</th>
-                <th>Capacity</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var venue in Model.AvailableVenues)
-            {
-                    <tr>
-                        <td>@venue.Name</td>
-                        <td>@venue.Location</td>
-                        <td>@venue.Capacity</td>
-                        <td>
-                            <button type="submit" asp-for="VenueId" value="@venue.Id">Reserve</button>
-                        </td>
-                    </tr>
-            }
-        </tbody>
-    </table>
-</form>

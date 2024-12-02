@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient<EventTypeService>();
 
 //Register the HTTP Client and the ReservationService for dependency injection
-builder.Services.AddHttpClient<VenueService>();
+builder.Services.AddHttpClient<AvailabilityService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
