@@ -102,4 +102,36 @@
 </tbody>
 <br />
 <br />
-<h3>Total Guests: @Model.Guests.Count</h3>
+<h5>Total Guests: @Model.Guests.Count</h5>
+<br />
+<br />
+<h3> Event Staffs </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>IsFirstAider</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var staff in Model.Staffs)
+        {
+            <tr>
+                <td>@staff.FirstName</td>
+                <td>@staff.LastName</td>
+                <td>@staff.IsFirstAider</td>
+                <td>
+                    <a asp-page="/EventStaffs/Remove" asp-route-EventId="@Model.Event.EventId" asp-route-StaffId="@staff.StaffId">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<tbody>
+    <tr>
+        <td>
+            <a asp-page="/EventStaffs/Create" asp-route-eventId="@Model.Event.EventId">Add New Staff</a>
+        </td>
+    </tr>
+</tbody>

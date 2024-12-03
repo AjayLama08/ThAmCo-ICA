@@ -1,0 +1,35 @@
+﻿@page
+@model ThAmCo.Events.Pages.EventStaffs.RemoveModel
+
+@{
+    ViewData["Title"] = "Remove";
+}
+
+<h1>Remove</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Staffing</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Staffing.Event)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Staffing.Event.EventTypeId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Staffing.Staff)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Staffing.Staff.FirstName)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Staffing.StaffId" />
+        <input type="hidden" asp-for="Staffing.EventId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Event/Details" asp-route-id="@Model.Staffing.EventId">Back to List</a>
+    </form>
+</div>

@@ -18,12 +18,15 @@ namespace ThAmCo.Events.Pages.Events
             _context = context;
             Guests = new List<ThAmCo.Events.Data.Guest>();
             GuestBookings = new List<GuestBooking>();
+            Staffs = new List<ThAmCo.Events.Data.Staff>();
+            Staffings = new List<Staffing>();
         }
 
         public Event Event { get; set; } = default!;
         public List<ThAmCo.Events.Data.Guest> Guests { get; set; }
         public List<GuestBooking> GuestBookings { get; set; }
-
+        public List<ThAmCo.Events.Data.Staff> Staffs { get; set; }
+        public List<Staffing> Staffings { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -49,9 +52,29 @@ namespace ThAmCo.Events.Pages.Events
                 {
                     Guests = eventGuests;
                 }
+            }
+            // Fetch the event and staffings from the database
+            var eventStaffings = await _context.Events.FirstOrDefaultAsync(m => m.EventId == id);
+            if (eventStaffings == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                Event = eventStaffings;
+                var eventStaffs = await _context.Staffs
+                    .Include(es => es.Staffings)
+                    .ThenInclude(s => s.Event)
+                    .Where(es => es.Staffings.Any(e => e.EventId == id))
+                    .ToListAsync();
+                if (eventStaffs != null)
+                {
+                    Staffs = eventStaffs;
+                }
                 return Page();
             }
         }
+        
         public async Task<IActionResult> OnPostRegisterAttendanceAsync(int eventId, int guestId)
         {
             var guestBooking = await _context.GuestBookings

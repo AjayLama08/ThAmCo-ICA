@@ -26,9 +26,9 @@
         <dt class="col-sm-2">  
             @Html.DisplayNameFor(model => model.Event.ReservationReference)  
         </dt>  
-        <dd class="col-sm-10">  
-            @if (string.IsNullOrEmpty(Model.Event.ReservationReference))  
-         {  
+        <dd class="col-sm-10">
+        @if (Model?.Event != null && string.IsNullOrEmpty(Model.Event.ReservationReference))
+        {
             <text>None</text>  
         }  
              else  
@@ -66,8 +66,13 @@
                                        <td>@venue.Date</td>
                                        <td>@venue.Capacity</td>
                                        <td>@venue.CostPerHour</td>
-                                   </tr>
-                               
+                                    <td>
+                                  <form method="post" asp-page-handler="ReserveVenue" asp-route-id="@venue.VenueCode">
+                                      <button type="submit" class="btn btn-primary">Reserve</button>
+                                  </form>
+                                   </td>
+    
+                                   </tr>      
                 }
             </tbody>
         </table>

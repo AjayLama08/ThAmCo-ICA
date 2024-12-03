@@ -11,7 +11,7 @@ using ThAmCo.Events.Data;
 namespace ThAmCo.Events.Data.Migrations
 {
     [DbContext(typeof(EventsDbContext))]
-    [Migration("20241203135440_InitialCreate")]
+    [Migration("20241203194030_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -51,7 +51,7 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 1,
-                            DateAndTime = new DateTime(2022, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2022, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "WED",
                             FoodBookingId = 101,
                             ReservationReference = "RES2022063001",
@@ -60,7 +60,7 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 2,
-                            DateAndTime = new DateTime(2022, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2022, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "CON",
                             FoodBookingId = 102,
                             Title = "Tech Innovations 2022"
@@ -68,7 +68,7 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 3,
-                            DateAndTime = new DateTime(2022, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2022, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "PTY",
                             ReservationReference = "RES2022081203",
                             Title = "Alice's Birthday Party"
@@ -76,7 +76,7 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 4,
-                            DateAndTime = new DateTime(2022, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2022, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "WED",
                             FoodBookingId = 104,
                             Title = "Mike and Emma's Wedding"
@@ -84,7 +84,7 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 5,
-                            DateAndTime = new DateTime(2022, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "CON",
                             ReservationReference = "RES2023100805",
                             Title = "Digital Marketing Summit"
@@ -92,7 +92,7 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 6,
-                            DateAndTime = new DateTime(2022, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2023, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "PTY",
                             FoodBookingId = 106,
                             Title = "Bob's Surprise Party"
@@ -100,14 +100,14 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 7,
-                            DateAndTime = new DateTime(2022, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2023, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "WED",
                             Title = "Sophie and Adam's Wedding"
                         },
                         new
                         {
                             EventId = 8,
-                            DateAndTime = new DateTime(2022, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "MET",
                             FoodBookingId = 108,
                             ReservationReference = "RES2024030508",
@@ -116,14 +116,14 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 9,
-                            DateAndTime = new DateTime(2022, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2023, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "PTY",
                             Title = "Frank's 50th Birthday"
                         },
                         new
                         {
                             EventId = 10,
-                            DateAndTime = new DateTime(2022, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2023, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "MET",
                             FoodBookingId = 110,
                             Title = "Leadership Forum"
@@ -351,6 +351,9 @@ namespace ThAmCo.Events.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsFirstAider")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -364,60 +367,70 @@ namespace ThAmCo.Events.Data.Migrations
                         {
                             StaffId = 1,
                             FirstName = "Sarah",
+                            IsFirstAider = true,
                             LastName = "Jones"
                         },
                         new
                         {
                             StaffId = 2,
                             FirstName = "Jacob",
+                            IsFirstAider = false,
                             LastName = "Smith"
                         },
                         new
                         {
                             StaffId = 3,
                             FirstName = "Emily",
+                            IsFirstAider = true,
                             LastName = "Brown"
                         },
                         new
                         {
                             StaffId = 4,
                             FirstName = "Michael",
+                            IsFirstAider = false,
                             LastName = "Johnson"
                         },
                         new
                         {
                             StaffId = 5,
                             FirstName = "Jessica",
+                            IsFirstAider = true,
                             LastName = "Williams"
                         },
                         new
                         {
                             StaffId = 6,
                             FirstName = "David",
+                            IsFirstAider = false,
                             LastName = "Miller"
                         },
                         new
                         {
                             StaffId = 7,
                             FirstName = "Laura",
+                            IsFirstAider = false,
                             LastName = "Wilson"
                         },
                         new
                         {
                             StaffId = 8,
                             FirstName = "Daniel",
+                            IsFirstAider = false,
                             LastName = "Taylor"
                         },
                         new
                         {
                             StaffId = 9,
                             FirstName = "Sophia",
+                            IsFirstAider = true,
                             LastName = "Davis"
                         },
                         new
                         {
                             StaffId = 10,
                             FirstName = "James",
+                            IsFirstAider = false,
                             LastName = "Anderson"
                         });
                 });

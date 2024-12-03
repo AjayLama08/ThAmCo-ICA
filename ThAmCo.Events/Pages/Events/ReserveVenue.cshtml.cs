@@ -79,23 +79,37 @@ namespace ThAmCo.Events.Pages.Events
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostReserveVenueAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
+            var eventToUpdate = await _context.Events.FindAsync(EventId);
+            if (eventToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            eventToUpdate.ReservationReference = VenueCode;
+
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EventExists(Event.EventId))
+                if (!EventExists(EventId))
                 {
                     return NotFound();
                 }
+                else
+                {
+                    throw;
+                }
             }
+
             return RedirectToPage("./Index");
         }
 

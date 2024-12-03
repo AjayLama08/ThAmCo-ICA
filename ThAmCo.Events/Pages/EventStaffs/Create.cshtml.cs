@@ -21,18 +21,27 @@ namespace ThAmCo.Events.Pages.EventStaffs
         public IActionResult OnGet()
         {
             ViewData["EventId"] = new SelectList(_context.Events, "EventId", "Title");
-            ViewData["StaffId"] = new SelectList(_context.Staffs, "StaffId", "FirstName");
+            ViewData["StaffId"] = new SelectList(_context.Staffs.Select(s => new { s.StaffId, FullName = s.FirstName + " " + s.LastName }), "StaffId", "FullName");
             return Page();
         }
 
         [BindProperty]
         public Staffing Staffing { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                return Page();
+            }
+
+            // Check if the staff is already assigned to the event
+            var existingStaffing = _context.Staffings
+                .FirstOrDefault(s => s.StaffId == Staffing.StaffId && s.EventId == Staffing.EventId);
+
+            if (existingStaffing != null)
+            {
+                ModelState.AddModelError(string.Empty, "This staff is already assigned to the event.");
                 return Page();
             }
 

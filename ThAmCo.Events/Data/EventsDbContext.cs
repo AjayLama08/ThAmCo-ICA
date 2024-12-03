@@ -81,16 +81,16 @@ namespace ThAmCo.Events.Data
 
             //Seed data to populate Event Table
             builder.Entity<Event>().HasData(
-             new Event { EventId = 1, EventTypeId = "WED", Title = "John and Jane's Wedding", DateAndTime = new DateTime(2022, 6, 30), FoodBookingId = 101, ReservationReference = "RES2022063001" },
-             new Event { EventId = 2, EventTypeId = "CON", Title = "Tech Innovations 2022", DateAndTime = new DateTime(2022, 7, 15), FoodBookingId = 102, ReservationReference = null },
-             new Event { EventId = 3, EventTypeId = "PTY", Title = "Alice's Birthday Party", DateAndTime = new DateTime(2022, 8, 12), FoodBookingId = null, ReservationReference = "RES2022081203" },
-             new Event { EventId = 4, EventTypeId = "WED", Title = "Mike and Emma's Wedding", DateAndTime = new DateTime(2022, 5, 20), FoodBookingId = 104, ReservationReference = null },
-             new Event { EventId = 5, EventTypeId = "CON", Title = "Digital Marketing Summit", DateAndTime = new DateTime(2022, 10, 8), FoodBookingId = null, ReservationReference = "RES2023100805" },
-             new Event { EventId = 6, EventTypeId = "PTY", Title = "Bob's Surprise Party", DateAndTime = new DateTime(2022, 9, 5), FoodBookingId = 106, ReservationReference = null },
-             new Event { EventId = 7, EventTypeId = "WED", Title = "Sophie and Adam's Wedding", DateAndTime = new DateTime(2022, 1, 13), FoodBookingId = null, ReservationReference = null },
-             new Event { EventId = 8, EventTypeId = "MET", Title = "AI and Future Tech", DateAndTime = new DateTime(2022, 3, 5), FoodBookingId = 108, ReservationReference = "RES2024030508" },
-             new Event { EventId = 9, EventTypeId = "PTY", Title = "Frank's 50th Birthday", DateAndTime = new DateTime(2022, 6, 17), FoodBookingId = null, ReservationReference = null },
-             new Event { EventId = 10, EventTypeId = "MET", Title = "Leadership Forum", DateAndTime = new DateTime(2022, 7, 22), FoodBookingId = 110, ReservationReference = null }
+             new Event { EventId = 1, EventTypeId = "WED", Title = "John and Jane's Wedding", DateAndTime = new DateTime(2022, 11, 30), FoodBookingId = 101, ReservationReference = "RES2022063001" },
+             new Event { EventId = 2, EventTypeId = "CON", Title = "Tech Innovations 2022", DateAndTime = new DateTime(2022, 11, 15), FoodBookingId = 102, ReservationReference = null },
+             new Event { EventId = 3, EventTypeId = "PTY", Title = "Alice's Birthday Party", DateAndTime = new DateTime(2022, 11, 12), FoodBookingId = null, ReservationReference = "RES2022081203" },
+             new Event { EventId = 4, EventTypeId = "WED", Title = "Mike and Emma's Wedding", DateAndTime = new DateTime(2022, 11, 20), FoodBookingId = 104, ReservationReference = null },
+             new Event { EventId = 5, EventTypeId = "CON", Title = "Digital Marketing Summit", DateAndTime = new DateTime(2022, 11, 8), FoodBookingId = null, ReservationReference = "RES2023100805" },
+             new Event { EventId = 6, EventTypeId = "PTY", Title = "Bob's Surprise Party", DateAndTime = new DateTime(2023, 1, 5), FoodBookingId = 106, ReservationReference = null },
+             new Event { EventId = 7, EventTypeId = "WED", Title = "Sophie and Adam's Wedding", DateAndTime = new DateTime(2023, 1, 13), FoodBookingId = null, ReservationReference = null },
+             new Event { EventId = 8, EventTypeId = "MET", Title = "AI and Future Tech", DateAndTime = new DateTime(2023, 1, 15), FoodBookingId = 108, ReservationReference = "RES2024030508" },
+             new Event { EventId = 9, EventTypeId = "PTY", Title = "Frank's 50th Birthday", DateAndTime = new DateTime(2023, 1, 17), FoodBookingId = null, ReservationReference = null },
+             new Event { EventId = 10, EventTypeId = "MET", Title = "Leadership Forum", DateAndTime = new DateTime(2023, 1, 22), FoodBookingId = 110, ReservationReference = null }
 );
 
             //Seed data to populate GuestBooking Table
@@ -134,16 +134,16 @@ namespace ThAmCo.Events.Data
 
             //Seed data to populate Staff Table
             builder.Entity<Staff>().HasData(
-            new Staff { StaffId = 1, FirstName = "Sarah", LastName = "Jones" },
-            new Staff { StaffId = 2, FirstName = "Jacob", LastName = "Smith" },
-            new Staff { StaffId = 3, FirstName = "Emily", LastName = "Brown" },
-            new Staff { StaffId = 4, FirstName = "Michael", LastName = "Johnson" },
-            new Staff { StaffId = 5, FirstName = "Jessica", LastName = "Williams" },
-            new Staff { StaffId = 6, FirstName = "David", LastName = "Miller" },
-            new Staff { StaffId = 7, FirstName = "Laura", LastName = "Wilson" },
-            new Staff { StaffId = 8, FirstName = "Daniel", LastName = "Taylor" },
-            new Staff { StaffId = 9, FirstName = "Sophia", LastName = "Davis" },
-            new Staff { StaffId = 10, FirstName = "James", LastName = "Anderson" }
+            new Staff { StaffId = 1, FirstName = "Sarah", LastName = "Jones", IsFirstAider = true },
+            new Staff { StaffId = 2, FirstName = "Jacob", LastName = "Smith", IsFirstAider = false },
+            new Staff { StaffId = 3, FirstName = "Emily", LastName = "Brown", IsFirstAider = true },
+            new Staff { StaffId = 4, FirstName = "Michael", LastName = "Johnson", IsFirstAider = false },
+            new Staff { StaffId = 5, FirstName = "Jessica", LastName = "Williams", IsFirstAider = true },
+            new Staff { StaffId = 6, FirstName = "David", LastName = "Miller", IsFirstAider = false },
+            new Staff { StaffId = 7, FirstName = "Laura", LastName = "Wilson", IsFirstAider = false },
+            new Staff { StaffId = 8, FirstName = "Daniel", LastName = "Taylor", IsFirstAider = false },
+            new Staff { StaffId = 9, FirstName = "Sophia", LastName = "Davis" , IsFirstAider = true },
+            new Staff { StaffId = 10, FirstName = "James", LastName = "Anderson" , IsFirstAider = false }
             );
 
             //Seed data to populate Staffing Table

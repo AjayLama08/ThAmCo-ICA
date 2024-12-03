@@ -15,14 +15,12 @@ namespace ThAmCo.Events.Data
             FirstName = firstName;
             LastName = lastName;
         }
-       
         public int StaffId { get; set; }
-
         [Required]
         public string FirstName { get; set; } = string.Empty;
-
         [Required]
         public string LastName { get; set; } = string.Empty;
+        public bool IsFirstAider { get; set; }
 
         //Navigation property to Staffing class
         public List<Staffing> Staffings { get; set; }
