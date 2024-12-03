@@ -84,13 +84,13 @@ namespace ThAmCo.Events.Data
              new Event { EventId = 1, EventTypeId = "WED", Title = "John and Jane's Wedding", DateAndTime = new DateTime(2022, 6, 30), FoodBookingId = 101, ReservationReference = "RES2022063001" },
              new Event { EventId = 2, EventTypeId = "CON", Title = "Tech Innovations 2022", DateAndTime = new DateTime(2022, 7, 15), FoodBookingId = 102, ReservationReference = null },
              new Event { EventId = 3, EventTypeId = "PTY", Title = "Alice's Birthday Party", DateAndTime = new DateTime(2022, 8, 12), FoodBookingId = null, ReservationReference = "RES2022081203" },
-             new Event { EventId = 4, EventTypeId = "WED", Title = "Mike and Emma's Wedding", DateAndTime = new DateTime(2023, 5, 20), FoodBookingId = 104, ReservationReference = null },
-             new Event { EventId = 5, EventTypeId = "CON", Title = "Digital Marketing Summit", DateAndTime = new DateTime(2023, 10, 8), FoodBookingId = null, ReservationReference = "RES2023100805" },
-             new Event { EventId = 6, EventTypeId = "PTY", Title = "Bob's Surprise Party", DateAndTime = new DateTime(2023, 9, 5), FoodBookingId = 106, ReservationReference = null },
-             new Event { EventId = 7, EventTypeId = "WED", Title = "Sophie and Adam's Wedding", DateAndTime = new DateTime(2024, 1, 13), FoodBookingId = null, ReservationReference = null },
-             new Event { EventId = 8, EventTypeId = "MET", Title = "AI and Future Tech", DateAndTime = new DateTime(2024, 3, 5), FoodBookingId = 108, ReservationReference = "RES2024030508" },
-             new Event { EventId = 9, EventTypeId = "PTY", Title = "Frank's 50th Birthday", DateAndTime = new DateTime(2024, 6, 17), FoodBookingId = null, ReservationReference = null },
-             new Event { EventId = 10, EventTypeId = "MET", Title = "Leadership Forum", DateAndTime = new DateTime(2024, 7, 22), FoodBookingId = 110, ReservationReference = null }
+             new Event { EventId = 4, EventTypeId = "WED", Title = "Mike and Emma's Wedding", DateAndTime = new DateTime(2022, 5, 20), FoodBookingId = 104, ReservationReference = null },
+             new Event { EventId = 5, EventTypeId = "CON", Title = "Digital Marketing Summit", DateAndTime = new DateTime(2022, 10, 8), FoodBookingId = null, ReservationReference = "RES2023100805" },
+             new Event { EventId = 6, EventTypeId = "PTY", Title = "Bob's Surprise Party", DateAndTime = new DateTime(2022, 9, 5), FoodBookingId = 106, ReservationReference = null },
+             new Event { EventId = 7, EventTypeId = "WED", Title = "Sophie and Adam's Wedding", DateAndTime = new DateTime(2022, 1, 13), FoodBookingId = null, ReservationReference = null },
+             new Event { EventId = 8, EventTypeId = "MET", Title = "AI and Future Tech", DateAndTime = new DateTime(2022, 3, 5), FoodBookingId = 108, ReservationReference = "RES2024030508" },
+             new Event { EventId = 9, EventTypeId = "PTY", Title = "Frank's 50th Birthday", DateAndTime = new DateTime(2022, 6, 17), FoodBookingId = null, ReservationReference = null },
+             new Event { EventId = 10, EventTypeId = "MET", Title = "Leadership Forum", DateAndTime = new DateTime(2022, 7, 22), FoodBookingId = 110, ReservationReference = null }
 );
 
             //Seed data to populate GuestBooking Table

@@ -43,25 +43,36 @@
             @Html.DisplayFor(model => model.Event.EventTypeId)  
         </dd>  
         </dl>  
-<div class="row">  
-  <div class="col-md-4">  
-      <form method="post">  
-          <div asp-validation-summary="ModelOnly" class="text-danger"></div>  
-          <input type="hidden" asp-for="EventId" />  
-          <div class="form-group">  
-          <label asp-for="VenueCode" class="control-label"></label>  
-          <select asp-for="VenueCode" asp-items="Model.AvailableVenues"  
-          class="form-control">  
-         <option value="">-- Select --</option>  
-         </select>  
-         <span asp-validation-for="VenueCode" class="text-danger"></span>  
-         </div>  
-          <div class="form-group">  
-              <input type="submit" value="Save" class="btn btn-primary" />  
-          </div>  
-      </form>  
-  </div>  
-</div>  
+
+<div class="row">
+    <div class="col-md-8">
+        <h4>Available Venues</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Date</th>
+                    <th>Capacity</th>
+                    <th>Cost Per Hour</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var venue in Model.AvailableVenues)
+                               {
+                                   <tr>
+                                       <td>@venue.VenueName</td>
+                                       <td>@venue.VenueCode</td>
+                                       <td>@venue.Date</td>
+                                       <td>@venue.Capacity</td>
+                                       <td>@venue.CostPerHour</td>
+                                   </tr>
+                               
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <div>  
   <a asp-page="./Index">Back to List</a>  

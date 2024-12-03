@@ -15,7 +15,7 @@ namespace ThAmCo.Events.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
             modelBuilder.Entity("ThAmCo.Events.Data.Event", b =>
                 {
@@ -73,7 +73,7 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 4,
-                            DateAndTime = new DateTime(2023, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2022, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "WED",
                             FoodBookingId = 104,
                             Title = "Mike and Emma's Wedding"
@@ -81,7 +81,7 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 5,
-                            DateAndTime = new DateTime(2023, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2022, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "CON",
                             ReservationReference = "RES2023100805",
                             Title = "Digital Marketing Summit"
@@ -89,7 +89,7 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 6,
-                            DateAndTime = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2022, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "PTY",
                             FoodBookingId = 106,
                             Title = "Bob's Surprise Party"
@@ -97,14 +97,14 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 7,
-                            DateAndTime = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2022, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "WED",
                             Title = "Sophie and Adam's Wedding"
                         },
                         new
                         {
                             EventId = 8,
-                            DateAndTime = new DateTime(2024, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2022, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "MET",
                             FoodBookingId = 108,
                             ReservationReference = "RES2024030508",
@@ -113,14 +113,14 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             EventId = 9,
-                            DateAndTime = new DateTime(2024, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2022, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "PTY",
                             Title = "Frank's 50th Birthday"
                         },
                         new
                         {
                             EventId = 10,
-                            DateAndTime = new DateTime(2024, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAndTime = new DateTime(2022, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "MET",
                             FoodBookingId = 110,
                             Title = "Leadership Forum"

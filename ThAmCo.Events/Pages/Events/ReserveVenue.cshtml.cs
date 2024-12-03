@@ -12,7 +12,7 @@ namespace ThAmCo.Events.Pages.Events
         private readonly ThAmCo.Events.Data.EventsDbContext _context;
         private readonly AvailabilityService _availabilityService;
 
-        public List<SelectListItem> AvailableVenues { get; set; }
+        public List<VenueListItem> AvailableVenues { get; set; }
 
         [BindProperty]
         public ReserveVenueVM ReserveVenue { get; set; }
@@ -21,7 +21,7 @@ namespace ThAmCo.Events.Pages.Events
         {
             _context = context;
             _availabilityService = availabilityService;
-            AvailableVenues = new List<SelectListItem>();
+            AvailableVenues = new List<VenueListItem>();
         }
 
         public EventVM Event { get; set; }
@@ -58,18 +58,21 @@ namespace ThAmCo.Events.Pages.Events
             ReserveVenue = new ReserveVenueVM();
             ReserveVenue.EventId = eventToReserve.EventId;
             EventId = eventToReserve.EventId;
-
+            /// this code snippet is for demo only - the deployed verion would need a credible collection of venue slots to select from.
             DateTime beginDate = eventToReserve.DateAndTime;
-            DateTime endDate = eventToReserve.DateAndTime;
+            DateTime endDate = eventToReserve.DateAndTime.AddMonths(6);
             string eventType = eventToReserve.EventTypeId;
 
             var availableVenues = await _availabilityService.GetAvailabilityListAsync(beginDate, endDate, eventType);
             if (availableVenues != null)
             {
-                AvailableVenues = availableVenues.Select(v => new SelectListItem
+                AvailableVenues = availableVenues.Select(v => new VenueListItem
                 {
-                    Text = v.VenueCode,
-                    Value = v.VenueCode
+                    VenueName = v.venueName,
+                    VenueCode = v.venueCode,
+                    Date = v.date,
+                    Capacity = v.capacity,
+                    CostPerHour = v.costPerHour
                 }).ToList();
             }
 
