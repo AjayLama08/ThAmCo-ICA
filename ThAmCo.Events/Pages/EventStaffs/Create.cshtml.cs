@@ -35,20 +35,20 @@ namespace ThAmCo.Events.Pages.EventStaffs
                 return Page();
             }
 
-            // Check if the staff is already assigned to the event
-            var existingStaffing = _context.Staffings
-                .FirstOrDefault(s => s.StaffId == Staffing.StaffId && s.EventId == Staffing.EventId);
+            //// Check if the staff is already assigned to the event
+            //var existingStaffing = _context.Staffings
+            //    .FirstOrDefault(s => s.StaffId == Staffing.StaffId && s.EventId == Staffing.EventId);
 
-            if (existingStaffing != null)
-            {
-                ModelState.AddModelError(string.Empty, "This staff is already assigned to the event.");
-                return Page();
-            }
+            //if (existingStaffing != null)
+            //{
+            //    ModelState.AddModelError(string.Empty, "This staff is already assigned to the event.");
+            //    return Page();
+            //}
 
             _context.Staffings.Add(Staffing);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Events/Details", new { id = Staffing.EventId });
         }
     }
 }

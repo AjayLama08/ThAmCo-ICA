@@ -16,13 +16,14 @@
             @Html.DisplayNameFor(model => model.Staffing.Event)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Staffing.Event.EventTypeId)
+            @Html.DisplayFor(model => model.Staffing.Event.Title)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Staffing.Staff)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Staffing.Staff.FirstName)
+            @Html.DisplayFor(model => model.Staffing.Staff.LastName)
         </dd>
     </dl>
     

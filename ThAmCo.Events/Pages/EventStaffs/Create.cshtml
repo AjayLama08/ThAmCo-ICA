@@ -1,25 +1,25 @@
 ﻿@page
 @model ThAmCo.Events.Pages.EventStaffs.CreateModel
+
 @{
-    ViewData["Title"] = "Create Event Staffing";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Create Event Staffing</h1>
+<h1>Create</h1>
 
 <h4>Staffing</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Staffing.EventId" class="control-label"></label>
                 <select asp-for="Staffing.EventId" class="form-control" asp-items="ViewBag.EventId"></select>
-                <span asp-validation-for="Staffing.EventId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Staffing.StaffId" class="control-label"></label>
                 <select asp-for="Staffing.StaffId" class="form-control" asp-items="ViewBag.StaffId"></select>
-                <span asp-validation-for="Staffing.StaffId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

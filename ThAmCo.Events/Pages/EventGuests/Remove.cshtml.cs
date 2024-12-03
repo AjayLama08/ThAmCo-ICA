@@ -59,7 +59,7 @@ namespace ThAmCo.Events.Pages.EventGuests
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Events/Details", new {id = eventId});
         }
     }
 }
