@@ -102,8 +102,8 @@ namespace ThAmCo.Events.Data.Migrations
                         principalColumn: "EventId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Staffings_Staffs_EventId",
-                        column: x => x.EventId,
+                        name: "FK_Staffings_Staffs_StaffId",
+                        column: x => x.StaffId,
                         principalTable: "Staffs",
                         principalColumn: "StaffId",
                         onDelete: ReferentialAction.Cascade);

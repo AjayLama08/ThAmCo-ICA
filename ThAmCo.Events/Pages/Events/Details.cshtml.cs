@@ -17,16 +17,19 @@ namespace ThAmCo.Events.Pages.Events
         {
             _context = context;
             Guests = new List<ThAmCo.Events.Data.Guest>();
-            GuestBookings = new List<GuestBooking>();
             Staffs = new List<ThAmCo.Events.Data.Staff>();
-            Staffings = new List<Staffing>();
+            string IsFirstAider;
+            int GuestsCount;
+            int StaffsCount;
         }
 
         public Event Event { get; set; } = default!;
         public List<ThAmCo.Events.Data.Guest> Guests { get; set; }
         public List<GuestBooking> GuestBookings { get; set; }
         public List<ThAmCo.Events.Data.Staff> Staffs { get; set; }
-        public List<Staffing> Staffings { get; set; }
+        public string IsFirstAider { get; set; }
+        public int GuestsCount { get; set; }
+        public int StaffsCount { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -48,28 +51,34 @@ namespace ThAmCo.Events.Pages.Events
                     .Where(gb => gb.GuestBookings.Any(e => e.EventId == id))
                     .ToListAsync();
 
+                var eventStaffs = await _context.Staffs
+                    .Include(s => s.Staffings)
+                    .ThenInclude(e => e.Event)
+                    .Where(s => s.Staffings.Any(e => e.EventId == id))
+                    .ToListAsync();
+
+                foreach (var staff in eventStaffs)
+                {
+                    if (staff.IsFirstAider == false)
+                    {
+                        IsFirstAider = "⚠️ Warning: No First-Aider for this event!";
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                }
                 if (eventGuests != null)
                 {
                     Guests = eventGuests;
+                    GuestsCount = eventGuests.Count;
                 }
-            }
-            // Fetch the event and staffings from the database
-            var eventStaffings = await _context.Events.FirstOrDefaultAsync(m => m.EventId == id);
-            if (eventStaffings == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                Event = eventStaffings;
-                var eventStaffs = await _context.Staffs
-                    .Include(es => es.Staffings)
-                    .ThenInclude(s => s.Event)
-                    .Where(es => es.Staffings.Any(e => e.EventId == id))
-                    .ToListAsync();
+
                 if (eventStaffs != null)
                 {
                     Staffs = eventStaffs;
+                    StaffsCount = eventStaffs.Count;
                 }
                 return Page();
             }

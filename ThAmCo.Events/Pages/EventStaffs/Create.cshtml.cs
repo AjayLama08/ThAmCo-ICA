@@ -48,7 +48,7 @@ namespace ThAmCo.Events.Pages.EventStaffs
             _context.Staffings.Add(Staffing);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Events/Details", new { id = Staffing.EventId });
+            return RedirectToPage("/Events/Details" , new { id = Staffing.EventId });
         }
     }
 }

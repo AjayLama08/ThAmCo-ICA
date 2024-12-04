@@ -20,11 +20,19 @@ namespace ThAmCo.Events.Pages.EventStaffs
 
         public IList<Staffing> Staffing { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? id)
         {
-            Staffing = await _context.Staffings
-                .Include(s => s.Event)
-                .Include(s => s.Staff).ToListAsync();
+            var eventStaffsContext = _context.Staffings.AsQueryable();
+
+            if (id != null)
+            {
+                eventStaffsContext = eventStaffsContext.Where(e => e.EventId == id);
+            }
+            eventStaffsContext = eventStaffsContext
+                .Include(es => es.Event)
+                .Include(es => es.Staff);
+
+            Staffing = await eventStaffsContext.ToListAsync();
         }
     }
 }

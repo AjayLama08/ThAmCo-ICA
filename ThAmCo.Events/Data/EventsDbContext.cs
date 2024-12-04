@@ -57,7 +57,7 @@ namespace ThAmCo.Events.Data
             builder.Entity<Staffing>()
                 .HasOne(s => s.Staff)
                 .WithMany(s => s.Staffings)
-                .HasForeignKey(s => s.EventId);
+                .HasForeignKey(s => s.StaffId);
 
             //Navigation properties
             builder.Entity<Staffing>()

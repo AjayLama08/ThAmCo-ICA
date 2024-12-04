@@ -11,7 +11,7 @@ using ThAmCo.Events.Data;
 namespace ThAmCo.Events.Data.Migrations
 {
     [DbContext(typeof(EventsDbContext))]
-    [Migration("20241203194030_InitialCreate")]
+    [Migration("20241204000133_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -581,7 +581,7 @@ namespace ThAmCo.Events.Data.Migrations
 
                     b.HasOne("ThAmCo.Events.Data.Staff", "Staff")
                         .WithMany("Staffings")
-                        .HasForeignKey("EventId")
+                        .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

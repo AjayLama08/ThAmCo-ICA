@@ -14,13 +14,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Staffing[0].Event.Title)
+                @Html.DisplayNameFor(model => model.Staffing[0].Event)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Staffing[0].Staff.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Staffing[0].Staff.LastName)
+                @Html.DisplayNameFor(model => model.Staffing[0].Staff)
             </th>
         </tr>
     </thead>
@@ -33,8 +30,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Staff.FirstName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Staff.LastName)
             <td>
             <a asp-page="./Remove" asp-route-EventId="@item.EventId" asp-route-StaffId="@item.StaffId">Remove</a>
             </td>

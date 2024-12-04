@@ -578,7 +578,7 @@ namespace ThAmCo.Events.Data.Migrations
 
                     b.HasOne("ThAmCo.Events.Data.Staff", "Staff")
                         .WithMany("Staffings")
-                        .HasForeignKey("EventId")
+                        .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
