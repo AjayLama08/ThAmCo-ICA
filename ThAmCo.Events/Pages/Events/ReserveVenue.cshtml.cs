@@ -86,13 +86,22 @@ namespace ThAmCo.Events.Pages.Events
                 return Page();
             }
 
-            var eventToUpdate = await _context.Events.FindAsync(EventId);
+            var eventToUpdate = await _context.Events
+                .FirstOrDefaultAsync(e => e.EventId == EventId);
+
             if (eventToUpdate == null)
             {
                 return NotFound();
             }
 
-            eventToUpdate.ReservationReference = VenueCode;
+            var reserve = await _availabilityService.ReserveVenue(VenueCode, eventToUpdate.DateAndTime);
+
+            if (reserve == null)
+            {
+                return BadRequest("Unable to reserve venue.");
+            }
+            eventToUpdate.ReservationReference = reserve.Reference;
+            _context.Attach(eventToUpdate).State = EntityState.Modified;
 
             try
             {

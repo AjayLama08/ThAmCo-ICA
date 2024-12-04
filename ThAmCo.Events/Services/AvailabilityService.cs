@@ -1,6 +1,8 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text.Json;
 using ThAmCo.Events;
+using ThAmCo.Events.Dtos;
 
 namespace ThAmCo.Events.Services
 {
@@ -11,6 +13,8 @@ namespace ThAmCo.Events.Services
 
         // The endpoint for the venues
         const string AvailabilityEndPoint = "/availability";
+
+        const string VenueEndPoint = "/ReserveVenue";
 
         // Private property for the HttpClient object
         private readonly HttpClient _httpClient;
@@ -42,6 +46,28 @@ namespace ThAmCo.Events.Services
                 throw new ArgumentNullException(nameof(response), "The Availability response is null");
             }
             return items; // Returning the list of Availability items
+        }
+
+        public async Task<ReservationPostDTO> ReserveVenue(string venueCode, DateTime eventDate)
+        {
+            var url = ServiceBaseUrl + VenueEndPoint + "/" + venueCode;
+            var bookTrainer = new ReservationGetDTO
+            {
+                VenueCode = venueCode,
+                EventDate = eventDate
+            };
+            HttpResponseMessage response = await _httpClient.PutAsJsonAsync(url, ReserveVenue);
+            // Ensuring the response indicates success (status code 200-299).
+            response.EnsureSuccessStatusCode();
+            // Reading the response content as a string.
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            // Deserializing the JSON response into a list of SessionFreeSlotDto objects.
+            var confirm = JsonSerializer.Deserialize<ReservationPostDTO>(jsonResponse, jsonOptions);
+            if (confirm == null) // Checking if the deserialized list is null.
+            {// Throwing an exception if the list is null.
+                throw new ArgumentNullException(nameof(response), "The Reserve Venue response is null.");
+            }
+            return confirm;
         }
     }
 }

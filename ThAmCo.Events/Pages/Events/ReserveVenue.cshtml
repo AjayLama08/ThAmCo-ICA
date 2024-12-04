@@ -57,24 +57,26 @@
                     <th>Cost Per Hour</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var venue in Model.AvailableVenues)
-                               {
-                                   <tr>
-                                       <td>@venue.VenueName</td>
-                                       <td>@venue.VenueCode</td>
-                                       <td>@venue.Date</td>
-                                       <td>@venue.Capacity</td>
-                                       <td>@venue.CostPerHour</td>
-                                    <td>
-                                  <form method="post" asp-page-handler="ReserveVenue" asp-route-id="@venue.VenueCode">
-                                      <button type="submit" class="btn btn-primary">Reserve</button>
-                                  </form>
-                                   </td>
-    
-                                   </tr>      
-                }
-            </tbody>
+                <tbody>
+                    @foreach (var venue in Model.AvailableVenues)
+                    {
+                        <tr>
+                            <td>@venue.VenueName</td>
+                            <td>@venue.VenueCode</td>
+                            <td>@venue.Date</td>
+                            <td>@venue.Capacity</td>
+                            <td>@venue.CostPerHour</td>
+                            <td>
+                                <form method="post" asp-page-handler="ReserveVenue" asp-route-id="@venue.VenueCode">
+                                    <button type="submit" class="btn btn-primary" 
+                                            onclick="this.innerText='Reserved'; this.disabled=true;">
+                                        Reserve
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
         </table>
     </div>
 </div>
