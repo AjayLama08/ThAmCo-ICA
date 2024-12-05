@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThAmCo.Events.Services;
 using ThAmCo.Events.ViewModels;
+using ThAmCo.Events.Dtos;
 
 namespace ThAmCo.Events.Pages.Events
 {
@@ -22,6 +23,7 @@ namespace ThAmCo.Events.Pages.Events
             _context = context;
             _availabilityService = availabilityService;
             AvailableVenues = new List<VenueListItem>();
+            ReservationPostDTO = new ReservationPostDTO();
         }
 
         public EventVM Event { get; set; }
@@ -31,6 +33,7 @@ namespace ThAmCo.Events.Pages.Events
 
         [BindProperty]
         public string VenueCode { get; set; }
+        public ReservationPostDTO ReservationPostDTO { get; private set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -96,16 +99,27 @@ namespace ThAmCo.Events.Pages.Events
 
             var reserve = await _availabilityService.ReserveVenue(VenueCode, eventToUpdate.DateAndTime);
 
+
             if (reserve == null)
             {
                 return BadRequest("Unable to reserve venue.");
             }
+
+            //reserve = new ReservationPostDTO
+            //{
+            //    VenueCode = VenueCode,
+            //    EventDate = eventToUpdate.DateAndTime,
+            //    Reference = eventToUpdate.ReservationReference,
+            //    StaffId = "StaffId"
+            //};
+
             eventToUpdate.ReservationReference = reserve.Reference;
             _context.Attach(eventToUpdate).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
+                await _availabilityService.ReserveVenue(VenueCode, eventToUpdate.DateAndTime); // Save changes to the venue database
             }
             catch (DbUpdateConcurrencyException)
             {

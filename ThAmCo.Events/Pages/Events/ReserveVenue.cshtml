@@ -9,8 +9,14 @@
 
 <h4>Event</h4>  
 <hr />  
-        @* Display Workshop Details (label/name and data columns)*@  
-        <dl class="row">  
+        @* Display Event Details (label/name and data columns)*@  
+        <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.EventId)
+       </dt>
+       <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.EventId)
+       </dd>
         <dt class="col-sm-2">  
             @Html.DisplayNameFor(model => model.Event.Title)  
         </dt>  
@@ -67,12 +73,11 @@
                             <td>@venue.Capacity</td>
                             <td>@venue.CostPerHour</td>
                             <td>
-                                <form method="post" asp-page-handler="ReserveVenue" asp-route-id="@venue.VenueCode">
-                                    <button type="submit" class="btn btn-primary" 
-                                            onclick="this.innerText='Reserved'; this.disabled=true;">
-                                        Reserve
-                                    </button>
-                                </form>
+                            <form method="post">
+                                <input type="hidden" asp-for="EventId" value="@Model.EventId" />
+                                <input type="hidden" asp-for="VenueCode" value="@venue.VenueCode" />
+                                <button type="submit" asp-page-handler="ReserveVenue">Reserve Venue</button>
+                            </form>
                             </td>
                         </tr>
                     }
