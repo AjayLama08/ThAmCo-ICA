@@ -10,9 +10,9 @@ using ThAmCo.Events.Areas.Identity.Data;
 
 namespace ThAmCo.Events.Migrations
 {
-    [DbContext(typeof(IdentityContext))]
-    [Migration("20241207132824_CreateIdentitySchema")]
-    partial class CreateIdentitySchema
+    [DbContext(typeof(IdentityDbContext))]
+    [Migration("20241209190104_sqlite.local_migration_726")]
+    partial class sqlitelocal_migration_726
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

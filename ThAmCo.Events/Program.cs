@@ -20,23 +20,15 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<EventsDbContext>();
 
 // Register the Identity database context
-builder.Services.AddDbContext<IdentityContext>(options =>
+builder.Services.AddDbContext<IdentityDbContext>(options =>
     options.UseSqlite(connectionString));
 
 // Register the Identity services
-builder.Services.AddDefaultIdentity<EventUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<EventUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<IdentityContext>();
+    .AddEntityFrameworkStores<IdentityDbContext>();
 
 var app = builder.Build();
-
-// Create roles
-using (var scope = app.Services.CreateScope())
-{
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<EventUser>>();
-    await CreateRoles(roleManager, userManager);
-}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -56,8 +48,15 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-app.Run();
+// Create roles
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<EventUser>>();
+    await CreateRoles(roleManager, userManager);
+}
 
+//Create Manager and Team Leader roles
 async Task CreateRoles(RoleManager<IdentityRole> roleManager, UserManager<EventUser> userManager)
 {
     string[] roleNames = { "Manager", "Team Leader" };
@@ -90,3 +89,6 @@ async Task CreateRoles(RoleManager<IdentityRole> roleManager, UserManager<EventU
         }
     }
 }
+
+app.Run();
+

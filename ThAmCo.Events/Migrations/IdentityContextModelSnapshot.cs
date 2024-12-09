@@ -9,7 +9,7 @@ using ThAmCo.Events.Areas.Identity.Data;
 
 namespace ThAmCo.Events.Migrations
 {
-    [DbContext(typeof(IdentityContext))]
+    [DbContext(typeof(IdentityDbContext))]
     partial class IdentityContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

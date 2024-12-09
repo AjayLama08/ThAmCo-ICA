@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using ThAmCo.Events.Data;
 
 namespace ThAmCo.Events.Pages.Events
 {
+    [Authorize(Roles = "Manager,Team Leader")]
     public class DeleteModel : PageModel
     {
         private readonly ThAmCo.Events.Data.EventsDbContext _context;

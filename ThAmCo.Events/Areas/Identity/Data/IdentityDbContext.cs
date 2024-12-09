@@ -5,9 +5,9 @@ using ThAmCo.Events.Areas.Identity.Data;
 
 namespace ThAmCo.Events.Areas.Identity.Data;
 
-public class IdentityContext : IdentityDbContext<EventUser>
+public class IdentityDbContext : IdentityDbContext<EventUser>
 {
-    public IdentityContext(DbContextOptions<IdentityContext> options)
+    public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
         : base(options)
     {
     }

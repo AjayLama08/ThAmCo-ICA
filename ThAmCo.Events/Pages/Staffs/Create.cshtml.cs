@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,6 +10,7 @@ using ThAmCo.Events.Data;
 
 namespace ThAmCo.Events.Pages.Staffs
 {
+    [Authorize(Roles = "Manager")]
     public class CreateModel : PageModel
     {
         private readonly ThAmCo.Events.Data.EventsDbContext _context;
