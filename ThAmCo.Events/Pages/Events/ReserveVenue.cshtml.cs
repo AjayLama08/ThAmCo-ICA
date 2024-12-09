@@ -97,7 +97,7 @@ namespace ThAmCo.Events.Pages.Events
                 return NotFound();
             }
 
-            var reserve = await _availabilityService.ReserveVenue(VenueCode, eventToUpdate.DateAndTime, eventToUpdate.ReservationReference);
+            var reserve = await _availabilityService.PostReserveVenue(VenueCode, eventToUpdate.DateAndTime);
 
 
             if (reserve == null)
@@ -113,13 +113,13 @@ namespace ThAmCo.Events.Pages.Events
             //    StaffId = "StaffId"
             //};
 
-            eventToUpdate.ReservationReference = reserve.Reference;
+            //eventToUpdate.ReservationReference = reserve.Reference;
             _context.Attach(eventToUpdate).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
-                await _availabilityService.ReserveVenue(VenueCode, eventToUpdate.DateAndTime, eventToUpdate.ReservationReference); // Save changes to the venue database
+                await _availabilityService.PostReserveVenue(VenueCode, eventToUpdate.DateAndTime); // Save changes to the venue database
             }
             catch (DbUpdateConcurrencyException)
             {

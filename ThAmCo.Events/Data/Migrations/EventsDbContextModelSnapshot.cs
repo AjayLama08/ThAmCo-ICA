@@ -219,6 +219,97 @@ namespace ThAmCo.Events.Data.Migrations
                             Email = "hank.anderson@example.com",
                             FirstName = "Hank",
                             LastName = "Anderson"
+                        },
+                        new
+                        {
+                            GuestId = 11,
+                            Email = "isla.scott@example.com",
+                            FirstName = "Isla",
+                            LastName = "Scott"
+                        },
+                        new
+                        {
+                            GuestId = 12,
+                            Email = "jack.evans@example.com",
+                            FirstName = "Jack",
+                            LastName = "Evans"
+                        },
+                        new
+                        {
+                            GuestId = 13,
+                            Email = "karen.hughes@example.com",
+                            FirstName = "Karen",
+                            LastName = "Hughes"
+                        },
+                        new
+                        {
+                            GuestId = 14,
+                            Email = "liam.white@example.com",
+                            FirstName = "Liam",
+                            LastName = "White"
+                        },
+                        new
+                        {
+                            GuestId = 15,
+                            Email = "mia.young@example.com",
+                            FirstName = "Mia",
+                            LastName = "Young"
+                        },
+                        new
+                        {
+                            GuestId = 16,
+                            Email = "noah.hall@example.com",
+                            FirstName = "Noah",
+                            LastName = "Hall"
+                        },
+                        new
+                        {
+                            GuestId = 17,
+                            Email = "olivia.king@example.com",
+                            FirstName = "Olivia",
+                            LastName = "King"
+                        },
+                        new
+                        {
+                            GuestId = 18,
+                            Email = "paul.wright@example.com",
+                            FirstName = "Paul",
+                            LastName = "Wright"
+                        },
+                        new
+                        {
+                            GuestId = 19,
+                            Email = "quinn.harris@example.com",
+                            FirstName = "Quinn",
+                            LastName = "Harris"
+                        },
+                        new
+                        {
+                            GuestId = 20,
+                            Email = "rachel.lewis@example.com",
+                            FirstName = "Rachel",
+                            LastName = "Lewis"
+                        },
+                        new
+                        {
+                            GuestId = 21,
+                            Email = "samuel.robinson@example.com",
+                            FirstName = "Samuel",
+                            LastName = "Robinson"
+                        },
+                        new
+                        {
+                            GuestId = 22,
+                            Email = "tina.walker@example.com",
+                            FirstName = "Tina",
+                            LastName = "Walker"
+                        },
+                        new
+                        {
+                            GuestId = 23,
+                            Email = "victor.green@example.com",
+                            FirstName = "Victor",
+                            LastName = "Green"
                         });
                 });
 
@@ -272,6 +363,12 @@ namespace ThAmCo.Events.Data.Migrations
                         },
                         new
                         {
+                            GuestId = 3,
+                            EventId = 5,
+                            HasAttended = false
+                        },
+                        new
+                        {
                             GuestId = 4,
                             EventId = 2,
                             HasAttended = false
@@ -279,7 +376,7 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             GuestId = 4,
-                            EventId = 5,
+                            EventId = 6,
                             HasAttended = false
                         },
                         new
@@ -302,6 +399,12 @@ namespace ThAmCo.Events.Data.Migrations
                         },
                         new
                         {
+                            GuestId = 6,
+                            EventId = 7,
+                            HasAttended = false
+                        },
+                        new
+                        {
                             GuestId = 7,
                             EventId = 6,
                             HasAttended = false
@@ -320,6 +423,12 @@ namespace ThAmCo.Events.Data.Migrations
                         },
                         new
                         {
+                            GuestId = 8,
+                            EventId = 8,
+                            HasAttended = false
+                        },
+                        new
+                        {
                             GuestId = 9,
                             EventId = 7,
                             HasAttended = false
@@ -327,13 +436,169 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             GuestId = 9,
-                            EventId = 8,
+                            EventId = 10,
                             HasAttended = false
                         },
                         new
                         {
                             GuestId = 10,
                             EventId = 10,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 11,
+                            EventId = 8,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 11,
+                            EventId = 9,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 12,
+                            EventId = 4,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 12,
+                            EventId = 10,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 13,
+                            EventId = 3,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 13,
+                            EventId = 6,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 14,
+                            EventId = 7,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 14,
+                            EventId = 8,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 15,
+                            EventId = 2,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 15,
+                            EventId = 9,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 16,
+                            EventId = 5,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 16,
+                            EventId = 10,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 17,
+                            EventId = 1,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 17,
+                            EventId = 7,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 18,
+                            EventId = 6,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 18,
+                            EventId = 8,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 19,
+                            EventId = 4,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 19,
+                            EventId = 9,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 20,
+                            EventId = 2,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 20,
+                            EventId = 8,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 21,
+                            EventId = 5,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 21,
+                            EventId = 10,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 22,
+                            EventId = 3,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 22,
+                            EventId = 7,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 23,
+                            EventId = 6,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 23,
+                            EventId = 9,
                             HasAttended = false
                         });
                 });

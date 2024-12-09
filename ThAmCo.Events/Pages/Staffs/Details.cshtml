@@ -32,7 +32,7 @@
                 @Html.DisplayNameFor(model => model.Staff.IsFirstAider)
         </dt>
         <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Staff.IsFirstAider)
+                @(Model.Staff.IsFirstAider ? "True" : "False")
         </dd>
 
     </dl>

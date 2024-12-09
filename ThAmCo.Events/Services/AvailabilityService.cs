@@ -48,19 +48,29 @@ namespace ThAmCo.Events.Services
             return items; // Returning the list of Availability items
         }
 
-        public async Task<ReservationPostDTO> ReserveVenue(string venueCode, DateTime eventDate, string reference)
+        public async Task<ReservationPostDTO> PostReserveVenue(string venueCode, DateTime eventDate)
         {
-            var url = ServiceBaseUrl + VenueEndPoint + "/" + reference;
-            var reserve = new ReservationGetDTO
+            var url = ServiceBaseUrl + VenueEndPoint;
+            var reserve = new ReservationPostDTO
             {
-                VenueCode = venueCode,
                 EventDate = eventDate,
+                VenueCode = venueCode,
                 StaffId = "1",
-                Reference = reference
+
             };
+            //// Log the request details
+            //Console.WriteLine($"Request URL: {url}");
+            //Console.WriteLine($"Request Body: {JsonSerializer.Serialize(reserve, jsonOptions)}");
+
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync(url, reserve);
-            response.EnsureSuccessStatusCode();
+
+            // Log the response details
+            Console.WriteLine($"Response Status Code: {response.StatusCode}");
             var jsonResponse = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Response Body: {jsonResponse}");
+
+            response.EnsureSuccessStatusCode();
+
             var confirm = JsonSerializer.Deserialize<ReservationPostDTO>(jsonResponse, jsonOptions);
             if (confirm == null)
             {

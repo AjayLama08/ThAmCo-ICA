@@ -76,8 +76,21 @@ namespace ThAmCo.Events.Data
              new Guest { GuestId = 7, FirstName = "Eve", LastName = "Miller", Email = "eve.miller@example.com" },
              new Guest { GuestId = 8, FirstName = "Frank", LastName = "Wilson", Email = "frank.wilson@example.com" },
              new Guest { GuestId = 9, FirstName = "Grace", LastName = "Taylor", Email = "grace.taylor@example.com" },
-             new Guest { GuestId = 10, FirstName = "Hank", LastName = "Anderson", Email = "hank.anderson@example.com"
-             });
+             new Guest { GuestId = 10, FirstName = "Hank", LastName = "Anderson", Email = "hank.anderson@example.com"},
+             new Guest { GuestId = 11, FirstName = "Isla", LastName = "Scott", Email = "isla.scott@example.com" },
+            new Guest { GuestId = 12, FirstName = "Jack", LastName = "Evans", Email = "jack.evans@example.com" },
+            new Guest { GuestId = 13, FirstName = "Karen", LastName = "Hughes", Email = "karen.hughes@example.com" },
+            new Guest { GuestId = 14, FirstName = "Liam", LastName = "White", Email = "liam.white@example.com" },
+            new Guest { GuestId = 15, FirstName = "Mia", LastName = "Young", Email = "mia.young@example.com" },
+            new Guest { GuestId = 16, FirstName = "Noah", LastName = "Hall", Email = "noah.hall@example.com" },
+            new Guest { GuestId = 17, FirstName = "Olivia", LastName = "King", Email = "olivia.king@example.com" },
+            new Guest { GuestId = 18, FirstName = "Paul", LastName = "Wright", Email = "paul.wright@example.com" },
+            new Guest { GuestId = 19, FirstName = "Quinn", LastName = "Harris", Email = "quinn.harris@example.com" },
+            new Guest { GuestId = 20, FirstName = "Rachel", LastName = "Lewis", Email = "rachel.lewis@example.com" },
+            new Guest { GuestId = 21, FirstName = "Samuel", LastName = "Robinson", Email = "samuel.robinson@example.com" },
+            new Guest { GuestId = 22, FirstName = "Tina", LastName = "Walker", Email = "tina.walker@example.com" },
+            new Guest { GuestId = 23, FirstName = "Victor", LastName = "Green", Email = "victor.green@example.com" }
+             );
 
             //Seed data to populate Event Table
             builder.Entity<Event>().HasData(
@@ -95,42 +108,98 @@ namespace ThAmCo.Events.Data
 
             //Seed data to populate GuestBooking Table
             builder.Entity<GuestBooking>().HasData(
-             // Guest 1 (John Doe)
-             new GuestBooking { GuestId = 1, EventId = 1 },  // John at John & Jane's Wedding
-             new GuestBooking { GuestId = 1, EventId = 2 },  // John at Tech Innovations 2022
+            // Guest 1 (John Doe)
+            new GuestBooking { GuestId = 1, EventId = 1 }, // John at John and Jane's Wedding
+            new GuestBooking { GuestId = 1, EventId = 2 }, // John at Tech Innovations 2022
 
-             // Guest 2 (Jane Smith)
-             new GuestBooking { GuestId = 2, EventId = 1 },  // Jane at John & Jane's Wedding
-             new GuestBooking { GuestId = 2, EventId = 3 },  // Jane at Alice's Birthday Party
+            // Guest 2 (Jane Smith)
+            new GuestBooking { GuestId = 2, EventId = 1 }, // Jane at John and Jane's Wedding
+            new GuestBooking { GuestId = 2, EventId = 3 }, // Jane at Alice's Birthday Party
 
-             // Guest 3 (Alice Johnson)
-             new GuestBooking { GuestId = 3, EventId = 3 },  // Alice at Alice's Birthday Party
+            // Guest 3 (Alice Johnson)
+            new GuestBooking { GuestId = 3, EventId = 3 }, // Alice at Alice's Birthday Party
+            new GuestBooking { GuestId = 3, EventId = 5 }, // Alice at Digital Marketing Summit
 
-             // Guest 4 (Bob Brown)
-             new GuestBooking { GuestId = 4, EventId = 2 },  // Bob at Tech Innovations 2022
-             new GuestBooking { GuestId = 4, EventId = 5 },  // Bob at Digital Marketing Summit
+            // Guest 4 (Bob Brown)
+            new GuestBooking { GuestId = 4, EventId = 2 }, // Bob at Tech Innovations 2022
+            new GuestBooking { GuestId = 4, EventId = 6 }, // Bob at Bob's Surprise Birthday Party`
 
-             // Guest 5 (Charlie Davis)
-             new GuestBooking { GuestId = 5, EventId = 4 },  // Charlie at Mike & Emma's Wedding
-             new GuestBooking { GuestId = 5, EventId = 6 },  // Charlie at Bob's Surprise Birthday
+            // Guest 5 (Charlie Davis)
+            new GuestBooking { GuestId = 5, EventId = 4 }, // Charlie at Mike and Emma's Wedding
+            new GuestBooking { GuestId = 5, EventId = 6 }, // Charlie at Bob's Surprise Birthday Party
 
-             // Guest 6 (David Martinez)
-             new GuestBooking { GuestId = 6, EventId = 5 },  // David at Digital Marketing Summit
+            // Guest 6 (David Martinez)
+            new GuestBooking { GuestId = 6, EventId = 5 }, // David at Digital Marketing Summit
+            new GuestBooking { GuestId = 6, EventId = 7 }, // David at Sophie and Adam's Wedding
 
-             // Guest 7 (Eve Miller)
-             new GuestBooking { GuestId = 7, EventId = 6 },  // Eve at Bob's Surprise Birthday
-             new GuestBooking { GuestId = 7, EventId = 9 },  // Eve at Frank's 50th Birthday Party
+            // Guest 7 (Eve Miller)
+            new GuestBooking { GuestId = 7, EventId = 6 }, // Eve at Bob's Surprise Birthday Party
+            new GuestBooking { GuestId = 7, EventId = 9 }, // Eve at Frank's 50th Birthday Party
 
-             // Guest 8 (Frank Wilson)
-             new GuestBooking { GuestId = 8, EventId = 7 },  // Frank at Sophie and Adam's Wedding
+            //Guest 8 (Frank Wilson)
+            new GuestBooking { GuestId = 8, EventId = 7 }, // Frank at Sophie and Adam's Wedding
+            new GuestBooking { GuestId = 8, EventId = 8 }, // Frank at AI and Future Technologies
 
-             // Guest 9 (Grace Taylor)
-             new GuestBooking { GuestId = 9, EventId = 7 },  // Grace at Sophie and Adam's Wedding
-             new GuestBooking { GuestId = 9, EventId = 8 },  // Grace at AI and Future Technologies
+            // Guest 9 (Grace Taylor)
+            new GuestBooking { GuestId = 9, EventId = 7 }, // Grace at Sophie and Adam's Wedding
+            new GuestBooking { GuestId = 9, EventId = 10 }, // Grace at Business Leadership Forum
 
-             // Guest 10 (Hank Anderson)
-             new GuestBooking { GuestId = 10, EventId = 10 } // Hank at Business Leadership Forum
+            // Guest 10 (Hank Anderson)
+            new GuestBooking { GuestId = 10, EventId = 10 }, // Hank at Business Leadership Forum
+
+            // Guest 11 (Isla Scott)
+            new GuestBooking { GuestId = 11, EventId = 8 }, // Isla at AI and Future Technologies
+            new GuestBooking { GuestId = 11, EventId = 9 }, // Isla at Frank's 50th Birthday Party
+
+            // Guest 12 (Jack Evans)
+            new GuestBooking { GuestId = 12, EventId = 4 }, // Jack at Mike and Emma's Wedding
+            new GuestBooking { GuestId = 12, EventId = 10 }, // Jack at Business Leadership Forum
+
+            // Guest 13 (Karen Hughes)
+            new GuestBooking { GuestId = 13, EventId = 3 }, // Karen at Alice's Birthday Party
+            new GuestBooking { GuestId = 13, EventId = 6 }, // Karen at Bob's Surprise Birthday Party
+
+            // Guest 14 (Liam White)
+            new GuestBooking { GuestId = 14, EventId = 7 }, // Liam at Sophie and Adam's Wedding
+            new GuestBooking { GuestId = 14, EventId = 8 }, // Liam at AI and Future Technologies
+
+            // Guest 15 (Mia Young)
+            new GuestBooking { GuestId = 15, EventId = 2 }, // Mia at Tech Innovations 2022
+            new GuestBooking { GuestId = 15, EventId = 9 }, // Mia at Frank's 50th Birthday Party
+
+            // Guest 16 (Noah Hall)
+            new GuestBooking { GuestId = 16, EventId = 5 }, // Noah at Digital Marketing Summit
+            new GuestBooking { GuestId = 16, EventId = 10 }, // Noah at Business Leadership Forum
+
+            // Guest 17 (Olivia King)
+            new GuestBooking { GuestId = 17, EventId = 1 }, // Olivia at John and Jane's Wedding
+            new GuestBooking { GuestId = 17, EventId = 7 }, // Olivia at Sophie and Adam's Wedding
+
+            // Guest 18 (Paul Wright)
+            new GuestBooking { GuestId = 18, EventId = 6 }, // Paul at Bob's Surprise Birthday Party
+            new GuestBooking { GuestId = 18, EventId = 8 }, // Paul at AI and Future Technologies
+
+            // Guest 19 (Quinn Harris)
+            new GuestBooking { GuestId = 19, EventId = 4 }, // Quinn at Mike and Emma's Wedding
+            new GuestBooking { GuestId = 19, EventId = 9 }, // Quinn at Frank's 50th Birthday Party
+
+            // Guest 20 (Rachel Lewis)
+            new GuestBooking { GuestId = 20, EventId = 2 }, // Rachel at Tech Innovations 2022
+            new GuestBooking { GuestId = 20, EventId = 8 }, // Rachel at AI and Future Technologies
+
+            // Guest 21 (Samuel Robinson)
+            new GuestBooking { GuestId = 21, EventId = 5 }, // Samuel at Digital Marketing Summit
+            new GuestBooking { GuestId = 21, EventId = 10 }, // Samuel at Business Leadership Forum
+
+            // Guest 22 (Tina Walker)
+            new GuestBooking { GuestId = 22, EventId = 3 }, // Tina at Alice's Birthday Party
+            new GuestBooking { GuestId = 22, EventId = 7 }, // Tina at Sophie and Adam's Wedding
+
+            // Guest 23 (Victor Green)
+            new GuestBooking { GuestId = 23, EventId = 6 }, // Victor at Bob's Surprise Birthday Party
+            new GuestBooking { GuestId = 23, EventId = 9 } // Victor at Frank's 50th Birthday Party
             );
+
 
             //Seed data to populate Staff Table
             builder.Entity<Staff>().HasData(
