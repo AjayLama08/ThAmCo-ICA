@@ -7,6 +7,18 @@
 
 <h1>Events</h1>
 
+@if (Model.ReservationReference != null)
+{
+    <p>Reservation Reference: @Model.ReservationReference</p>
+}
+
+<ul>
+    @foreach (var eventItem in Model.Event)
+    {
+        <li>@eventItem.Title</li>
+    }
+</ul>
+
 <p>
     <a asp-page="Create">Create New</a>
 </p>
@@ -22,27 +34,40 @@
             <th>
                 @Html.DisplayNameFor(model => model.Event[0].DateAndTime)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Event[0].ReservationReference)
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Event) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventId)
-           </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateAndTime)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.EventId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.EventId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.EventId">Delete</a> |
-                <a asp-page="./ReserveVenue" asp-route-id="@item.EventId">Reserve Venue</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Event)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateAndTime)
+                </td>
+                <td>
+                    @if (item.ReservationReference == null)
+                    {
+                        <text>None</text>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.ReservationReference)
+                    }
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.EventId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.EventId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.EventId">Delete</a> |
+                    <a asp-page="./ReserveVenue" asp-route-id="@item.EventId">Reserve Venue</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

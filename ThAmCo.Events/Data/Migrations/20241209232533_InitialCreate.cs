@@ -114,14 +114,14 @@ namespace ThAmCo.Events.Data.Migrations
                 columns: new[] { "EventId", "DateAndTime", "EventTypeId", "FoodBookingId", "ReservationReference", "Title" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "WED", 101, "RES2022063001", "John and Jane's Wedding" },
+                    { 1, new DateTime(2022, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "WED", 101, null, "John and Jane's Wedding" },
                     { 2, new DateTime(2022, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "CON", 102, null, "Tech Innovations 2022" },
-                    { 3, new DateTime(2022, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "PTY", null, "RES2022081203", "Alice's Birthday Party" },
+                    { 3, new DateTime(2022, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "PTY", null, null, "Alice's Birthday Party" },
                     { 4, new DateTime(2022, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "WED", 104, null, "Mike and Emma's Wedding" },
-                    { 5, new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "CON", null, "RES2023100805", "Digital Marketing Summit" },
+                    { 5, new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "CON", null, null, "Digital Marketing Summit" },
                     { 6, new DateTime(2023, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "PTY", 106, null, "Bob's Surprise Party" },
                     { 7, new DateTime(2023, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "WED", null, null, "Sophie and Adam's Wedding" },
-                    { 8, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "MET", 108, "RES2024030508", "AI and Future Tech" },
+                    { 8, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "MET", 108, null, "AI and Future Tech" },
                     { 9, new DateTime(2023, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "PTY", null, null, "Frank's 50th Birthday" },
                     { 10, new DateTime(2023, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "MET", 110, null, "Leadership Forum" }
                 });

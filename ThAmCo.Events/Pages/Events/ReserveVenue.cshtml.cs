@@ -33,6 +33,8 @@ namespace ThAmCo.Events.Pages.Events
 
         [BindProperty]
         public string VenueCode { get; set; }
+
+        //public string StaffId { get; set; }
         public ReservationPostDTO ReservationPostDTO { get; private set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -96,7 +98,7 @@ namespace ThAmCo.Events.Pages.Events
             {
                 return NotFound();
             }
-
+            
             var reserve = await _availabilityService.PostReserveVenue(VenueCode, eventToUpdate.DateAndTime);
 
 
@@ -119,7 +121,7 @@ namespace ThAmCo.Events.Pages.Events
             try
             {
                 await _context.SaveChangesAsync();
-                await _availabilityService.PostReserveVenue(VenueCode, eventToUpdate.DateAndTime); // Save changes to the venue database
+                //await _availabilityService.PostReserveVenue(VenueCode, eventToUpdate.DateAndTime); // Save changes to the venue database
             }
             catch (DbUpdateConcurrencyException)
             {

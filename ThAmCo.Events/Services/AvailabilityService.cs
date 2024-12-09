@@ -50,33 +50,45 @@ namespace ThAmCo.Events.Services
 
         public async Task<ReservationPostDTO> PostReserveVenue(string venueCode, DateTime eventDate)
         {
+            string staffId = "1";
             var url = ServiceBaseUrl + VenueEndPoint;
-            var reserve = new ReservationPostDTO
+            var reserve = new ThAmCo.Events.Dtos.ReservationPostDTO
             {
                 EventDate = eventDate,
                 VenueCode = venueCode,
-                StaffId = "1",
-
+                StaffId = staffId
             };
-            //// Log the request details
-            //Console.WriteLine($"Request URL: {url}");
-            //Console.WriteLine($"Request Body: {JsonSerializer.Serialize(reserve, jsonOptions)}");
 
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync(url, reserve);
-
-            // Log the response details
-            Console.WriteLine($"Response Status Code: {response.StatusCode}");
-            var jsonResponse = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($"Response Body: {jsonResponse}");
-
-            response.EnsureSuccessStatusCode();
-
-            var confirm = JsonSerializer.Deserialize<ReservationPostDTO>(jsonResponse, jsonOptions);
-            if (confirm == null)
+            try
             {
-                throw new ArgumentNullException(nameof(response), "The Reserve Venue response is null.");
+                //// Log the request details
+                //Console.WriteLine($"Request URL: {url}");
+                //Console.WriteLine($"Request Body: {JsonSerializer.Serialize(reserve, jsonOptions)}");
+
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync(url, reserve);
+
+                //// Log the response status code
+                //Console.WriteLine($"Response Status Code: {response.StatusCode}");
+
+                response.EnsureSuccessStatusCode();
+
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                // Log the response body
+                Console.WriteLine($"Response Body: {jsonResponse}");
+
+                var confirm = JsonSerializer.Deserialize<ReservationPostDTO>(jsonResponse, jsonOptions);
+                if (confirm == null)
+                {
+                    throw new ArgumentNullException(nameof(response), "The Reserve Venue response is null.");
+                }
+                return confirm;
             }
-            return confirm;
+            catch (Exception ex)
+            {
+                // Log the exception details
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                throw;
+            }
         }
     }
 }

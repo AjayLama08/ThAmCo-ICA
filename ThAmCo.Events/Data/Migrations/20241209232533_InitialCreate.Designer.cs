@@ -11,7 +11,7 @@ using ThAmCo.Events.Data;
 namespace ThAmCo.Events.Data.Migrations
 {
     [DbContext(typeof(EventsDbContext))]
-    [Migration("20241209194325_InitialCreate")]
+    [Migration("20241209232533_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -54,7 +54,6 @@ namespace ThAmCo.Events.Data.Migrations
                             DateAndTime = new DateTime(2022, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "WED",
                             FoodBookingId = 101,
-                            ReservationReference = "RES2022063001",
                             Title = "John and Jane's Wedding"
                         },
                         new
@@ -70,7 +69,6 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 3,
                             DateAndTime = new DateTime(2022, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "PTY",
-                            ReservationReference = "RES2022081203",
                             Title = "Alice's Birthday Party"
                         },
                         new
@@ -86,7 +84,6 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 5,
                             DateAndTime = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "CON",
-                            ReservationReference = "RES2023100805",
                             Title = "Digital Marketing Summit"
                         },
                         new
@@ -110,7 +107,6 @@ namespace ThAmCo.Events.Data.Migrations
                             DateAndTime = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "MET",
                             FoodBookingId = 108,
-                            ReservationReference = "RES2024030508",
                             Title = "AI and Future Tech"
                         },
                         new

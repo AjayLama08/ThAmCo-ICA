@@ -5,8 +5,11 @@ namespace ThAmCo.Events.Dtos
 {
     public class ReservationPostDTO
     {
+        [Required, DataType(DataType.Date)]
         public DateTime EventDate { get; set; }
-        public string VenueCode { get; set; } = string.Empty;
-        public string StaffId { get; set; } = string.Empty;
+
+        [Required, MinLength(5), MaxLength(5)]
+        public string VenueCode { get; set; }
+        public string StaffId { get; set; }
     }
 }
