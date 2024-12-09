@@ -97,7 +97,7 @@ namespace ThAmCo.Events.Pages.Events
                 return NotFound();
             }
 
-            var reserve = await _availabilityService.ReserveVenue(VenueCode, eventToUpdate.DateAndTime);
+            var reserve = await _availabilityService.ReserveVenue(VenueCode, eventToUpdate.DateAndTime, eventToUpdate.ReservationReference);
 
 
             if (reserve == null)
@@ -119,7 +119,7 @@ namespace ThAmCo.Events.Pages.Events
             try
             {
                 await _context.SaveChangesAsync();
-                await _availabilityService.ReserveVenue(VenueCode, eventToUpdate.DateAndTime); // Save changes to the venue database
+                await _availabilityService.ReserveVenue(VenueCode, eventToUpdate.DateAndTime, eventToUpdate.ReservationReference); // Save changes to the venue database
             }
             catch (DbUpdateConcurrencyException)
             {

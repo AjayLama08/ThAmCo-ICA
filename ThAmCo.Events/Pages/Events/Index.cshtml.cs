@@ -10,7 +10,7 @@ using ThAmCo.Events.Data;
 
 namespace ThAmCo.Events.Pages.Events
 {
-    [Authorize(Roles = "Manager")]
+   
     public class IndexModel : PageModel
     {
         private readonly ThAmCo.Events.Data.EventsDbContext _context;

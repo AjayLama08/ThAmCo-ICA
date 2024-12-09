@@ -48,15 +48,15 @@ namespace ThAmCo.Events.Services
             return items; // Returning the list of Availability items
         }
 
-        public async Task<ReservationPostDTO> ReserveVenue(string venueCode, DateTime eventDate)
+        public async Task<ReservationPostDTO> ReserveVenue(string venueCode, DateTime eventDate, string reference)
         {
-            var url = ServiceBaseUrl + VenueEndPoint + "/" + venueCode;
+            var url = ServiceBaseUrl + VenueEndPoint + "/" + reference;
             var reserve = new ReservationGetDTO
             {
                 VenueCode = venueCode,
                 EventDate = eventDate,
                 StaffId = "1",
-                Reference = "1"
+                Reference = reference
             };
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync(url, reserve);
             response.EnsureSuccessStatusCode();
