@@ -27,7 +27,7 @@ namespace ThAmCo.Events.Services
             _httpClient = httpClient; // Initialize the HttpClient property
         }
 
-        // Asynchronous method to reserve a venue
+        // Asynchronous method to get a list of available venues
         public async Task<List<AvailabilityDTO>> GetAvailabilityListAsync(DateTime beginDate, DateTime endDate, string eventType)
         {
             var requestUrl = $"{ServiceBaseUrl}{AvailabilityEndPoint}?beginDate={beginDate.ToString("yyyy-MM-dd")}&endDate={endDate.ToString("yyyy-MM-dd")}&eventType={eventType}";
@@ -48,6 +48,7 @@ namespace ThAmCo.Events.Services
             return items; // Returning the list of Availability items
         }
 
+        // Asynchronous method to reserve a venue
         public async Task<ReservationPostDTO> PostReserveVenue(string venueCode, DateTime eventDate)
         {
             string staffId = "1";
@@ -90,45 +91,20 @@ namespace ThAmCo.Events.Services
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 throw;
             }
-        }   
+        }
 
-//            // Asynchronous method to free a previously reserved venue
-//            public async Task<bool> FreeVenueAsync()
-//{
-//            var url = ServiceBaseUrl + VenueEndPoint;
-//            string reference;
-//            // Sending a DELETE request to the Venue EndPoint to free a venue
-//            //var response = await _httpClient.DeleteAsync(url, reference);
+        // Asynchronous method to free a previously reserved venue
+        public async Task<bool> FreeVenueAsync(string reference)
+        {
+            var url = $"{ServiceBaseUrl}{VenueEndPoint}/{reference}";
 
-//             // Ensuring the response is successful (status code 200-299)
-//            response.EnsureSuccessStatusCode();
+            // Sending a DELETE request to the Venue EndPoint to free a venue
+            var response = await _httpClient.DeleteAsync(url);
 
-//             return response.IsSuccessStatusCode;
-//            }
-       }
+            // Ensuring the response is successful (status code 200-299)
+            response.EnsureSuccessStatusCode();
+
+            return response.IsSuccessStatusCode;
+        }
+    }
 }
-
-
-//        // Asynchronous method to get available venues based on event suitability
-//        public async Task<List<AvailabilityDTO>> GetAvailableVenuesAsync(string eventId)
-//        {
-//            // Sending a GET request to the Venue EndPoint to get available venues
-//            var response = await _httpClient.GetAsync(ServiceBaseUrl + VenueEndPoint + $"/availability/{eventId}");
-
-//            // Ensuring the response is successful (status code 200-299)
-//            response.EnsureSuccessStatusCode();
-
-//            // Reading the response as a string
-//            var jsonResponse = await response.Content.ReadAsStringAsync();
-
-//            // Deserializing the JSON response to a list of VenueDTO objects
-//            var venues = JsonSerializer.Deserialize<List<AvailabilityDTO>>(jsonResponse, jsonOptions);
-
-//            if (venues == null) // Checking if the response is null
-//            {
-//                throw new ArgumentNullException(nameof(response), "The Venue response is null");
-//            }
-//            return venues; // Returning the list of available venues
-//        }
-//    }
-//}

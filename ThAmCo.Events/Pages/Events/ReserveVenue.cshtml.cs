@@ -107,23 +107,22 @@ namespace ThAmCo.Events.Pages.Events
                 return BadRequest("Unable to reserve venue.");
             }
 
+            // Update the event with the reservation reference
             _context.Attach(eventToUpdate).State = EntityState.Modified;
 
+            // Free the previous reservation if it exists
+            if (eventToUpdate.ReservationReference != null)
+            {
+                await _availabilityService.FreeVenueAsync(eventToUpdate.ReservationReference);
+            }
+
+            // Update the reservation reference
             try
             {
-                if (eventToUpdate.ReservationReference != null)
-                {
-                    await _availabilityService.FreeVenueAsync(eventToUpdate.ReservationReference);
-                }
-                else
-                {
+                eventToUpdate.ReservationReference = $"{VenueCode}{EventDate.Date:yyyyMMdd}";
 
-                    // await _context.SaveChangesAsync();
-
-                    eventToUpdate.ReservationReference = $"{VenueCode}{EventDate.Date:yyyyMMdd}";
-
-                    await _context.SaveChangesAsync();
-                }
+                await _context.SaveChangesAsync();
+                
             }
             catch (DbUpdateConcurrencyException)
             {
