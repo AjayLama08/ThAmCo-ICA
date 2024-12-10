@@ -61,18 +61,19 @@ namespace ThAmCo.Events.Services
 
             try
             {
-                //// Log the request details
-                //Console.WriteLine($"Request URL: {url}");
-                //Console.WriteLine($"Request Body: {JsonSerializer.Serialize(reserve, jsonOptions)}");
+                //Log the request details
+                Console.WriteLine($"Request URL: {url}");
+                Console.WriteLine($"Request Body: {JsonSerializer.Serialize(reserve, jsonOptions)}");
 
                 HttpResponseMessage response = await _httpClient.PostAsJsonAsync(url, reserve);
 
-                //// Log the response status code
-                //Console.WriteLine($"Response Status Code: {response.StatusCode}");
+                // Log the response status code
+                Console.WriteLine($"Response Status Code: {response.StatusCode}");
 
                 response.EnsureSuccessStatusCode();
 
                 var jsonResponse = await response.Content.ReadAsStringAsync();
+
                 // Log the response body
                 Console.WriteLine($"Response Body: {jsonResponse}");
 

@@ -23,7 +23,6 @@ namespace ThAmCo.Events.Pages.Events
             _context = context;
             _availabilityService = availabilityService;
             AvailableVenues = new List<VenueListItem>();
-            ReservationPostDTO = new ReservationPostDTO();
         }
 
         public EventVM Event { get; set; }
@@ -34,8 +33,8 @@ namespace ThAmCo.Events.Pages.Events
         [BindProperty]
         public string VenueCode { get; set; }
 
-        //public string StaffId { get; set; }
-        public ReservationPostDTO ReservationPostDTO { get; private set; }
+        [BindProperty]
+        public DateTime EventDate { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -63,6 +62,7 @@ namespace ThAmCo.Events.Pages.Events
             ReserveVenue = new ReserveVenueVM();
             ReserveVenue.EventId = eventToReserve.EventId;
             EventId = eventToReserve.EventId;
+
             /// this code snippet is for demo only - the deployed verion would need a credible collection of venue slots to select from.
             DateTime beginDate = eventToReserve.DateAndTime;
             DateTime endDate = eventToReserve.DateAndTime.AddMonths(6);
@@ -99,7 +99,7 @@ namespace ThAmCo.Events.Pages.Events
                 return NotFound();
             }
             
-            var reserve = await _availabilityService.PostReserveVenue(VenueCode, eventToUpdate.DateAndTime);
+            var reserve = await _availabilityService.PostReserveVenue(VenueCode, EventDate);
 
 
             if (reserve == null)
@@ -107,21 +107,15 @@ namespace ThAmCo.Events.Pages.Events
                 return BadRequest("Unable to reserve venue.");
             }
 
-            //reserve = new ReservationPostDTO
-            //{
-            //    VenueCode = VenueCode,
-            //    EventDate = eventToUpdate.DateAndTime,
-            //    Reference = eventToUpdate.ReservationReference,
-            //    StaffId = "StaffId"
-            //};
-
-            //eventToUpdate.ReservationReference = reserve.Reference;
             _context.Attach(eventToUpdate).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
-                //await _availabilityService.PostReserveVenue(VenueCode, eventToUpdate.DateAndTime); // Save changes to the venue database
+
+                eventToUpdate.ReservationReference = $"{VenueCode}{EventDate.Date:yyyyMMdd}";
+
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {

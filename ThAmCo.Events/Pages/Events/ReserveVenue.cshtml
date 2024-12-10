@@ -76,6 +76,7 @@
                             <form method="post">
                                 <input type="hidden" asp-for="EventId" value="@Model.EventId" />
                                 <input type="hidden" asp-for="VenueCode" value="@venue.VenueCode" />
+                                <input type="hidden" asp-for="EventDate" value="@venue.Date" />
                                 <button type="submit" asp-page-handler="ReserveVenue">Reserve Venue</button>
                             </form>
                             </td>

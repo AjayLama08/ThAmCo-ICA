@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ThAmCo.Events.Data;
+using ThAmCo.Events.Dtos;
 
 namespace ThAmCo.Events.Pages.Events
 {
@@ -21,11 +22,9 @@ namespace ThAmCo.Events.Pages.Events
         }
 
         public IList<Event> Event { get;set; } = default!;
-        public string? ReservationReference { get; set; }
 
         public async Task OnGetAsync()
         {
-            ReservationReference = ReservationReference;
             Event = await _context.Events.ToListAsync();
         }
     }
