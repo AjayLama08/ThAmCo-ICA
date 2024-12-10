@@ -90,21 +90,24 @@ namespace ThAmCo.Events.Services
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 throw;
             }
-        }
-    }
-}
+        }   
 
-//        // Asynchronous method to free a previously reserved venue
-//        public async Task<bool> FreeVenueAsync(string eventId)
-//        {
+//            // Asynchronous method to free a previously reserved venue
+//            public async Task<bool> FreeVenueAsync()
+//{
+//            var url = ServiceBaseUrl + VenueEndPoint;
+//            string reference;
 //            // Sending a DELETE request to the Venue EndPoint to free a venue
-//            var response = await _httpClient.DeleteAsync(ServiceBaseUrl + VenueEndPoint + $"/free/{eventId}");
+//            //var response = await _httpClient.DeleteAsync(url, reference);
 
-//            // Ensuring the response is successful (status code 200-299)
+//             // Ensuring the response is successful (status code 200-299)
 //            response.EnsureSuccessStatusCode();
 
-//            return response.IsSuccessStatusCode;
-//        }
+//             return response.IsSuccessStatusCode;
+//            }
+       }
+}
+
 
 //        // Asynchronous method to get available venues based on event suitability
 //        public async Task<List<AvailabilityDTO>> GetAvailableVenuesAsync(string eventId)

@@ -19,6 +19,7 @@ namespace ThAmCo.Events.Pages.Events
         public IndexModel(ThAmCo.Events.Data.EventsDbContext context)
         {
             _context = context;
+
         }
 
         public IList<Event> Event { get;set; } = default!;

@@ -111,11 +111,19 @@ namespace ThAmCo.Events.Pages.Events
 
             try
             {
-                await _context.SaveChangesAsync();
+                if (eventToUpdate.ReservationReference != null)
+                {
+                    await _availabilityService.FreeVenueAsync(eventToUpdate.ReservationReference);
+                }
+                else
+                {
 
-                eventToUpdate.ReservationReference = $"{VenueCode}{EventDate.Date:yyyyMMdd}";
+                    // await _context.SaveChangesAsync();
 
-                await _context.SaveChangesAsync();
+                    eventToUpdate.ReservationReference = $"{VenueCode}{EventDate.Date:yyyyMMdd}";
+
+                    await _context.SaveChangesAsync();
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
