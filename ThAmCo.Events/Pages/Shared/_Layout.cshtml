@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - ThAmCo Events Management</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel = "stylesheet" href = "https://cdn.datatables.net/1.13.6/css/jquery.datatable.min.css">
     <link rel="stylesheet" href="~/ThAmCo.Events.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -48,11 +49,24 @@
             &copy; @DateTime.Now.Year - ThAmCo Events Management- <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.datatables.net/1.13.6/css/jquery.datatable.min.css"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.datatable').Datatable({
+                searching: true,
+                info:true,
+                paging: true,
+                pageLength: [2,6,8,10]
+            })
+        }
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
