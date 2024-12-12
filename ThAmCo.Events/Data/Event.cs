@@ -26,9 +26,8 @@ namespace ThAmCo.Events.Data
 
         [DataType(DataType.Date)]
         public DateTime DateAndTime { get; set; }
-  
+        public bool IsDeleted { get; set; }
         public int? FoodBookingId { get; set; }
-
         public string? ReservationReference { get; set; }
 
         //Navigation property to Staffing class

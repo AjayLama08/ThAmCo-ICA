@@ -33,6 +33,9 @@ namespace ThAmCo.Events.Data.Migrations
                     b.Property<int?>("FoodBookingId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("ReservationReference")
                         .HasColumnType("TEXT");
 
@@ -51,6 +54,7 @@ namespace ThAmCo.Events.Data.Migrations
                             DateAndTime = new DateTime(2022, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "WED",
                             FoodBookingId = 101,
+                            IsDeleted = false,
                             Title = "John and Jane's Wedding"
                         },
                         new
@@ -59,6 +63,7 @@ namespace ThAmCo.Events.Data.Migrations
                             DateAndTime = new DateTime(2022, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "CON",
                             FoodBookingId = 102,
+                            IsDeleted = false,
                             Title = "Tech Innovations 2022"
                         },
                         new
@@ -66,6 +71,7 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 3,
                             DateAndTime = new DateTime(2022, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "PTY",
+                            IsDeleted = false,
                             Title = "Alice's Birthday Party"
                         },
                         new
@@ -74,6 +80,7 @@ namespace ThAmCo.Events.Data.Migrations
                             DateAndTime = new DateTime(2022, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "WED",
                             FoodBookingId = 104,
+                            IsDeleted = false,
                             Title = "Mike and Emma's Wedding"
                         },
                         new
@@ -81,6 +88,7 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 5,
                             DateAndTime = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "CON",
+                            IsDeleted = false,
                             Title = "Digital Marketing Summit"
                         },
                         new
@@ -89,6 +97,7 @@ namespace ThAmCo.Events.Data.Migrations
                             DateAndTime = new DateTime(2023, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "PTY",
                             FoodBookingId = 106,
+                            IsDeleted = false,
                             Title = "Bob's Surprise Party"
                         },
                         new
@@ -96,6 +105,7 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 7,
                             DateAndTime = new DateTime(2023, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "WED",
+                            IsDeleted = false,
                             Title = "Sophie and Adam's Wedding"
                         },
                         new
@@ -104,6 +114,7 @@ namespace ThAmCo.Events.Data.Migrations
                             DateAndTime = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "MET",
                             FoodBookingId = 108,
+                            IsDeleted = false,
                             Title = "AI and Future Tech"
                         },
                         new
@@ -111,6 +122,7 @@ namespace ThAmCo.Events.Data.Migrations
                             EventId = 9,
                             DateAndTime = new DateTime(2023, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "PTY",
+                            IsDeleted = false,
                             Title = "Frank's 50th Birthday"
                         },
                         new
@@ -119,6 +131,7 @@ namespace ThAmCo.Events.Data.Migrations
                             DateAndTime = new DateTime(2023, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = "MET",
                             FoodBookingId = 110,
+                            IsDeleted = false,
                             Title = "Leadership Forum"
                         });
                 });

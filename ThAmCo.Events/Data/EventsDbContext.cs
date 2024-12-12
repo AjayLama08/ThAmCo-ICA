@@ -65,6 +65,9 @@ namespace ThAmCo.Events.Data
                 .WithMany(s => s.Staffings)
                 .HasForeignKey(e => e.EventId);
 
+            //Query filter to exclude deleted events
+            builder.Entity<Event>().HasQueryFilter(e => !e.IsDeleted);
+
             //Seed data to populate Guest Table
             builder.Entity<Guest>().HasData(
              new Guest { GuestId = 1, FirstName = "John", LastName = "Doe", Email = "john.doe@example.com" },

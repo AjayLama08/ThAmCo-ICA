@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ThAmCo.Events.Data;
+using ThAmCo.Events.Services;
 
 namespace ThAmCo.Events.Pages.Events
 {
@@ -14,10 +15,12 @@ namespace ThAmCo.Events.Pages.Events
     public class DeleteModel : PageModel
     {
         private readonly ThAmCo.Events.Data.EventsDbContext _context;
+        private readonly AvailabilityService _availabilityService;
 
-        public DeleteModel(ThAmCo.Events.Data.EventsDbContext context)
+        public DeleteModel(ThAmCo.Events.Data.EventsDbContext context, AvailabilityService availabilityService)
         {
             _context = context;
+            _availabilityService = availabilityService;
         }
 
         [BindProperty]
@@ -51,10 +54,18 @@ namespace ThAmCo.Events.Pages.Events
             }
 
             var eventToDelete = await _context.Events.FindAsync(id);
+            var staffingsToDelete = await _context.Staffings.Where(s => s.EventId == id).ToListAsync();
             if (eventToDelete != null)
             {
-                Event = eventToDelete;
-                _context.Events.Remove(Event);
+                // Soft delete the event and remove all staffings
+                eventToDelete.IsDeleted = true;
+                _context.Entry(eventToDelete).State = EntityState.Modified;
+                _context.Staffings.RemoveRange(staffingsToDelete);
+
+                // Free the venue
+                _availabilityService.FreeVenueAsync(eventToDelete.ReservationReference);
+
+                // Save changes
                 await _context.SaveChangesAsync();
             }
 

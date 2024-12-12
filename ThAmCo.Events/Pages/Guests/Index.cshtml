@@ -10,6 +10,9 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<p>
+    <a asp-page="Anonymise">Anonymise Guest</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -34,7 +37,7 @@
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.GuestId">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.GuestId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.GuestId">Delete</a>
+                <a asp-page="./Delete" asp-route-id="@item.GuestId">Delete</a> 
             </td>
         </tr>
 }
