@@ -17,5 +17,11 @@ namespace ThAmCo.Events.Data
 
         //Navigation property with Guest class
         public Guest? Guest { get; set; }
+        public static int GetGuestCount(EventsDbContext context, int eventId)
+        {
+            return context.GuestBookings.Count(gb => gb.EventId == eventId);
+        }
     }
 }
+
+

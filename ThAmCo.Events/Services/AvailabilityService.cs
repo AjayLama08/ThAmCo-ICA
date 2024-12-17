@@ -48,6 +48,33 @@ namespace ThAmCo.Events.Services
             return items; // Returning the list of Availability items
         }
 
+        // Asynchronous method to get reservation information
+        public async Task<string> GetReservationAsync(string reference)
+        {
+            if (reference == null) // Checking if the reference is null
+            {
+                return "Not Known";
+            }
+
+            var url = $"{ServiceBaseUrl}{VenueEndPoint}/{reference}";
+
+            var response = await _httpClient.GetAsync(url);
+
+            // Ensuring the response is successful (status code 200-299)
+            response.EnsureSuccessStatusCode();
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            var reservation = JsonSerializer.Deserialize<ReservationPostDTO>(jsonResponse, jsonOptions);
+
+            if (reservation == null) // Checking if the response is null
+            {
+                throw new ArgumentNullException(nameof(response), "The Reservation response is null");
+            }
+
+            return reservation.VenueCode; // Returning the venue code
+        }
+
         // Asynchronous method to reserve a venue
         public async Task<ReservationPostDTO> PostReserveVenue(string venueCode, DateTime eventDate)
         {
