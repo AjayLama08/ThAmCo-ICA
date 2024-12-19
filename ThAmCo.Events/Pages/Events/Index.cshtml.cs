@@ -22,7 +22,6 @@ namespace ThAmCo.Events.Pages.Events
         {
             _context = context;
             _availabilityService = availabilityService;
-
         }
 
         public IList<ThAmCo.Events.ViewModels.EventIndexVM> Event { get; set; } = default!;
@@ -34,7 +33,7 @@ namespace ThAmCo.Events.Pages.Events
 
             foreach (var e in events)
             {
-                var venueInfo = await _availabilityService.GetReservationAsync(e.ReservationReference);
+                var venueInfo = await _availabilityService.GetVenueCodeAsync(e.ReservationReference);
 
                 var eventVM = new ThAmCo.Events.ViewModels.EventIndexVM
                 {
@@ -43,7 +42,7 @@ namespace ThAmCo.Events.Pages.Events
                     DateAndTime = e.DateAndTime,
                     ReservationReference = e.ReservationReference,
                     GuestCount = ThAmCo.Events.Data.GuestBooking.GetGuestCount(_context, e.EventId),
-                    VenueCode = venueInfo // Assuming venueInfo contains the venue code
+                    VenueCode = venueInfo
                 };
                 Event.Add(eventVM);
             }

@@ -40,14 +40,7 @@
                     @Html.DisplayFor(modelItem => item.DateAndTime)
                 </td>
                 <td>
-                    @if (item.ReservationReference == null)
-                    {
-                        <text>Not Known</text>
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.ReservationReference)
-                    }
+                    @Html.DisplayFor(modelItem => item.ReservationReference)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.VenueCode)

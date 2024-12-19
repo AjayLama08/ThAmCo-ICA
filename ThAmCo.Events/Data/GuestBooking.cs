@@ -6,10 +6,8 @@ namespace ThAmCo.Events.Data
     {
         [Required]
         public int EventId { get; set; }
-
         [Required]
         public int GuestId { get; set; }
-
         public bool HasAttended { get; set; }
 
         //Navigation property with Event class
@@ -17,6 +15,7 @@ namespace ThAmCo.Events.Data
 
         //Navigation property with Guest class
         public Guest? Guest { get; set; }
+
         public static int GetGuestCount(EventsDbContext context, int eventId)
         {
             return context.GuestBookings.Count(gb => gb.EventId == eventId);

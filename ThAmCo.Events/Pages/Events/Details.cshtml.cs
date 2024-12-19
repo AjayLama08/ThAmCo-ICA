@@ -6,21 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ThAmCo.Events.Data;
+using ThAmCo.Events.Dtos;
+using ThAmCo.Events.Services;
 
 namespace ThAmCo.Events.Pages.Events
 {
     public class DetailsModel : PageModel
     {
         private readonly ThAmCo.Events.Data.EventsDbContext _context;
+        private readonly AvailabilityService _availabilityService;
 
-        public DetailsModel(ThAmCo.Events.Data.EventsDbContext context)
+        public DetailsModel(ThAmCo.Events.Data.EventsDbContext context, AvailabilityService availabilityService)
         {
             _context = context;
+            _availabilityService = availabilityService;
             Guests = new List<ThAmCo.Events.Data.Guest>();
             Staffs = new List<ThAmCo.Events.Data.Staff>();
-            string IsFirstAider;
-            int GuestsCount;
-            int StaffsCount;
         }
 
         public Event Event { get; set; } = default!;
@@ -30,6 +31,8 @@ namespace ThAmCo.Events.Pages.Events
         public string IsFirstAider { get; set; }
         public int GuestsCount { get; set; }
         public int StaffsCount { get; set; }
+
+        public IList<ThAmCo.Events.ViewModels.VenueDetailsVM> Venue { get; set; } = default!;
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -67,8 +70,8 @@ namespace ThAmCo.Events.Pages.Events
                     {
                         break;
                     }
-
                 }
+
                 if (eventGuests != null)
                 {
                     Guests = eventGuests;
@@ -80,10 +83,25 @@ namespace ThAmCo.Events.Pages.Events
                     Staffs = eventStaffs;
                     StaffsCount = eventStaffs.Count;
                 }
-                return Page();
-            }
-        }
-        
+
+                var venueCode = await _availabilityService.GetVenueCodeAsync(Event.ReservationReference);
+
+                var venueInfo = await _availabilityService.GetVenueDetailsAsync(venueCode);
+
+                Venue = new List<ThAmCo.Events.ViewModels.VenueDetailsVM>
+                 {
+                   new ThAmCo.Events.ViewModels.VenueDetailsVM
+                    {
+                        VenueCode = venueInfo.VenueCode,
+                        VenueName = venueInfo.VenueName,
+                        Description = venueInfo.Description,
+                        Capacity = venueInfo.Capacity,
+                    }   
+                 };
+               return Page();
+           }
+      }
+
         public async Task<IActionResult> OnPostRegisterAttendanceAsync(int eventId, int guestId)
         {
             var guestBooking = await _context.GuestBookings
