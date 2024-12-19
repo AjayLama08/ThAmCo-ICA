@@ -18,7 +18,6 @@ namespace ThAmCo.Events.Pages.Staffs
             _context = context;
             Staffings = new List<Staffing>();
             Events = new List<Event>();
-            int eventCount;
         }
 
         public Staff Staff { get; set; } = default!;

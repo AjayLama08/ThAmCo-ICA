@@ -12,16 +12,18 @@ namespace ThAmCo.Events.Pages.Events
     {
         private readonly ThAmCo.Events.Data.EventsDbContext _context;
         private readonly AvailabilityService _availabilityService;
+        private readonly VenueService _venueService;
 
         public List<VenueListItem> AvailableVenues { get; set; }
 
         [BindProperty]
         public ReserveVenueVM ReserveVenue { get; set; }
 
-        public ReserveVenueModel(ThAmCo.Events.Data.EventsDbContext context, AvailabilityService availabilityService)
+        public ReserveVenueModel(ThAmCo.Events.Data.EventsDbContext context, AvailabilityService availabilityService, VenueService venueService)
         {
             _context = context;
             _availabilityService = availabilityService;
+            _venueService = venueService;
             AvailableVenues = new List<VenueListItem>();
         }
 
@@ -99,7 +101,7 @@ namespace ThAmCo.Events.Pages.Events
                 return NotFound();
             }
             
-            var reserve = await _availabilityService.PostReserveVenue(VenueCode, EventDate);
+            var reserve = await _venueService.PostReserveVenue(VenueCode, EventDate);
 
 
             if (reserve == null)
@@ -113,7 +115,7 @@ namespace ThAmCo.Events.Pages.Events
             // Free the previous reservation if it exists
             if (eventToUpdate.ReservationReference != null)
             {
-                await _availabilityService.FreeVenueAsync(eventToUpdate.ReservationReference);
+                await _venueService.FreeVenueAsync(eventToUpdate.ReservationReference);
             }
 
             // Update the reservation reference

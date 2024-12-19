@@ -14,12 +14,12 @@ namespace ThAmCo.Events.Pages.Events
     public class DetailsModel : PageModel
     {
         private readonly ThAmCo.Events.Data.EventsDbContext _context;
-        private readonly AvailabilityService _availabilityService;
+        private readonly VenueService _venueService;
 
-        public DetailsModel(ThAmCo.Events.Data.EventsDbContext context, AvailabilityService availabilityService)
+        public DetailsModel(ThAmCo.Events.Data.EventsDbContext context, VenueService venueService)
         {
             _context = context;
-            _availabilityService = availabilityService;
+            _venueService = venueService ;
             Guests = new List<ThAmCo.Events.Data.Guest>();
             Staffs = new List<ThAmCo.Events.Data.Staff>();
         }
@@ -84,9 +84,9 @@ namespace ThAmCo.Events.Pages.Events
                     StaffsCount = eventStaffs.Count;
                 }
 
-                var venueCode = await _availabilityService.GetVenueCodeAsync(Event.ReservationReference);
+                var venueCode = Event.ReservationReference != null ? await _venueService.GetVenueCodeAsync(Event.ReservationReference) : "Not Known";
 
-                var venueInfo = await _availabilityService.GetVenueDetailsAsync(venueCode);
+                var venueInfo = await _venueService.GetVenueDetailsAsync(venueCode);
 
                 Venue = new List<ThAmCo.Events.ViewModels.VenueDetailsVM>
                  {

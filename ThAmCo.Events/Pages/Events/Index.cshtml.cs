@@ -16,12 +16,12 @@ namespace ThAmCo.Events.Pages.Events
     public class IndexModel : PageModel
     {
         private readonly ThAmCo.Events.Data.EventsDbContext _context;
-        private readonly ThAmCo.Events.Services.AvailabilityService _availabilityService;
+        private readonly ThAmCo.Events.Services.VenueService _venueService;
 
-        public IndexModel(ThAmCo.Events.Data.EventsDbContext context, AvailabilityService availabilityService)
+        public IndexModel(ThAmCo.Events.Data.EventsDbContext context, VenueService venueService)
         {
             _context = context;
-            _availabilityService = availabilityService;
+            _venueService = venueService ;
         }
 
         public IList<ThAmCo.Events.ViewModels.EventIndexVM> Event { get; set; } = default!;
@@ -33,14 +33,16 @@ namespace ThAmCo.Events.Pages.Events
 
             foreach (var e in events)
             {
-                var venueInfo = await _availabilityService.GetVenueCodeAsync(e.ReservationReference);
+                var venueInfo = e.ReservationReference != null
+                    ? await _venueService.GetVenueCodeAsync(e.ReservationReference)
+                    : "Not Known";
 
                 var eventVM = new ThAmCo.Events.ViewModels.EventIndexVM
                 {
                     EventId = e.EventId,
                     Title = e.Title,
                     DateAndTime = e.DateAndTime,
-                    ReservationReference = e.ReservationReference,
+                    ReservationReference = e.ReservationReference ?? "Not Known",
                     GuestCount = ThAmCo.Events.Data.GuestBooking.GetGuestCount(_context, e.EventId),
                     VenueCode = venueInfo
                 };

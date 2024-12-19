@@ -15,12 +15,12 @@ namespace ThAmCo.Events.Pages.Events
     public class DeleteModel : PageModel
     {
         private readonly ThAmCo.Events.Data.EventsDbContext _context;
-        private readonly AvailabilityService _availabilityService;
+        private readonly VenueService _venueService;
 
-        public DeleteModel(ThAmCo.Events.Data.EventsDbContext context, AvailabilityService availabilityService)
+        public DeleteModel(ThAmCo.Events.Data.EventsDbContext context, VenueService venueService)
         {
             _context = context;
-            _availabilityService = availabilityService;
+            _venueService = venueService;
         }
 
         [BindProperty]
@@ -63,7 +63,7 @@ namespace ThAmCo.Events.Pages.Events
                 _context.Staffings.RemoveRange(staffingsToDelete);
 
                 // Free the venue
-                _availabilityService.FreeVenueAsync(eventToDelete.ReservationReference);
+                await _venueService.FreeVenueAsync(eventToDelete.ReservationReference);
 
                 // Save changes
                 await _context.SaveChangesAsync();
