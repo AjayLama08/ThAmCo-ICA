@@ -8,5 +8,6 @@
         public string? ReservationReference { get; set; }
         public int GuestCount { get; set; }
         public string VenueCode { get; set; } = string.Empty;
+        public bool IsStaffingSufficient { get; set; }
     }
 }

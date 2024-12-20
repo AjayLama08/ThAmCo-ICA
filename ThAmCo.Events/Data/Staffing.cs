@@ -25,5 +25,10 @@ namespace ThAmCo.Events.Data
         //Navigation property with Staff class
         public Staff? Staff { get; set; }
 
+        public static int GetStaffCount(EventsDbContext context, int eventId)
+        {
+            return context.Staffings.Count(s => s.EventId == eventId);
+        }
+
     }
 }

@@ -21,15 +21,21 @@ namespace ThAmCo.Events.Pages.Events
         public IndexModel(ThAmCo.Events.Data.EventsDbContext context, VenueService venueService)
         {
             _context = context;
-            _venueService = venueService ;
+            _venueService = venueService;
         }
 
-        public IList<ThAmCo.Events.ViewModels.EventIndexVM> Event { get; set; } = default!;
+        public List<ThAmCo.Events.ViewModels.EventIndexVM> Event { get; set; } = default!;
+        public int StaffCount { get; set; }
+        public int GuestCount { get; set; }
+        public string HasSufficientStaff { get; set; }
+
 
         public async Task OnGetAsync()
         {
-            var events = await _context.Events.ToListAsync();
+            var events = await _context.Events.Include(e => e.Staffings).ToListAsync();
             Event = new List<ThAmCo.Events.ViewModels.EventIndexVM>();
+
+            bool allStaffSufficient = true; // Assume all are sufficient initially
 
             foreach (var e in events)
             {
@@ -37,17 +43,40 @@ namespace ThAmCo.Events.Pages.Events
                     ? await _venueService.GetVenueCodeAsync(e.ReservationReference)
                     : "Not Known";
 
+                GuestCount = ThAmCo.Events.Data.GuestBooking.GetGuestCount(_context, e.EventId);
+                StaffCount = ThAmCo.Events.Data.Staffing.GetStaffCount(_context, e.EventId);
+
+                var isSufficient = StaffPerGuest(StaffCount, GuestCount);
+
+                if (!isSufficient)
+                {
+                    allStaffSufficient = false; // Flag insufficient staffing
+                }
+
                 var eventVM = new ThAmCo.Events.ViewModels.EventIndexVM
                 {
                     EventId = e.EventId,
                     Title = e.Title,
                     DateAndTime = e.DateAndTime,
                     ReservationReference = e.ReservationReference ?? "Not Known",
-                    GuestCount = ThAmCo.Events.Data.GuestBooking.GetGuestCount(_context, e.EventId),
-                    VenueCode = venueInfo
+                    GuestCount = GuestCount,
+                    VenueCode = venueInfo,
+                    IsStaffingSufficient = isSufficient
                 };
+
                 Event.Add(eventVM);
             }
+
+            // Set HasSufficientStaff after checking all events
+            HasSufficientStaff = allStaffSufficient ? "Yes" : "⚠️ Warning: No";
+        }
+
+
+        public bool StaffPerGuest(int staffCount, int guestCount)
+        {
+            return staffCount > (guestCount / 10.0);
         }
     }
 }
+
+

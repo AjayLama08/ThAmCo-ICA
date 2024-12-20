@@ -7,55 +7,48 @@
 
 <h1>Events</h1>
 <p>
-    <a asp-page="Create">Create New</a>
+    <a class="btn btn-primary" asp-page="Create">Create New</a>
 </p>
-<table class="table table-striped datatable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Event[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event[0].DateAndTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event[0].ReservationReference)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event[0].VenueCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event[0].GuestCount)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Event)
-        {
+<div class="table-responsive">
+    <table class="table table-striped table-bordered text-center align-middle">
+        <thead class="table-dark">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateAndTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReservationReference)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VenueCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GuestCount)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.EventId">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.EventId">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.EventId">Delete</a> |
-                    <a asp-page="./ReserveVenue" asp-route-id="@item.EventId">Reserve Venue</a>
-                </td>
+                <th>@Html.DisplayNameFor(model => model.Event[0].Title)</th>
+                <th>@Html.DisplayNameFor(model => model.Event[0].DateAndTime)</th>
+                <th>@Html.DisplayNameFor(model => model.Event[0].ReservationReference)</th>
+                <th>@Html.DisplayNameFor(model => model.Event[0].VenueCode)</th>
+                <th>@Html.DisplayNameFor(model => model.Event[0].GuestCount)</th>
+                <th>HasSufficientStaff?</th>
+                <th>Actions</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Event)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DateAndTime)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ReservationReference)</td>
+                    <td>@Html.DisplayFor(modelItem => item.VenueCode)</td>
+                    <td>@Html.DisplayFor(modelItem => item.GuestCount)</td>
+                    <td>@(item.IsStaffingSufficient ? "Yes" : "⚠️ Warning: No")</td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-primary" asp-page="./Edit" asp-route-id="@item.EventId">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                        <a class="btn btn-sm btn-outline-info" asp-page="./Details" asp-route-id="@item.EventId">
+                            <i class="bi bi-info-circle"></i> Details
+                        </a>
+                        <a class="btn btn-sm btn-outline-danger" asp-page="./Delete" asp-route-id="@item.EventId">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                        <a class="btn btn-sm btn-outline-success" asp-page="./ReserveVenue" asp-route-id="@item.EventId">
+                            <i class="bi bi-building"></i> Reserve Venue
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-    </tbody>
-</table>
+</div>
