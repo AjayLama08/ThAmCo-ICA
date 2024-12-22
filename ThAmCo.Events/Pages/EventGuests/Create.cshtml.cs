@@ -20,27 +20,41 @@ namespace ThAmCo.Events.Pages.EventGuests
             _context = context;
         }
 
-        public IActionResult OnGet()
+        [BindProperty]
+        public GuestBooking GuestBooking { get; set; } = default!;
+
+
+        public IActionResult OnGet(int? eventId)
         {
+            GuestBooking = new GuestBooking
+            {
+                EventId = eventId ?? 0
+            };
             ViewData["EventId"] = new SelectList(_context.Events, "EventId", "Title");
             ViewData["GuestId"] = new SelectList(_context.Guests.Select(g => new { g.GuestId, FullName = g.FirstName + " " + g.LastName }), "GuestId", "FullName");
             return Page();
         }
 
-        [BindProperty]
-        public GuestBooking GuestBooking { get; set; } = default!;
-
         public async Task<IActionResult> OnPostAsync()
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
+
+            var existingGuest = await _context.GuestBookings.FirstOrDefaultAsync(gb => gb.GuestId == GuestBooking.GuestId && gb.EventId == GuestBooking.EventId);
+            if(existingGuest != null)
             {
+                ModelState.AddModelError(string.Empty, "This guest is already booked in for the selected event.");
+                ViewData["EventId"] = new SelectList(_context.Events, "EventId", "Title");
+                ViewData["GuestId"] = new SelectList(_context.Guests.Select(g => new { g.GuestId, FullName = g.FirstName + " " + g.LastName }), "GuestId", "FullName");
                 return Page();
             }
 
             _context.GuestBookings.Add(GuestBooking);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Events/Details", new { id = GuestBooking.EventId });
         }
     }
 }

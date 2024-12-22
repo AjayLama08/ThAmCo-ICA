@@ -20,8 +20,12 @@ namespace ThAmCo.Events.Pages.EventStaffs
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(int? eventId)
         {
+            Staffing = new Staffing
+            {
+                EventId = eventId ?? 0
+            };
             ViewData["EventId"] = new SelectList(_context.Events, "EventId", "Title");
             ViewData["StaffId"] = new SelectList(_context.Staffs.Select(s => new { s.StaffId, FullName = s.FirstName + " " + s.LastName }), "StaffId", "FullName");
             return Page();
@@ -37,15 +41,17 @@ namespace ThAmCo.Events.Pages.EventStaffs
                 return Page();
             }
 
-            //// Check if the staff is already assigned to the event
-            //var existingStaffing = _context.Staffings
-            //    .FirstOrDefault(s => s.StaffId == Staffing.StaffId && s.EventId == Staffing.EventId);
+            // Check if the staff is already assigned to the event
+            var existingStaffing = _context.Staffings
+                .FirstOrDefault(s => s.StaffId == Staffing.StaffId && s.EventId == Staffing.EventId);
 
-            //if (existingStaffing != null)
-            //{
-            //    ModelState.AddModelError(string.Empty, "This staff is already assigned to the event.");
-            //    return Page();
-            //}
+            if (existingStaffing != null)
+            {
+                ModelState.AddModelError(string.Empty, "This staff is already assigned to the event.");
+                ViewData["EventId"] = new SelectList(_context.Events, "EventId", "Title");
+                ViewData["StaffId"] = new SelectList(_context.Staffs.Select(s => new { s.StaffId, FullName = s.FirstName + " " + s.LastName }), "StaffId", "FullName");
+                return Page();
+            }
 
             _context.Staffings.Add(Staffing);
             await _context.SaveChangesAsync();

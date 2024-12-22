@@ -74,7 +74,7 @@ namespace ThAmCo.Events.Pages.Events
 
         public bool StaffPerGuest(int staffCount, int guestCount)
         {
-            return staffCount > (guestCount / 10.0);
+            return staffCount >= (guestCount / 10.0);
         }
     }
 }

@@ -2,36 +2,48 @@
 @model ThAmCo.Events.Pages.EventGuests.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Guest Booking";
 }
 
-<h1>Create</h1>
+<h1 class="mb-4">Create Guest Booking</h1>
 
-<h4>GuestBooking</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="GuestBooking.EventId" class="control-label"></label>
-                <select asp-for="GuestBooking.EventId" class ="form-control" asp-items="ViewBag.EventId"></select>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h4 class="card-title">Guest Booking Details</h4>
+        <hr />
+        <form method="post" class="needs-validation">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Event Dropdown -->
+            <div class="form-group mb-3">
+                <label asp-for="GuestBooking.EventId" class="form-label"></label>
+                <select asp-for="GuestBooking.EventId" class="form-select" asp-items="ViewBag.EventId"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="GuestBooking.GuestId" class="control-label"></label>
-                <select asp-for="GuestBooking.GuestId" class ="form-control" asp-items="ViewBag.GuestId"></select>
+
+            <!-- Guest Dropdown -->
+            <div class="form-group mb-3">
+                <label asp-for="GuestBooking.GuestId" class="form-label"></label>
+                <select asp-for="GuestBooking.GuestId" class="form-select" asp-items="ViewBag.GuestId"></select>
             </div>
+
+            <!-- Submit Button -->
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary w-100">Create</button>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
+<!-- Back to Event Details Link -->
+<div class="mt-3">
+    <a class="btn btn-outline-secondary" asp-page="/Events/Details"
+       asp-route-id="@(Model.GuestBooking?.EventId > 0 ? Model.GuestBooking.EventId : null)">
+        <i class="bi bi-arrow-left"></i> Back to Event Details
+    </a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

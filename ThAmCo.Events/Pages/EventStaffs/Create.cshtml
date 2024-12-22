@@ -2,34 +2,42 @@
 @model ThAmCo.Events.Pages.EventStaffs.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Staffing";
 }
 
-<h1>Create</h1>
+<h1 class="mb-4">Create Staffing</h1>
 
-<h4>Staffing</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Assign Staff to Event</h4>
+        <hr />
+
         <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
             <div class="form-group">
-                <label asp-for="Staffing.EventId" class="control-label"></label>
+                <label asp-for="Staffing.EventId" class="control-label">Event</label>
                 <select asp-for="Staffing.EventId" class="form-control" asp-items="ViewBag.EventId"></select>
+                <span asp-validation-for="Staffing.EventId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Staffing.StaffId" class="control-label"></label>
+                <label asp-for="Staffing.StaffId" class="control-label">Staff</label>
                 <select asp-for="Staffing.StaffId" class="form-control" asp-items="ViewBag.StaffId"></select>
+                <span asp-validation-for="Staffing.StaffId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+
+            <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
+<div class="mt-3">
+    <a asp-page="/Events/Details" asp-route-id="@(Model.Staffing?.EventId > 0 ? Model.Staffing.EventId : null)" class="btn btn-secondary">
+        <i class="bi bi-arrow-left-circle"></i> Back to Event Details
+    </a>
 </div>
 
 @section Scripts {

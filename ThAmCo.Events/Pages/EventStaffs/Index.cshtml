@@ -2,38 +2,38 @@
 @model ThAmCo.Events.Pages.EventStaffs.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Event Staffs";
 }
 
-<h1>Event Staffs</h1>
+<h1 class="mb-4">Event Staffs</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+<div class="mb-3">
+    <a asp-page="Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Create New Staff Assignment
+    </a>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Staffing[0].Event)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Staffing[0].Staff)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.Staffing[0].Event)</th>
+            <th>@Html.DisplayNameFor(model => model.Staffing[0].Staff)</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Staffing) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Staff.FirstName)
-            </td>
-            <td>
-            <a asp-page="./Remove" asp-route-EventId="@item.EventId" asp-route-StaffId="@item.StaffId">Remove</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Staffing)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Event.Title)</td>
+                <td>@Html.DisplayFor(modelItem => item.Staff.FirstName)</td>
+                <td>
+                    <a asp-page="./Remove" asp-route-EventId="@item.EventId" asp-route-StaffId="@item.StaffId" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i> Remove
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
