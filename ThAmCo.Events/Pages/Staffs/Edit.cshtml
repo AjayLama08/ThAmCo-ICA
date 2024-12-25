@@ -2,45 +2,54 @@
 @model ThAmCo.Events.Pages.Staffs.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Staff";
 }
 
-<h1>Edit</h1>
+<h1 class="mb-4">Edit Staff</h1>
 
-<h4>Staff</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Hidden Field for Staff ID -->
             <input type="hidden" asp-for="Staff.StaffId" />
-            <div class="form-group">
-                <label asp-for="Staff.FirstName" class="control-label"></label>
+
+            <!-- First Name -->
+            <div class="form-group mb-3">
+                <label asp-for="Staff.FirstName" class="form-label"></label>
                 <input asp-for="Staff.FirstName" class="form-control" />
                 <span asp-validation-for="Staff.FirstName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Staff.LastName" class="control-label"></label>
+
+            <!-- Last Name -->
+            <div class="form-group mb-3">
+                <label asp-for="Staff.LastName" class="form-label"></label>
                 <input asp-for="Staff.LastName" class="form-control" />
                 <span asp-validation-for="Staff.LastName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Staff.IsFirstAider" class="control-label"></label>
-                <input asp-for="Staff.IsFirstAider" class="form-control" />
+
+            <!-- Is First Aider -->
+            <div class="form-group mb-4">
+                <label asp-for="Staff.IsFirstAider" class="form-label"></label>
+                <select asp-for="Staff.IsFirstAider" class="form-control">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
                 <span asp-validation-for="Staff.IsFirstAider" class="text-danger"></span>
             </div>
 
+            <!-- Save Button -->
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-page="./Index" class="btn btn-secondary ms-2">Cancel</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

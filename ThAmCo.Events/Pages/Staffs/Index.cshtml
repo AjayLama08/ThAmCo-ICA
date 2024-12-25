@@ -2,16 +2,19 @@
 @model ThAmCo.Events.Pages.Staffs.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Staff List";
 }
 
-<h1>Staffs</h1>
+<h1 class="mb-4">Staffs</h1>
 
+<!-- Create New Staff Button -->
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-primary">Create New Staff</a>
 </p>
-<table class="table">
-    <thead>
+
+<!-- Staffs Table -->
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Staff[0].FirstName)
@@ -19,24 +22,35 @@
             <th>
                 @Html.DisplayNameFor(model => model.Staff[0].LastName)
             </th>
-            <th></th>
+            <th class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Staff) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.StaffId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.StaffId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.StaffId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Staff)
+        {
+            <tr>
+                <!-- First Name -->
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+
+                <!-- Last Name -->
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+
+                <!-- Action Buttons -->
+                <td class="text-center">
+                    <a class="btn btn-sm btn-outline-primary" asp-page="./Edit" asp-route-id="@item.StaffId">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <a class="btn btn-sm btn-outline-info" asp-page="./Details" asp-route-id="@item.StaffId">
+                        <i class="bi bi-info-circle"></i> Details
+                    </a>
+                    <a class="btn btn-sm btn-outline-danger" asp-page="./Delete" asp-route-id="@item.StaffId">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+            </tr>
+        }
     </tbody>
 </table>

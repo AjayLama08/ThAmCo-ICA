@@ -2,44 +2,56 @@
 @model ThAmCo.Events.Pages.Guest.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Guest";
 }
 
-<h1>Edit</h1>
+<h1 class="mb-4">Edit Guest</h1>
 
-<h4>Guest</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Guest Details</h4>
+        <hr />
+
+        <!-- Edit Form -->
         <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Hidden Guest ID -->
             <input type="hidden" asp-for="Guest.GuestId" />
-            <div class="form-group">
-                <label asp-for="Guest.FirstName" class="control-label"></label>
-                <input asp-for="Guest.FirstName" class="form-control" />
+
+            <!-- First Name -->
+            <div class="form-group mb-3">
+                <label asp-for="Guest.FirstName" class="form-label">First Name</label>
+                <input asp-for="Guest.FirstName" class="form-control" placeholder="Enter first name" />
                 <span asp-validation-for="Guest.FirstName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Guest.LastName" class="control-label"></label>
-                <input asp-for="Guest.LastName" class="form-control" />
+
+            <!-- Last Name -->
+            <div class="form-group mb-3">
+                <label asp-for="Guest.LastName" class="form-label">Last Name</label>
+                <input asp-for="Guest.LastName" class="form-control" placeholder="Enter last name" />
                 <span asp-validation-for="Guest.LastName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Guest.Email" class="control-label"></label>
-                <input asp-for="Guest.Email" class="form-control" />
+
+            <!-- Email -->
+            <div class="form-group mb-3">
+                <label asp-for="Guest.Email" class="form-label">Email</label>
+                <input asp-for="Guest.Email" class="form-control" placeholder="Enter email address" />
                 <span asp-validation-for="Guest.Email" class="text-danger"></span>
             </div>
+
+            <!-- Save Button -->
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-page="./Index" class="btn btn-secondary ms-2">Cancel</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

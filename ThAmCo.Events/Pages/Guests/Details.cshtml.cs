@@ -23,7 +23,8 @@ namespace ThAmCo.Events.Pages.Guest
         public ThAmCo.Events.Data.Guest Guest { get; set; } = default!;
         public List<GuestBooking> GuestBookings { get; set; }
         public List<Event> Events { get; set; }
-       
+        public int eventCount { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -45,6 +46,7 @@ namespace ThAmCo.Events.Pages.Guest
                 Guest = guest;
                 GuestBookings = guest.GuestBookings;
                 Events = guest.GuestBookings.Select(gb => gb.Event).ToList();
+                eventCount = Events.Count;
                 return Page();
             }
         }

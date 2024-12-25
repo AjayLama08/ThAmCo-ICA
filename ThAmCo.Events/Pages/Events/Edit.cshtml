@@ -17,41 +17,48 @@
 
             <input type="hidden" asp-for="Event.EventId" />
 
+            <!-- Event Type -->
             <div class="form-group mb-3">
-                <label asp-for="Event.EventTypeId" class="control-label"></label>
+                <label asp-for="Event.EventTypeId" class="control-label">Event Type</label>
                 <input asp-for="Event.EventTypeId" class="form-control" readonly />
                 <span asp-validation-for="Event.EventTypeId" class="text-danger"></span>
             </div>
 
+            <!-- Title -->
             <div class="form-group mb-3">
-                <label asp-for="Event.Title" class="control-label"></label>
-                <input asp-for="Event.Title" class="form-control" />
+                <label asp-for="Event.Title" class="control-label">Event Title</label>
+                <input asp-for="Event.Title" class="form-control" placeholder="Enter event title" />
                 <span asp-validation-for="Event.Title" class="text-danger"></span>
             </div>
 
+            <!-- Date and Time -->
             <div class="form-group mb-3">
-                <label asp-for="Event.DateAndTime" class="control-label"></label>
+                <label asp-for="Event.DateAndTime" class="control-label">Date and Time</label>
                 <input asp-for="Event.DateAndTime" class="form-control" readonly />
                 <span asp-validation-for="Event.DateAndTime" class="text-danger"></span>
             </div>
 
+            <!-- Food Booking -->
             <div class="form-group mb-3">
-                <label asp-for="Event.FoodBookingId" class="control-label"></label>
-                <input asp-for="Event.FoodBookingId" class="form-control" />
+                <label asp-for="Event.FoodBookingId" class="control-label">Food Booking ID</label>
+                <input asp-for="Event.FoodBookingId" class="form-control" placeholder="Enter food booking ID" />
                 <span asp-validation-for="Event.FoodBookingId" class="text-danger"></span>
             </div>
 
+            <!-- Reservation Reference -->
             <div class="form-group mb-3">
-                <label asp-for="Event.ReservationReference" class="control-label"></label>
-                <input asp-for="Event.ReservationReference" class="form-control" />
+                <label asp-for="Event.ReservationReference" class="control-label">Reservation Reference</label>
+                <input asp-for="Event.ReservationReference" class="form-control" readonly />
                 <span asp-validation-for="Event.ReservationReference" class="text-danger"></span>
             </div>
 
+            <!-- Save Button -->
             <div class="form-group d-flex justify-content-end mb-3">
                 <input type="submit" value="Save Changes" class="btn btn-primary" />
             </div>
         </form>
 
+        <!-- Back to List Button -->
         <div class="mt-3">
             <a asp-page="./Index" class="btn btn-secondary">
                 <i class="bi bi-arrow-left-circle"></i> Back to List

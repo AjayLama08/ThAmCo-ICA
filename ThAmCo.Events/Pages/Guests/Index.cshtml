@@ -2,44 +2,59 @@
 @model ThAmCo.Events.Pages.Guest.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Guest List";
 }
 
-<h1>Guests</h1>
+<h1 class="mb-4">Guest List</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<p>
-    <a asp-page="Anonymise">Anonymise Guest</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Guest[0].FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Guest[0].LastName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Guest) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.GuestId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.GuestId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.GuestId">Delete</a> 
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<!-- Action Buttons -->
+<div class="mb-3">
+    <a asp-page="Create" class="btn btn-primary">
+        <i class="bi bi-person-plus"></i> Create New Guest
+    </a>
+    <a asp-page="Anonymise" class="btn btn-warning ms-2">
+        <i class="bi bi-shield-lock"></i> Anonymise Guest
+    </a>
+</div>
+
+<!-- Guests Table -->
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Guest[0].FirstName)</th>
+                <th>@Html.DisplayNameFor(model => model.Guest[0].LastName)</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Guest.Any())
+            {
+                @foreach (var item in Model.Guest)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-outline-primary" asp-page="./Edit" asp-route-id="@item.GuestId">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <a class="btn btn-sm btn-outline-info" asp-page="./Details" asp-route-id="@item.GuestId">
+                                <i class="bi bi-info-circle"></i> Details
+                            </a>
+                            <a class="btn btn-sm btn-outline-danger" asp-page="./Delete" asp-route-id="@item.GuestId">
+                                <i class="bi bi-trash"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" class="text-center">No guests found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
