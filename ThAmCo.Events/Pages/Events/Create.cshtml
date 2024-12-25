@@ -14,6 +14,7 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
+            <!-- Event Type -->
             <div class="form-group mb-3">
                 <label asp-for="Event.EventTypeId" class="form-label"></label>
                 <select asp-for="Event.EventTypeId" asp-items="Model.EventTypeItems" class="form-select">
@@ -22,21 +23,24 @@
                 <span asp-validation-for="Event.EventTypeId" class="text-danger"></span>
             </div>
 
+            <!-- Title -->
             <div class="form-group mb-3">
                 <label asp-for="Event.Title" class="form-label"></label>
                 <input asp-for="Event.Title" class="form-control" placeholder="Enter event title" />
                 <span asp-validation-for="Event.Title" class="text-danger"></span>
             </div>
 
+            <!-- DateAndTime -->
             <div class="form-group mb-3">
                 <label asp-for="Event.DateAndTime" class="form-label"></label>
                 <input asp-for="Event.DateAndTime" class="form-control" type="datetime-local" />
                 <span asp-validation-for="Event.DateAndTime" class="text-danger"></span>
             </div>
 
+            <!-- Buttons -->
             <div class="d-flex justify-content-start">
                 <button type="submit" class="btn btn-primary me-2">
-                    <i class="bi bi-save"></i> Create
+                    <i class="bi bi-save"></i> Create Event
                 </button>
                 <a asp-page="Index" class="btn btn-secondary">
                     <i class="bi bi-arrow-left-circle"></i> Back to List

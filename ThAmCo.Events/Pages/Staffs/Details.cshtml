@@ -76,3 +76,9 @@
 </table>
 
 <h5 class="text-muted mt-3">Total Events: @Model.eventCount</h5>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

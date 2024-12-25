@@ -9,12 +9,16 @@
 <div>
     <hr />
     <dl class="row">
+
+        <!--Event Title-->
         <dt class="col-sm-3"><strong>@Html.DisplayNameFor(model => model.Event.Title):</strong></dt>
         <dd class="col-sm-9">@Html.DisplayFor(model => model.Event.Title)</dd>
 
+        <!--Event Date and Time-->
         <dt class="col-sm-3"><strong>@Html.DisplayNameFor(model => model.Event.DateAndTime):</strong></dt>
         <dd class="col-sm-9">@Html.DisplayFor(model => model.Event.DateAndTime)</dd>
 
+        <!--Reservation Reference-->
         <dt class="col-sm-3"><strong>@Html.DisplayNameFor(model => model.Event.ReservationReference):</strong></dt>
         <dd class="col-sm-9">
             @if (string.IsNullOrEmpty(Model.Event.ReservationReference))
