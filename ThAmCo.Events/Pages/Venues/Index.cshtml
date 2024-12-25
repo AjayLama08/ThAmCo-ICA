@@ -4,67 +4,101 @@
     ViewData["Title"] = "Available Venues";
 }
 
-<h2>Available Venues</h2>
+<h2 class="text-center mt-4">Available Venues</h2>
 
-<form method="post" asp-page-handler="Filter">
-    <div class="form-group">
-        <label asp-for="EventType" class="control-label">Event Type</label>
-        <input asp-for="EventType" class="form-control" />
+<div class="container my-5">
+    <!-- Filter Form -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Filter Venues</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" asp-page-handler="Filter">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label asp-for="EventType" class="form-label">Event Type</label>
+                        <select asp-for="EventType" class="form-select" asp-items="Model.EventTypeItems">
+                            <option value="" disabled selected>Select an event type</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="BeginDate" class="form-label">Begin Date</label>
+                        <input asp-for="BeginDate" class="form-control" type="date" />
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="EndDate" class="form-label">End Date</label>
+                        <input asp-for="EndDate" class="form-control" type="date" />
+                    </div>
+                </div>
+                <div class="text-end mt-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="BeginDate" class="control-label">Begin Date</label>
-        <input asp-for="BeginDate" class="form-control" type="date" />
-    </div>
-    <div class="form-group">
-        <label asp-for="EndDate" class="control-label">End Date</label>
-        <input asp-for="EndDate" class="form-control" type="date" />
-    </div>
-    <button type="submit" class="btn btn-primary">Filter</button>
-</form>
 
-@if (Model.AvailableVenues != null && Model.AvailableVenues.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Venue Name</th>
-                <th>Venue Code</th>
-                <th>Date</th>
-                <th>Capacity</th>
-                <th>Cost Per Hour</th>
-                <th>Select</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var venue in Model.AvailableVenues)
-            {
-                <tr>
-                    <td>@venue.VenueName</td>
-                    <td>@venue.VenueCode</td>
-                    <td>@venue.Date.ToShortDateString()</td>
-                    <td>@venue.Capacity</td>
-                    <td>@venue.CostPerHour</td>
-                    <td>
-                        <form method="post" asp-page-handler="CreateEvent">
-                            <input type="hidden" name="SelectedVenueDate" value="@venue.Date.ToString("yyyy-MM-dd")" />
-                            <div class="form-group">
-                                <input type="text" name="EventTitle" placeholder="Event Title" class="form-control" required />
-                                <span class="text-danger" asp-validation-for="EventTitle"></span>
-                            </div>
-                            <button type="submit" class="btn btn-success">Create Event</button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No available venues found.</p>
-}
+    <!-- Venues Table -->
+    @if (Model.AvailableVenues != null && Model.AvailableVenues.Any())
+    {
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Available Venues</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered text-center align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>S.N.</th>
+                                <th>Venue Name</th>
+                                <th>Venue Code</th>
+                                <th>Date</th>
+                                <th>Capacity</th>
+                                <th>Cost Per Hour</th>
+                                <th>Select</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.AvailableVenues.Count; i++)
+                            {
+                                var venue = Model.AvailableVenues[i];
+                                <tr>
+                                    <td>@(i + 1)</td>
+                                    <td>@venue.VenueName</td>
+                                    <td>@venue.VenueCode</td>
+                                    <td>@venue.Date.ToShortDateString()</td>
+                                    <td>@venue.Capacity</td>
+                                    <td>£@venue.CostPerHour</td>
+                                    <td>
+                                        <form method="post" asp-page-handler="CreateEvent">
+                                            <input type="hidden" name="SelectedVenueDate" value="@venue.Date.ToString("yyyy-MM-dd")" />
+                                            <div class="form-group">
+                                                <input type="text" name="EventTitle" placeholder="Event Title" class="form-control mb-2" required />
+                                                <span class="text-danger" asp-validation-for="EventTitle"></span>
+                                            </div>
+                                            <button type="submit" class="btn btn-success w-100">
+                                                <i class="fas fa-calendar-plus"></i> Create Event
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            <i class="fas fa-exclamation-circle"></i> No available venues found. Please adjust your filters.
+        </div>
+    }
+</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 }
