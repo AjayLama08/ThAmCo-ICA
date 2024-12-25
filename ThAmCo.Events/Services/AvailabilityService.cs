@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using Microsoft.DotNet.MSIdentity.Shared;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using ThAmCo.Events;
@@ -51,6 +52,20 @@ namespace ThAmCo.Events.Services
             }
             return items; // Returning the list of Availability items
         }
-    }
 
+        // Asynchronous method to get a list of available venues
+        public async Task<List<AvailabilityDTO>> GetAvailableVenues(DateTime beginDate, DateTime endDate, string eventType)
+            { 
+            // Construct the request URL based on the provided parameters
+            var requestUrl = $"{ServiceBaseUrl}{AvailabilityEndPoint}?beginDate={beginDate.ToString("yyyy-MM-dd")}&endDate={endDate.ToString("yyyy-MM-dd")}&eventType={eventType}";
+
+            var response = await _httpClient.GetAsync(requestUrl);
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+             return JsonSerializer.Deserialize<List<AvailabilityDTO>>(content);
+            }
+        }
 }
+
+

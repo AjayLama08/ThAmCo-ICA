@@ -14,11 +14,6 @@ namespace ThAmCo.Events.Pages.Events
         private readonly AvailabilityService _availabilityService;
         private readonly VenueService _venueService;
 
-        public List<VenueListItem> AvailableVenues { get; set; }
-
-        [BindProperty]
-        public ReserveVenueVM ReserveVenue { get; set; }
-
         public ReserveVenueModel(ThAmCo.Events.Data.EventsDbContext context, AvailabilityService availabilityService, VenueService venueService)
         {
             _context = context;
@@ -26,6 +21,10 @@ namespace ThAmCo.Events.Pages.Events
             _venueService = venueService;
             AvailableVenues = new List<VenueListItem>();
         }
+        public List<VenueListItem> AvailableVenues { get; set; }
+
+        [BindProperty]
+        public ReserveVenueVM ReserveVenue { get; set; }
 
         public EventVM Event { get; set; }
 

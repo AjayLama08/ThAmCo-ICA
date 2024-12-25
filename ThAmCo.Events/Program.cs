@@ -5,7 +5,8 @@ using ThAmCo.Events.Data;
 using ThAmCo.Events.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("IdentityContextConnection") ?? throw new InvalidOperationException("Connection string 'IdentityContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("IdentityContextConnection") 
+                        ?? throw new InvalidOperationException("Connection string 'IdentityContextConnection' not found.");
 
 // Register the HTTP Client and the EventTypeService for dependency injection
 builder.Services.AddHttpClient<EventTypeService>();

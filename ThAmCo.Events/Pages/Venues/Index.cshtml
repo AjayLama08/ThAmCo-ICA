@@ -1,0 +1,70 @@
+﻿@page
+@model ThAmCo.Events.Pages.Venues.IndexModel
+@{
+    ViewData["Title"] = "Available Venues";
+}
+
+<h2>Available Venues</h2>
+
+<form method="post" asp-page-handler="Filter">
+    <div class="form-group">
+        <label asp-for="EventType" class="control-label">Event Type</label>
+        <input asp-for="EventType" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="BeginDate" class="control-label">Begin Date</label>
+        <input asp-for="BeginDate" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="EndDate" class="control-label">End Date</label>
+        <input asp-for="EndDate" class="form-control" type="date" />
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+@if (Model.AvailableVenues != null && Model.AvailableVenues.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Venue Name</th>
+                <th>Venue Code</th>
+                <th>Date</th>
+                <th>Capacity</th>
+                <th>Cost Per Hour</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var venue in Model.AvailableVenues)
+            {
+                <tr>
+                    <td>@venue.VenueName</td>
+                    <td>@venue.VenueCode</td>
+                    <td>@venue.Date.ToShortDateString()</td>
+                    <td>@venue.Capacity</td>
+                    <td>@venue.CostPerHour</td>
+                    <td>
+                        <form method="post" asp-page-handler="CreateEvent">
+                            <input type="hidden" name="SelectedVenueDate" value="@venue.Date.ToString("yyyy-MM-dd")" />
+                            <div class="form-group">
+                                <input type="text" name="EventTitle" placeholder="Event Title" class="form-control" required />
+                                <span class="text-danger" asp-validation-for="EventTitle"></span>
+                            </div>
+                            <button type="submit" class="btn btn-success">Create Event</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No available venues found.</p>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
