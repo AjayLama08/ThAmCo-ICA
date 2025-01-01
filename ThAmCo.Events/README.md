@@ -15,17 +15,17 @@ ThAmCo.Events is a .NET 8 project designed to manage events for ThAmCo. This pro
 
 ## Getting Started
 1. Clone the Repository.
-> Open visual studio.
->> Click on the "Clone a repository" button.
->> Enter the repository URL (which is https://github.com/AjayLama08/ThAmCo-ICA/tree/master/ThAmCo.Events in this case).
->> Click on the "Clone" button.
+   - Open visual studio.
+   - Click on the "Clone a repository" button.
+   - Enter the repository URL (which is https://github.com/AjayLama08/ThAmCo-ICA/tree/master/ThAmCo.Events in this case).
+   - Click on the "Clone" button.
 
 ### Setup the Database
 1. Open the integrated terminal in Visual Studio (Tools > NuGet Package Manager > Package Manager Console).
 2. Run the following command to update the Events database:
->> Update-Database -context EventsDbContext
+   - `Update-Database -context EventsDbContext`
 3. Run the following command to update the Identity database:
->> Update-Database -context IdentityDbContext
+   - `Update-Database -context IdentityDbContext`
 
 ### Running the Application
 1. Open the solution in Visual Studio.
