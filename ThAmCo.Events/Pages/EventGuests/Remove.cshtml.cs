@@ -29,7 +29,7 @@ namespace ThAmCo.Events.Pages.EventGuests
             {
                 return NotFound();
             }
-
+            // Get the guest booking
             var guestbooking = await _context.GuestBookings
                 .Include(g => g.Guest)
                 .Include(g => g.Event)
@@ -52,7 +52,7 @@ namespace ThAmCo.Events.Pages.EventGuests
             {
                 return NotFound();
             }
-
+            // Get the guest booking
             var guestbooking = await _context.GuestBookings.FirstOrDefaultAsync(m => m.EventId == eventId && m.GuestId == guestId);
             if (guestbooking != null)
             {

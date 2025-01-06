@@ -57,6 +57,7 @@ namespace ThAmCo.Catering.Controllers
         [HttpGet("{id}/Details")]
         public async Task<ActionResult<ThAmCo.Catering.DTO.FoodItemsInMenuDTO>> GetFoodItemsInMenu(int id)
         {
+            // Find the menu by id
             var menu = await _context.Menus
                 .Include(m => m.MenuFoodItems)
                 .ThenInclude(mfi => mfi.FoodItem)
@@ -66,7 +67,7 @@ namespace ThAmCo.Catering.Controllers
             {
                 return NotFound();
             }
-
+            // Create a DTO object to return
             var foodItemsInMenu = new ThAmCo.Catering.DTO.FoodItemsInMenuDTO
             {
                 MenuId = menu.MenuId,
@@ -136,6 +137,7 @@ namespace ThAmCo.Catering.Controllers
         [HttpPost]
         public async Task<ActionResult<Menu>> PostMenu(ThAmCo.Catering.DTO.MenuDTO menu)
         {
+            // Create a new menu object
             Menu thisMenu = new Menu
             {
                 MenuName = menu.MenuName,

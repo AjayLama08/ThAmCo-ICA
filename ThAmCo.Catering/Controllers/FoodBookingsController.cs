@@ -40,6 +40,7 @@ namespace ThAmCo.Catering.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<FoodBooking>> GetFoodBooking(int id)
         {
+            //Find the food booking by id
             var foodBooking = await _context.FoodBookings.FindAsync(id);
 
             if (foodBooking == null)
@@ -61,11 +62,13 @@ namespace ThAmCo.Catering.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFoodBooking(int id, FoodBooking foodBooking)
         {
+            //Check if the id is the same as the food booking id
             if (id != foodBooking.FoodBookingId)
             {
                 return BadRequest();
             }
 
+            //Set the state of the food booking to modified
             _context.Entry(foodBooking).State = EntityState.Modified;
 
             try
@@ -112,13 +115,15 @@ namespace ThAmCo.Catering.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFoodBooking(int id)
         {
+            //Find the food booking by id
             var foodBooking = await _context.FoodBookings.FindAsync(id);
             if (foodBooking == null)
             {
                 return NotFound();
             }
-
+            //Remove the food booking
             _context.FoodBookings.Remove(foodBooking);
+            //Save the changes
             await _context.SaveChangesAsync();
 
             return NoContent();

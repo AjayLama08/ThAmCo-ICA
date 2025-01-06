@@ -22,6 +22,7 @@ namespace ThAmCo.Events.Pages.Guests
         {
 
         }
+        // Pseudonymise the guest details
         public static string Pseudonymise(string input)
         {
             return "Anonymised_" + input.GetHashCode();

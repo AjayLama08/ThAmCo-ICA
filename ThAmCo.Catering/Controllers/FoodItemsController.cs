@@ -105,6 +105,7 @@ namespace ThAmCo.Catering.Controllers
         [HttpPost]
         public async Task<ActionResult<FoodItem>> PostFoodItem(ThAmCo.Catering.DTO.FoodItemDTO foodItem)
         {
+            // Create a new food item
             FoodItem thisFoodItem = new FoodItem
             {
                 Description = foodItem.Description,

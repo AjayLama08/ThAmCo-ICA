@@ -22,6 +22,7 @@ namespace ThAmCo.Events.Pages.EventGuests
 
         public async Task OnGetAsync(int? id)
         {
+            // Get all the guest bookings
             var eventsContext = _context.GuestBookings.AsQueryable();
 
             if (id != null)

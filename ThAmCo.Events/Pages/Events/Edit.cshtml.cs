@@ -47,7 +47,6 @@ namespace ThAmCo.Events.Pages.Events
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)

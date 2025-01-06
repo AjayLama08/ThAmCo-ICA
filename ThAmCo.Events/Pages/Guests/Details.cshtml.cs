@@ -31,7 +31,7 @@ namespace ThAmCo.Events.Pages.Guest
             {
                 return NotFound();
             }
-
+            // Get the guest details
             var guest = await _context.Guests
                 .Include(g => g.GuestBookings)
                 .ThenInclude(gb => gb.Event)

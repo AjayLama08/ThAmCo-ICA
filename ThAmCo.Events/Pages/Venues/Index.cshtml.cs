@@ -51,13 +51,17 @@ namespace ThAmCo.Events.Pages.Venues
 
         public async Task<IActionResult> OnGetAsync()
         {
+            // Set the default begin date to 1st November 2022
             BeginDate = new DateTime(2022, 11, 1);
+            // Set the default end date to 4 months after the begin date
             EndDate = BeginDate.AddMonths(4);
+            // Set the default event type to WED
             EventType = "WED";
 
             //Popualte event type drop down using service class
             EventTypeItems = await _eventTypeService.GetEventTypeSelectListAsync(); ;
 
+            // Get the list of available venues
             var availableVenues = await _availabilityService.GetAvailabilityListAsync(BeginDate, EndDate, EventType);
             if (availableVenues != null)
             {

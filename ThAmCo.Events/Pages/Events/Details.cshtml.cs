@@ -39,7 +39,7 @@ namespace ThAmCo.Events.Pages.Events
             {
                 return NotFound();
             }
-
+            // Get the event to show details
             var eventForDetails = await _context.Events.FirstOrDefaultAsync(m => m.EventId == id);
             if (eventForDetails == null)
             {
@@ -48,12 +48,14 @@ namespace ThAmCo.Events.Pages.Events
             else
             {
                 Event = eventForDetails;
+                // Get all the guest bookings for the event
                 var eventGuests = await _context.Guests
                     .Include(gb => gb.GuestBookings)
                     .ThenInclude(e => e.Event)
                     .Where(gb => gb.GuestBookings.Any(e => e.EventId == id))
                     .ToListAsync();
 
+                // Get all the staff for the event
                 var eventStaffs = await _context.Staffs
                     .Include(s => s.Staffings)
                     .ThenInclude(e => e.Event)
@@ -84,6 +86,7 @@ namespace ThAmCo.Events.Pages.Events
                     StaffsCount = eventStaffs.Count;
                 }
 
+                // Get the venue details
                 var venueCode = Event.ReservationReference != null ? await _venueService.GetVenueCodeAsync(Event.ReservationReference) : "Not Known";
 
                 var venueInfo = await _venueService.GetVenueDetailsAsync(venueCode);
@@ -104,6 +107,7 @@ namespace ThAmCo.Events.Pages.Events
 
         public async Task<IActionResult> OnPostRegisterAttendanceAsync(int eventId, int guestId)
         {
+            // Get the guest booking
             var guestBooking = await _context.GuestBookings
                 .FirstOrDefaultAsync(gb => gb.EventId == eventId && gb.GuestId == guestId);
 

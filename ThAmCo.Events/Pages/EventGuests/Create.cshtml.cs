@@ -37,11 +37,7 @@ namespace ThAmCo.Events.Pages.EventGuests
 
         public async Task<IActionResult> OnPostAsync()
         {
-            //if (ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
-
+            // Check if the guest is already booked in for the event
             var existingGuest = await _context.GuestBookings.FirstOrDefaultAsync(gb => gb.GuestId == GuestBooking.GuestId && gb.EventId == GuestBooking.EventId);
             if(existingGuest != null)
             {

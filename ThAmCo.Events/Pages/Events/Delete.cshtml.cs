@@ -32,7 +32,7 @@ namespace ThAmCo.Events.Pages.Events
             {
                 return NotFound();
             }
-
+            // Get the event to delete
             var eventToDelete = await _context.Events.FirstOrDefaultAsync(m => m.EventId == id);
 
             if (eventToDelete == null)
@@ -52,8 +52,9 @@ namespace ThAmCo.Events.Pages.Events
             {
                 return NotFound();
             }
-
+            // Get the event to delete
             var eventToDelete = await _context.Events.FindAsync(id);
+            // Get all staffings for the event
             var staffingsToDelete = await _context.Staffings.Where(s => s.EventId == id).ToListAsync();
             if (eventToDelete != null)
             {

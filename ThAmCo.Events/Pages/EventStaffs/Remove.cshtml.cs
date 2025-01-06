@@ -29,7 +29,7 @@ namespace ThAmCo.Events.Pages.EventStaffs
             {
                 return NotFound();
             }
-
+            // Find the staffing record
             var staffing = await _context.Staffings
                 .Include(s => s.Staff)
                 .Include(s => s.Event)
@@ -52,11 +52,12 @@ namespace ThAmCo.Events.Pages.EventStaffs
             {
                 return NotFound();
             }
-
+            // Find the staffing record
             var staffing = await _context.Staffings.FirstOrDefaultAsync(m => m.EventId == eventId && m.StaffId == staffId);
             if (staffing != null)
             {
                 Staffing = staffing;
+                // Remove the staffing record
                 _context.Staffings.Remove(Staffing);
                 await _context.SaveChangesAsync();
             }

@@ -62,6 +62,7 @@ namespace ThAmCo.Catering.Controllers
         [HttpPut("{foodItemId}/{menuId}")]
         public async Task<IActionResult> PutMenuFoodItem(int foodItemId, int menuId, MenuFoodItem menuFoodItem)
         {
+            // Check if the food item and menu id match
             if (foodItemId != menuFoodItem.FoodItemId || menuId != menuFoodItem.MenuId)
             {
                 return BadRequest();
@@ -98,6 +99,7 @@ namespace ThAmCo.Catering.Controllers
         [HttpPost]
         public async Task<ActionResult<MenuFoodItem>> PostMenuFoodItem(ThAmCo.Catering.DTO.MenuFoodItemDTO menuFoodItem)
         {
+            // Create a new menu food item
             MenuFoodItem thisMenuFoodItem = new MenuFoodItem
             {
                 MenuId = menuFoodItem.MenuId,
@@ -138,6 +140,7 @@ namespace ThAmCo.Catering.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteMenuFoodItem(ThAmCo.Catering.DTO.MenuFoodItemDTO menuFoodItemDTO)
         {
+            // Find the menu food item by food item id and menu id
             var menuFoodItem = await _context.MenuFoodItems
                 .FirstOrDefaultAsync(mfi => mfi.FoodItemId == menuFoodItemDTO.FoodItemId && mfi.MenuId == menuFoodItemDTO.MenuId);
 

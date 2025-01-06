@@ -39,6 +39,7 @@ namespace ThAmCo.Events.Pages.Events
 
             foreach (var e in events)
             {
+                // Get the venue code
                 var venueInfo = e.ReservationReference != null
                     ? await _venueService.GetVenueCodeAsync(e.ReservationReference)
                     : "Not Known";

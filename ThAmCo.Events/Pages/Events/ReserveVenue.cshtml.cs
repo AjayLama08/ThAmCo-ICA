@@ -66,6 +66,7 @@ namespace ThAmCo.Events.Pages.Events
 
             /// this code snippet is for demo only - the deployed verion would need a credible collection of venue slots to select from.
             DateTime beginDate = eventToReserve.DateAndTime;
+            //The available venues are only in the next 6 months from the event date
             DateTime endDate = eventToReserve.DateAndTime.AddMonths(6);
             string eventType = eventToReserve.EventTypeId;
 
