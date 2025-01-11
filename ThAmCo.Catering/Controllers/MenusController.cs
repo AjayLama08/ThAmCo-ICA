@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThAmCo.Catering.Data;
+using ThAmCo.Catering.DTO;
 
 namespace ThAmCo.Catering.Controllers
 {
@@ -26,9 +27,17 @@ namespace ThAmCo.Catering.Controllers
         /// <returns></returns>
         // GET: api/Menus
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Menu>>> GetMenus()
+        public async Task<ActionResult<IEnumerable<MenuGetDTO>>> GetMenus()
         {
-            return await _context.Menus.ToListAsync();
+            var menus = await _context.Menus.ToListAsync();
+
+            var menuDto = menus.Select(m => new MenuGetDTO
+            {
+                MenuId = m.MenuId,
+                MenuName = m.MenuName
+            });
+            return Ok(menuDto);
+
         }
 
         /// <summary>
@@ -38,16 +47,21 @@ namespace ThAmCo.Catering.Controllers
         /// <returns></returns>
         // GET: api/Menus/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Menu>> GetMenu(int id)
+        public async Task<ActionResult<MenuGetDTO>> GetMenu(int id)
         {
             var menu = await _context.Menus.FindAsync(id);
+
+            var menuDto = new MenuGetDTO
+            {
+                MenuId = menu.MenuId,
+                MenuName = menu.MenuName
+            };
 
             if (menu == null)
             {
                 return NotFound();
             }
-
-            return menu;
+            return Ok(menuDto);
         }
         /// <summary>
         /// Get food item details in a menu
@@ -72,7 +86,7 @@ namespace ThAmCo.Catering.Controllers
             {
                 MenuId = menu.MenuId,
                 MenuName = menu.MenuName,
-                FoodItems = menu.MenuFoodItems.Select(mfi => new ThAmCo.Catering.DTO.FoodItemDTO
+                FoodItems = menu.MenuFoodItems.Select(mfi => new ThAmCo.Catering.DTO.FoodItemGetDTO
                 {
                     FoodItemId = mfi.FoodItem.FoodItemId,
                     Description = mfi.FoodItem.Description,
@@ -92,7 +106,7 @@ namespace ThAmCo.Catering.Controllers
         // PUT: api/Menus/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMenu(int id, ThAmCo.Catering.DTO.MenuDTO menu)
+        public async Task<IActionResult> PutMenu(int id, ThAmCo.Catering.DTO.MenuPostDTO menu)
         {
             var thisMenu = await _context.Menus.FindAsync(id);
 
@@ -135,7 +149,7 @@ namespace ThAmCo.Catering.Controllers
         // POST: api/Menus
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Menu>> PostMenu(ThAmCo.Catering.DTO.MenuDTO menu)
+        public async Task<ActionResult<Menu>> PostMenu(ThAmCo.Catering.DTO.MenuPostDTO menu)
         {
             // Create a new menu object
             Menu thisMenu = new Menu

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThAmCo.Catering.Data;
+using ThAmCo.Catering.DTO;
 
 namespace ThAmCo.Catering.Controllers
 {
@@ -26,9 +27,17 @@ namespace ThAmCo.Catering.Controllers
         /// <returns></returns>
         // GET: api/FoodItems
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<FoodItem>>> GetFoodItems()
+        public async Task<ActionResult<IEnumerable<FoodItemGetDTO>>> GetFoodItems()
         {
-            return await _context.FoodItems.ToListAsync();
+            var foodItem = await _context.FoodItems.ToListAsync();
+
+            var foodItemDto = foodItem.Select(f => new FoodItemGetDTO
+            {
+                FoodItemId = f.FoodItemId,  
+                Description = f.Description,
+                UnitPrice = f.UnitPrice
+            });
+            return Ok(foodItemDto);
         }
 
         /// <summary>
@@ -38,16 +47,23 @@ namespace ThAmCo.Catering.Controllers
         /// <returns></returns>
         // GET: api/FoodItems/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<FoodItem>> GetFoodItem(int id)
+        public async Task<ActionResult<FoodItemGetDTO>> GetFoodItem(int id)
         {
             var foodItem = await _context.FoodItems.FindAsync(id);
 
             if (foodItem == null)
             {
-                return NotFound();
+                return NotFound("Food item with the given id does not exist.");
             }
 
-            return foodItem;
+            var foodItemDto = new FoodItemGetDTO
+            {
+                FoodItemId = foodItem.FoodItemId,
+                Description = foodItem.Description,
+                UnitPrice = foodItem.UnitPrice
+            };
+
+            return foodItemDto;
         }
 
         /// <summary>
@@ -57,16 +73,16 @@ namespace ThAmCo.Catering.Controllers
         /// <param name="foodItem"></param>
         /// <returns></returns>
         // PUT: api/FoodItems/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFoodItem(int id, ThAmCo.Catering.DTO.FoodItemDTO foodItem)
+        public async Task<IActionResult> PutFoodItem(int id, ThAmCo.Catering.DTO.FoodItemPostDTO foodItem)
         {
             var thisFoodItem = await _context.FoodItems.FindAsync(id);
 
             if (thisFoodItem == null)
-            {
-                return BadRequest();
-            }
+              {
+                return BadRequest("Food item with the given id does not exist.");
+              }
+            
 
             // Update the properties of the entity directly
             thisFoodItem.Description = foodItem.Description;
@@ -101,9 +117,8 @@ namespace ThAmCo.Catering.Controllers
         /// <param name="foodItem"></param>
         /// <returns></returns>
         // POST: api/FoodItems
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<FoodItem>> PostFoodItem(ThAmCo.Catering.DTO.FoodItemDTO foodItem)
+        public async Task<ActionResult<FoodItem>> PostFoodItem(ThAmCo.Catering.DTO.FoodItemPostDTO foodItem)
         {
             // Create a new food item
             FoodItem thisFoodItem = new FoodItem
@@ -130,7 +145,7 @@ namespace ThAmCo.Catering.Controllers
             var foodItem = await _context.FoodItems.FindAsync(id);
             if (foodItem == null)
             {
-                return NotFound();
+                return NotFound("Food item with the given id does not exist.");
             }
 
             _context.FoodItems.Remove(foodItem);

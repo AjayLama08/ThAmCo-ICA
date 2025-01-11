@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThAmCo.Catering.Data;
+using ThAmCo.Catering.DTO;
 
 namespace ThAmCo.Catering.Controllers
 {
@@ -26,9 +27,16 @@ namespace ThAmCo.Catering.Controllers
         /// <returns></returns>
         // GET: api/MenuFoodItems
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MenuFoodItem>>> GetMenuFoodItems()
+        public async Task<ActionResult<IEnumerable<MenuFoodItemDTO>>>MenuFoodItems()
         {
-            return await _context.MenuFoodItems.ToListAsync();
+            var menuFoodItems = await _context.MenuFoodItems.ToListAsync();
+
+            var menuFoodItemDto = menuFoodItems.Select(mfi => new MenuFoodItemDTO
+            {
+                MenuId = mfi.MenuId,
+                FoodItemId = mfi.FoodItemId
+            });
+            return Ok(menuFoodItemDto);
         }
 
         /// <summary>

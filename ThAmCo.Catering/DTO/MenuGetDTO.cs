@@ -2,8 +2,9 @@
 
 namespace ThAmCo.Catering.DTO
 {
-    public class MenuDTO
+    public class MenuGetDTO
     {
+        public int MenuId { get; set; }
         public required string MenuName { get; set; }
  
     }
