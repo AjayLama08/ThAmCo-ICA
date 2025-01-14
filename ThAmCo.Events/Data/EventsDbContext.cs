@@ -117,9 +117,12 @@ namespace ThAmCo.Events.Data
 
             // Guest 2 (Jane Smith)
             new GuestBooking { GuestId = 2, EventId = 1 }, // Jane at John and Jane's Wedding
+            new GuestBooking { GuestId = 2, EventId = 2 }, //Jane at Tech Inovations 2022
             new GuestBooking { GuestId = 2, EventId = 3 }, // Jane at Alice's Birthday Party
 
+
             // Guest 3 (Alice Johnson)
+            new GuestBooking { GuestId = 3, EventId = 2 }, // Alice at Tech Innovations 2022
             new GuestBooking { GuestId = 3, EventId = 3 }, // Alice at Alice's Birthday Party
             new GuestBooking { GuestId = 3, EventId = 5 }, // Alice at Digital Marketing Summit
 
@@ -128,29 +131,36 @@ namespace ThAmCo.Events.Data
             new GuestBooking { GuestId = 4, EventId = 6 }, // Bob at Bob's Surprise Birthday Party`
 
             // Guest 5 (Charlie Davis)
+            new GuestBooking { GuestId = 5, EventId = 2 }, // Charlie at Tech Innovations 2022
             new GuestBooking { GuestId = 5, EventId = 4 }, // Charlie at Mike and Emma's Wedding
             new GuestBooking { GuestId = 5, EventId = 6 }, // Charlie at Bob's Surprise Birthday Party
 
             // Guest 6 (David Martinez)
+            new GuestBooking { GuestId = 6, EventId = 2 }, // David at Tech Innovations 2022
             new GuestBooking { GuestId = 6, EventId = 5 }, // David at Digital Marketing Summit
             new GuestBooking { GuestId = 6, EventId = 7 }, // David at Sophie and Adam's Wedding
 
             // Guest 7 (Eve Miller)
+            new GuestBooking { GuestId = 7, EventId = 2 }, // Eve at Tech Innovations 2022
             new GuestBooking { GuestId = 7, EventId = 6 }, // Eve at Bob's Surprise Birthday Party
             new GuestBooking { GuestId = 7, EventId = 9 }, // Eve at Frank's 50th Birthday Party
 
             //Guest 8 (Frank Wilson)
+            new GuestBooking { GuestId = 8, EventId = 2 }, // Frank at Tech Innovations 2022
             new GuestBooking { GuestId = 8, EventId = 7 }, // Frank at Sophie and Adam's Wedding
             new GuestBooking { GuestId = 8, EventId = 8 }, // Frank at AI and Future Technologies
 
             // Guest 9 (Grace Taylor)
+            new GuestBooking { GuestId = 9, EventId = 2 }, // Grace at Tech Innovations 2022
             new GuestBooking { GuestId = 9, EventId = 7 }, // Grace at Sophie and Adam's Wedding
             new GuestBooking { GuestId = 9, EventId = 10 }, // Grace at Business Leadership Forum
 
             // Guest 10 (Hank Anderson)
+            new GuestBooking { GuestId = 10, EventId = 2 }, // Hank at Tech Innovations 2022
             new GuestBooking { GuestId = 10, EventId = 10 }, // Hank at Business Leadership Forum
 
             // Guest 11 (Isla Scott)
+            new GuestBooking { GuestId = 11, EventId = 2 }, // Isla at Tech Innovations 2022
             new GuestBooking { GuestId = 11, EventId = 8 }, // Isla at AI and Future Technologies
             new GuestBooking { GuestId = 11, EventId = 9 }, // Isla at Frank's 50th Birthday Party
 
@@ -222,7 +232,6 @@ namespace ThAmCo.Events.Data
             builder.Entity<Staffing>().HasData(
             new Staffing { StaffId = 1, EventId = 1 },  // Sarah at John and Jane's Wedding
             new Staffing { StaffId = 2, EventId = 1 },  // Jacob at John and Jane's Wedding
-            new Staffing { StaffId = 3, EventId = 2 },  // Emily at Tech Innovations 2022
             new Staffing { StaffId = 4, EventId = 2 },  // Michael at Tech Innovations 2022
             new Staffing { StaffId = 5, EventId = 3 },  // Jessica at Alice's Birthday Party
             new Staffing { StaffId = 6, EventId = 3 },  // David at Alice's Birthday Party

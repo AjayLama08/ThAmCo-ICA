@@ -29,13 +29,15 @@ namespace ThAmCo.Catering.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MenuGetDTO>>> GetMenus()
         {
+            // Get all menus
             var menus = await _context.Menus.ToListAsync();
-
+            // Create a DTO for each menu
             var menuDto = menus.Select(m => new MenuGetDTO
             {
                 MenuId = m.MenuId,
                 MenuName = m.MenuName
             });
+            // Return the DTOs
             return Ok(menuDto);
 
         }
@@ -49,18 +51,20 @@ namespace ThAmCo.Catering.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<MenuGetDTO>> GetMenu(int id)
         {
+            // Find the menu by id
             var menu = await _context.Menus.FindAsync(id);
-
+            // Create a DTO for the menu
             var menuDto = new MenuGetDTO
             {
                 MenuId = menu.MenuId,
                 MenuName = menu.MenuName
             };
-
+            // If the menu does not exist, return a 400 Bad Request
             if (menu == null)
             {
-                return NotFound();
+                return BadRequest("The menu with the given id does not exist.");
             }
+            // Return the DTO
             return Ok(menuDto);
         }
         /// <summary>
@@ -76,10 +80,10 @@ namespace ThAmCo.Catering.Controllers
                 .Include(m => m.MenuFoodItems)
                 .ThenInclude(mfi => mfi.FoodItem)
                 .FirstOrDefaultAsync(m => m.MenuId == id);
-
+            // If the menu does not exist, return a 400 Bad Request
             if (menu == null)
             {
-                return NotFound();
+                return BadRequest("The menu with the given id does not exist.");
             }
             // Create a DTO object to return
             var foodItemsInMenu = new ThAmCo.Catering.DTO.FoodItemsInMenuDTO
@@ -93,7 +97,7 @@ namespace ThAmCo.Catering.Controllers
                     UnitPrice = mfi.FoodItem.UnitPrice
                 }).ToList()
             };
-
+            // Return the DTO
             return foodItemsInMenu;
         }
 
@@ -104,15 +108,15 @@ namespace ThAmCo.Catering.Controllers
         /// <param name="menu"></param>
         /// <returns></returns>
         // PUT: api/Menus/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMenu(int id, ThAmCo.Catering.DTO.MenuPostDTO menu)
         {
+            // Find the menu by id
             var thisMenu = await _context.Menus.FindAsync(id);
-
+            // If the menu does not exist, return a 400 Bad Request
             if (thisMenu == null)
             {
-                return NotFound();
+                return BadRequest("The menu with the given id does not exist.");
             }
 
             // Update the properties of the entity directly
@@ -147,7 +151,6 @@ namespace ThAmCo.Catering.Controllers
         /// <param name="menu"></param>
         /// <returns></returns>
         // POST: api/Menus
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Menu>> PostMenu(ThAmCo.Catering.DTO.MenuPostDTO menu)
         {
@@ -158,10 +161,11 @@ namespace ThAmCo.Catering.Controllers
                  FoodBookings= null,
                 MenuFoodItems = null, 
             };
-
+            // Add the menu to the context
             _context.Menus.Add(thisMenu);
+            // Save the changes
             await _context.SaveChangesAsync();
-
+            // Return the menu
             return CreatedAtAction("GetMenu", new { id = thisMenu.MenuId }, thisMenu);
         }
 
@@ -174,13 +178,16 @@ namespace ThAmCo.Catering.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMenu(int id)
         {
+            // Find the menu by id
             var menu = await _context.Menus.FindAsync(id);
+            // If the menu does not exist, return a 400 Bad Request
             if (menu == null)
             {
-                return NotFound();
+                return BadRequest("The menu with the given id does not exist.");
             }
-
+            // Remove the menu
             _context.Menus.Remove(menu);
+            // Save the changes
             await _context.SaveChangesAsync();
 
             return NoContent();

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using ThAmCo.Catering.Data;
+using ThAmCo.Catering.DTO;
 
 namespace ThAmCo.Catering.Controllers
 {
@@ -26,9 +28,20 @@ namespace ThAmCo.Catering.Controllers
         /// <returns></returns>
         // GET: api/FoodBookings
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<FoodBooking>>> GetFoodBookings()
+        public async Task<ActionResult<IEnumerable<FoodBookingGetDTO>>> GetFoodBookings()
         {
-            return await _context.FoodBookings.ToListAsync();
+            //Get all food bookings
+            var foodBooking = await _context.FoodBookings.ToListAsync();
+            //Create a DTO for each food booking
+            var foodBookingDto = foodBooking.Select(f => new FoodBookingGetDTO
+            {
+                FoodBookingId = f.FoodBookingId,
+                ClientReferenceId = f.ClientReferenceId,
+                NumberOfGuests = f.NumberOfGuests,
+                MenuId = f.MenuId,
+            });
+            //Return the DTOs
+            return Ok(foodBookingDto);
         }
 
         /// <summary>
@@ -38,17 +51,25 @@ namespace ThAmCo.Catering.Controllers
         /// <returns></returns>
         // GET: api/FoodBookings/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<FoodBooking>> GetFoodBooking(int id)
+        public async Task<ActionResult<FoodBookingGetDTO>> GetFoodBooking(int id)
         {
             //Find the food booking by id
             var foodBooking = await _context.FoodBookings.FindAsync(id);
-
+            //If the food booking does not exist, return a 400 Bad Request
             if (foodBooking == null)
             {
-                return NotFound();
+                return BadRequest("The food booking with the given id does not exist.");
             }
-
-            return foodBooking;
+            //Create a DTO for the food booking
+            var foodBookingDto = new FoodBookingGetDTO
+            {
+                FoodBookingId = foodBooking.FoodBookingId,
+                ClientReferenceId = foodBooking.ClientReferenceId,
+                NumberOfGuests = foodBooking.NumberOfGuests,
+                MenuId = foodBooking.MenuId,
+            };
+            //Return the DTO
+            return foodBookingDto;
         }
 
         /// <summary>
@@ -58,18 +79,22 @@ namespace ThAmCo.Catering.Controllers
         /// <param name="foodBooking"></param>
         /// <returns></returns>
         // PUT: api/FoodBookings/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFoodBooking(int id, FoodBooking foodBooking)
+        public async Task<IActionResult> PutFoodBooking(int id, FoodBookingPostDTO foodBooking )
         {
-            //Check if the id is the same as the food booking id
-            if (id != foodBooking.FoodBookingId)
-            {
-                return BadRequest();
+            //Get the food booking by id
+            var thisFoodBooking = await _context.FoodBookings.FindAsync(id);
+            //If the food booking does not exist, return a 400 Bad Request
+            if (thisFoodBooking == null) {
+                return BadRequest("The food booking with the given id does not exist.");
             }
+            //Update the food booking
+            thisFoodBooking.ClientReferenceId = foodBooking.ClientReferenceId;
+            thisFoodBooking.NumberOfGuests = foodBooking.NumberOfGuests;
+            thisFoodBooking.MenuId = foodBooking.MenuId;
 
             //Set the state of the food booking to modified
-            _context.Entry(foodBooking).State = EntityState.Modified;
+            _context.Entry(thisFoodBooking).State = EntityState.Modified;
 
             try
             {
@@ -96,14 +121,22 @@ namespace ThAmCo.Catering.Controllers
         /// <param name="foodBooking"></param>
         /// <returns></returns>
         // POST: api/FoodBookings
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<FoodBooking>> PostFoodBooking(FoodBooking foodBooking)
+        public async Task<ActionResult<FoodBooking>> PostFoodBooking(FoodBookingPostDTO foodBooking)
         {
-            _context.FoodBookings.Add(foodBooking);
+            //Create a new food booking
+            FoodBooking thisFoodBooking = new FoodBooking
+            {
+                ClientReferenceId = foodBooking.ClientReferenceId,
+                NumberOfGuests = foodBooking.NumberOfGuests,
+                MenuId = foodBooking.MenuId,
+            };
+            //Add the food booking to the database
+            _context.FoodBookings.Add(thisFoodBooking);
+            //Save the changes
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetFoodBooking", new { id = foodBooking.FoodBookingId }, foodBooking);
+            //Return the food booking
+            return CreatedAtAction("GetFoodBooking", new { id = thisFoodBooking.FoodBookingId }, foodBooking);
         }
 
         /// <summary>
@@ -119,7 +152,7 @@ namespace ThAmCo.Catering.Controllers
             var foodBooking = await _context.FoodBookings.FindAsync(id);
             if (foodBooking == null)
             {
-                return NotFound();
+                return BadRequest("The food booking with the given id does not exist.");
             }
             //Remove the food booking
             _context.FoodBookings.Remove(foodBooking);

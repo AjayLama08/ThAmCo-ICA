@@ -29,14 +29,16 @@ namespace ThAmCo.Catering.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FoodItemGetDTO>>> GetFoodItems()
         {
+            // Get all food items
             var foodItem = await _context.FoodItems.ToListAsync();
-
+            // Create a DTO for each food item
             var foodItemDto = foodItem.Select(f => new FoodItemGetDTO
             {
                 FoodItemId = f.FoodItemId,  
                 Description = f.Description,
                 UnitPrice = f.UnitPrice
             });
+            // Return the DTOs
             return Ok(foodItemDto);
         }
 
@@ -49,20 +51,21 @@ namespace ThAmCo.Catering.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<FoodItemGetDTO>> GetFoodItem(int id)
         {
+            // Find the food item by id
             var foodItem = await _context.FoodItems.FindAsync(id);
-
+            // If the food item does not exist, return a 400 Bad Request
             if (foodItem == null)
             {
-                return NotFound("Food item with the given id does not exist.");
+                return BadRequest("Food item with the given id does not exist.");
             }
-
+            // Create a DTO for the food item
             var foodItemDto = new FoodItemGetDTO
             {
                 FoodItemId = foodItem.FoodItemId,
                 Description = foodItem.Description,
                 UnitPrice = foodItem.UnitPrice
             };
-
+            // Return the DTO
             return foodItemDto;
         }
 
@@ -76,8 +79,9 @@ namespace ThAmCo.Catering.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFoodItem(int id, ThAmCo.Catering.DTO.FoodItemPostDTO foodItem)
         {
+            // Find the food item by id
             var thisFoodItem = await _context.FoodItems.FindAsync(id);
-
+            // If the food item does not exist, return a 400 Bad Request
             if (thisFoodItem == null)
               {
                 return BadRequest("Food item with the given id does not exist.");
@@ -127,9 +131,11 @@ namespace ThAmCo.Catering.Controllers
                 UnitPrice = foodItem.UnitPrice
             };
 
+            // Add the food item to the database
             _context.FoodItems.Add(thisFoodItem);
+            // Save the changes
             await _context.SaveChangesAsync();
-
+            // Return the newly created food item
             return CreatedAtAction("GetFoodItem", new { id = thisFoodItem.FoodItemId }, thisFoodItem);
         }
 

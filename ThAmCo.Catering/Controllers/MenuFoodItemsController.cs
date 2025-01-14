@@ -29,13 +29,15 @@ namespace ThAmCo.Catering.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MenuFoodItemDTO>>>MenuFoodItems()
         {
+            // Get all menu food items
             var menuFoodItems = await _context.MenuFoodItems.ToListAsync();
-
+            // Create a DTO for each menu food item
             var menuFoodItemDto = menuFoodItems.Select(mfi => new MenuFoodItemDTO
             {
                 MenuId = mfi.MenuId,
                 FoodItemId = mfi.FoodItemId
             });
+            // Return the DTOs
             return Ok(menuFoodItemDto);
         }
 
@@ -48,13 +50,14 @@ namespace ThAmCo.Catering.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<MenuFoodItem>> GetMenuFoodItem(int id)
         {
+            // Find the menu food item by id
             var menuFoodItem = await _context.MenuFoodItems.FindAsync(id);
-
+            // If the menu food item does not exist, return a 400 Bad Request
             if (menuFoodItem == null)
             {
-                return NotFound();
+                return BadRequest("The menu food item with the given id does not exist.");
             }
-
+            // Return the menu food item
             return menuFoodItem;
         }
 
@@ -66,14 +69,13 @@ namespace ThAmCo.Catering.Controllers
         /// <param name="menuFoodItem"></param>
         /// <returns></returns>
         // PUT: api/MenuFoodItems/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{foodItemId}/{menuId}")]
         public async Task<IActionResult> PutMenuFoodItem(int foodItemId, int menuId, MenuFoodItem menuFoodItem)
         {
             // Check if the food item and menu id match
             if (foodItemId != menuFoodItem.FoodItemId || menuId != menuFoodItem.MenuId)
             {
-                return BadRequest();
+                return BadRequest("\"The menu food item with the given id does not exist.\"");
             }
 
             _context.Entry(menuFoodItem).State = EntityState.Modified;
@@ -103,7 +105,6 @@ namespace ThAmCo.Catering.Controllers
         /// <param name="menuFoodItem"></param>
         /// <returns></returns>
         // POST: api/MenuFoodItems
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<MenuFoodItem>> PostMenuFoodItem(ThAmCo.Catering.DTO.MenuFoodItemDTO menuFoodItem)
         {
@@ -113,7 +114,7 @@ namespace ThAmCo.Catering.Controllers
                 MenuId = menuFoodItem.MenuId,
                 FoodItemId = menuFoodItem.FoodItemId
             };
-
+            // Add the menu food item to the context
             _context.MenuFoodItems.Add(thisMenuFoodItem);
             try
             {
@@ -130,7 +131,7 @@ namespace ThAmCo.Catering.Controllers
                     throw;
                 }
             }
-
+            // Return the newly created menu food item
             return CreatedAtAction("GetMenuFoodItem", new { id = thisMenuFoodItem.MenuId }, thisMenuFoodItem);
         }
 
@@ -151,13 +152,14 @@ namespace ThAmCo.Catering.Controllers
             // Find the menu food item by food item id and menu id
             var menuFoodItem = await _context.MenuFoodItems
                 .FirstOrDefaultAsync(mfi => mfi.FoodItemId == menuFoodItemDTO.FoodItemId && mfi.MenuId == menuFoodItemDTO.MenuId);
-
+            // If the menu food item does not exist, return a 400 Bad Request
             if (menuFoodItem == null)
             {
-                return NotFound();
+                return BadRequest("The menu food item with the given is does not exist.");
             }
-
+            // Remove the menu food item
             _context.MenuFoodItems.Remove(menuFoodItem);
+            // Save the changes
             await _context.SaveChangesAsync();
 
             return NoContent();

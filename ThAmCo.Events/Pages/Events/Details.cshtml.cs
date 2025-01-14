@@ -62,6 +62,7 @@ namespace ThAmCo.Events.Pages.Events
                     .Where(s => s.Staffings.Any(e => e.EventId == id))
                     .ToListAsync();
 
+                
                 foreach (var staff in eventStaffs)
                 {
                     if (staff.IsFirstAider == false)

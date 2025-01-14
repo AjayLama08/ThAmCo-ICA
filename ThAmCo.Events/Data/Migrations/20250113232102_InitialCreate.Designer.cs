@@ -11,7 +11,7 @@ using ThAmCo.Events.Data;
 namespace ThAmCo.Events.Data.Migrations
 {
     [DbContext(typeof(EventsDbContext))]
-    [Migration("20241212115838_InitialCreate")]
+    [Migration("20250113232102_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -364,7 +364,19 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             GuestId = 2,
+                            EventId = 2,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 2,
                             EventId = 3,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 3,
+                            EventId = 2,
                             HasAttended = false
                         },
                         new
@@ -394,6 +406,12 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             GuestId = 5,
+                            EventId = 2,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 5,
                             EventId = 4,
                             HasAttended = false
                         },
@@ -401,6 +419,12 @@ namespace ThAmCo.Events.Data.Migrations
                         {
                             GuestId = 5,
                             EventId = 6,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 6,
+                            EventId = 2,
                             HasAttended = false
                         },
                         new
@@ -418,6 +442,12 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             GuestId = 7,
+                            EventId = 2,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 7,
                             EventId = 6,
                             HasAttended = false
                         },
@@ -425,6 +455,12 @@ namespace ThAmCo.Events.Data.Migrations
                         {
                             GuestId = 7,
                             EventId = 9,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 8,
+                            EventId = 2,
                             HasAttended = false
                         },
                         new
@@ -442,6 +478,12 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             GuestId = 9,
+                            EventId = 2,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 9,
                             EventId = 7,
                             HasAttended = false
                         },
@@ -454,7 +496,19 @@ namespace ThAmCo.Events.Data.Migrations
                         new
                         {
                             GuestId = 10,
+                            EventId = 2,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 10,
                             EventId = 10,
+                            HasAttended = false
+                        },
+                        new
+                        {
+                            GuestId = 11,
+                            EventId = 2,
                             HasAttended = false
                         },
                         new
@@ -733,11 +787,6 @@ namespace ThAmCo.Events.Data.Migrations
                         {
                             StaffId = 2,
                             EventId = 1
-                        },
-                        new
-                        {
-                            StaffId = 3,
-                            EventId = 2
                         },
                         new
                         {

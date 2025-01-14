@@ -33,7 +33,7 @@ ThAmCo.Catering is a .NET 8 web application designed to manage catering services
 - `GET /api/FoodBookings` - Retrieve all food bookings
 - `GET /api/FoodBookings/{id}` - Retrieve a specific food booking by ID
 - `POST /api/FoodBookings` - Create a new food booking
-- `PUT /api/FoodBookings/{id}` - Update an existing food booking
+- `PUT /api/FoodBookings/{id}` - Edit an existing food booking
 - `DELETE /api/FoodBookings/{id}` - Delete a food booking
 
 ## Key Problems and Challenges  
