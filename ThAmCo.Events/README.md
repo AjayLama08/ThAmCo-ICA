@@ -26,6 +26,8 @@ ThAmCo.Events is a .NET 8 project designed to manage events for ThAmCo. This pro
    - `Update-Database -context EventsDbContext`
 3. Run the following command to update the Identity database:
    - `Update-Database -context IdentityDbContext`
+4. Run the following command to update the Venue database:
+   - `Update-Database -context VenueDbContext`
 
 ### Running the Application
 1. Open the solution in Visual Studio.
