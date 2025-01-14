@@ -30,6 +30,29 @@ ThAmCo.Catering is a .NET 8 web application designed to manage catering services
 3. Press `F5` to run the application.
 
 ## API Endpoints
+
+1. **Food Items**
+- `GET /api/FoodItems` - Retrieve all food items
+- `GET /api/FoodItems/{id}` - Retrieve a specific food item by ID
+- `POST /api/FoodItems` - Create a new food item
+- `PUT /api/FoodItems/{id}` - Edit an existing food item
+- `DELETE /api/FoodItems/{id}` - Delete a food item
+
+2. **Menus**
+- `GET /api/Menus` - Retrieve all menus
+- `GET /api/Menus/{id}` - Retrieve a specific menu by ID
+- `POST /api/Menus` - Create a new menu
+- `PUT /api/Menus/{id}` - Edit an existing menu
+- `DELETE /api/Menus/{id}` - Delete a menu
+
+3. **Menu Food Items**
+- `GET /api/MenuFoodItems` - Retrieve all menu food items
+- `GET /api/MenuFoodItems/{id}` - Retrieve a specific menu food item by ID
+- `POST /api/MenuFoodItems` - Create a new menu food item
+- `PUT /api/MenuFoodItems/{id}` - Edit an existing menu food item
+- `DELETE /api/MenuFoodItems/{id}` - Delete a menu food item
+
+4. **Food Bookings**
 - `GET /api/FoodBookings` - Retrieve all food bookings
 - `GET /api/FoodBookings/{id}` - Retrieve a specific food booking by ID
 - `POST /api/FoodBookings` - Create a new food booking
@@ -40,7 +63,6 @@ ThAmCo.Catering is a .NET 8 web application designed to manage catering services
 
 1. **Database Migrations**: Keeping the database schema updated with new features like food items, orders, and event assignments was crucial and complex.  
 2. **API Design**: Building a RESTful API for managing catering services required a clear structure to handle food orders efficiently.  
-3. **Concurrency**: Managing simultaneous food orders and updates without conflicts was a significant challenge.  
 
 ## Alternative Solutions  
 
@@ -52,10 +74,6 @@ ThAmCo.Catering is a .NET 8 web application designed to manage catering services
    - **Alternative**: GraphQL for more flexible queries.  
    - **Why Not Used**: RESTful API fits the project's scale and simplicity needs.  
 
-3. **Concurrency**  
-   - **Alternative**: Redis for distributed locking.  
-   - **Why Not Used**: Application-level locking and SQL constraints were sufficient.  
-
 ## Justification  
 
 - **Entity Framework Core**: Simplifies database operations and supports seamless integration with ASP.NET Core.  
@@ -63,4 +81,5 @@ ThAmCo.Catering is a .NET 8 web application designed to manage catering services
 - **RESTful API**: A widely accepted standard for managing resources like food orders, ensuring ease of use and compatibility.  
 
 ## Contact
-For any questions or suggestions, please contact [q2043246@live.tees.ac.uk](mailto: q2043246@live.tees.ac.uk).
+For any questions or suggestions, please contact [q2043246@live.tees.ac.uk](mailto:q2043246@live.tees.ac.uk).
+

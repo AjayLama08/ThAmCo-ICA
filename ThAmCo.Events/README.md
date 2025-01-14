@@ -29,7 +29,7 @@ ThAmCo.Events is a .NET 8 project designed to manage events for ThAmCo. This pro
 
 ### Running the Application
 1. Open the solution in Visual Studio.
-2. Set `ThAmCo.Events` as the startup project (right-click the project in Solution Explorer > Set as StartUp Project).
+2. Set `ThAmCo.Events` and `ThAmcCo.Venues` as the startup project (right-click the solution  in Solution Explorer > Configure Startup Projects > Multiple Startups Projects > Set the action to start for both projects).
 3. Press `F5` to run the application.
 
 ## Key Problems and Challenges  
