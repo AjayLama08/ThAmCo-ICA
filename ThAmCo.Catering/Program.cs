@@ -13,13 +13,13 @@ builder.Services.AddEndpointsApiExplorer();
 //Swagger Documentation Section
 var info = new OpenApiInfo()
 {
-    Title = "Your API Documentation",
+    Title = "Service to manage catering",
     Version = "v1",
-    Description = "Description of your API",
+    Description = "ThAmCo Catering Service",
     Contact = new OpenApiContact()
     {
-        Name = "Your name",
-        Email = "your@email.com",
+        Name = "Ajay Lama",
+        Email = "q2043246@live.tees.ac.uk",
     }
 
 };
@@ -51,7 +51,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.RoutePrefix = "swagger";
-        c.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "Your API Title or Version");
+        c.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "ThAmCo Catering Service");
     });
 }
 
